@@ -1,3 +1,4 @@
 # Veerus
 **The best hidden Rat/Crypo Miner for Linux/Mac/Windows**
-Please leave a "Star" bro
+
+\nPlease leave a "Star" bro
