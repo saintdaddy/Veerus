@@ -13,6 +13,7 @@ The build will be in ./dist/
 
 💚 = Added
 
+
 🚫 = Will never be added</h3>
 
 🔜 MacOS full support
