@@ -8,11 +8,12 @@ The build will be in ./dist/
 
 <h1>To-do List</h1>
 
-**🔜 = Soon
+<h3>
+🔜 = Soon
 
 💚 = Added
 
-🚫 = Will never be added**
+🚫 = Will never be added</h3>
 
 🔜 MacOS full support
 
