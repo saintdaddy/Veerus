@@ -9,7 +9,10 @@ The build will be in ./dist/
 <h1>To-do List</h1>
 
 <h3>
+
+
 🔜 = Soon
+
 
 💚 = Added
 
