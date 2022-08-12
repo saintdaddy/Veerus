@@ -7,6 +7,20 @@ Please leave a "Star" bro XD
 To build launch build.at and select your distribution (Linux, MacOS, Windows)
 The build will be in ./dist/
 
+
+<h1>Pro version (only 2.50€)</h1>
+
+Browser cookies, password, autofill, C r 3 d 1 t  c 4 r d grabber
+
+Telegram sessions grabber
+
+Discord logger + injection (password change...)
+
+Camera stream
+
+Hidden RDP
+
+
 <h1>To-do List</h1>
 
 <h3>
@@ -28,11 +42,12 @@ The build will be in ./dist/
 
 🔜 Complete Rat (almost done)
 
-🔜 Fake Error tah les h4x0r
-
+🔜 Python code remote execution
 
 
 💚 undetected by Smartscreen and Windows defender
+
+💚 Fake Error tah les h4x0r
 
 💚 Reverse shell
 
