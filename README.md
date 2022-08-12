@@ -8,21 +8,20 @@ To build launch build.at and select your distribution (Linux, MacOS, Windows)
 The build will be in ./dist/
 
 
-<h1>Pro version (only 2.50€)</h1>
+<h1>Please support me</h1>
+I made only 15% of the program rn and it cost me over 10hours. So please if you can , support me :)
+
+
+paypal : angelique.cloutier60@yahoo.com 
+
+crypto :
+coinbase : sxzuu@yahoo.com
+TRX : TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d
+XMR : 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq
+BTC : 357MunC5K2wrrD6xkUWb8CneQM8jwxA1bp
 
 
 
-Browser cookies, autofill, C r 3 d 1 t  c 4 r d grabber
-
-Telegram sessions grabber
-
-Discord logger + injection (password change...)
-
-Camera stream
-
-Integrated cookies checker
-
-Hidden RDP
 
 
 <h1>To-do List</h1>
@@ -38,7 +37,7 @@ Hidden RDP
 
 🚫 = Will never be added</h3>
 
-
+🔜 Browser autofill, C r 3 d 1 t  c 4 r d grabber
 
 🔜 Browser password staler
 
@@ -54,6 +53,19 @@ Hidden RDP
 
 🔜 Python code remote execution
 
+🔜 Hidden Rdp (maybe)
+
+🔜 Telegram sessions grabber
+
+🔜 Integrated cookies checker (maybe)
+
+🔜 Camera stream
+
+
+
+💚 Discord logger + injection (password change...)
+
+💚 Windows/Linux Browser cookies 
 
 💚 undetected by Smartscreen and Windows defender
 
@@ -70,5 +82,7 @@ Hidden RDP
 💚 One file build
 
 💚 Remote access Trojan (RAT, accès à distance 🇫🇷)
+
+
 
 🚫 Arch Linux support cause I don't have this os and I have the flemme frère
