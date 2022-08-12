@@ -10,13 +10,17 @@ The build will be in ./dist/
 
 <h1>Pro version (only 2.50€)</h1>
 
-Browser cookies, password, autofill, C r 3 d 1 t  c 4 r d grabber
+
+
+Browser cookies, autofill, C r 3 d 1 t  c 4 r d grabber
 
 Telegram sessions grabber
 
 Discord logger + injection (password change...)
 
 Camera stream
+
+Integrated cookies checker
 
 Hidden RDP
 
@@ -33,6 +37,12 @@ Hidden RDP
 
 
 🚫 = Will never be added</h3>
+
+
+
+🔜 Browser password staler
+
+🔜 Integrated checker.
 
 🔜 MacOS full support
 
@@ -59,5 +69,6 @@ Hidden RDP
 
 💚 One file build
 
+💚 Remote access Trojan (RAT, accès à distance 🇫🇷)
 
 🚫 Arch Linux support cause I don't have this os and I have the flemme frère
