@@ -16,7 +16,7 @@ The Best Multifunctional Computer Virus Including : RAT, Stealer, Miner
 
 <!-- About the Project -->
 ## :star2: About the Project
-Veerus is a multifunctional virus including : RAT, Crypto Miner, Rdp, Stealers
+Veerus is a multifunctional virus including : RAT, Crypto Miner, Rdp, Stealers and much more...
 <!-- Screenshots -->
 ### :camera: Screenshots
 
