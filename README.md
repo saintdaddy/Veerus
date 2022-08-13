@@ -2,7 +2,7 @@
 **15 stars = drop**
 **The best hidden Stealer/Rat/Crypo Miner for Linux/Mac/Windows**
 
-Please leave a "Star" bro XD
+Please leave a "Star" bro 
 
 To build launch build.at and select your distribution (Linux, MacOS, Windows)
 The build will be in ./dist/
@@ -15,12 +15,14 @@ The build will be in ./dist/
 paypal : angelique.cloutier60@yahoo.com 
 
 crypto :
+
 coinbase : sxzuu@yahoo.com
+
 TRX : TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d
+
 XMR : 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq
+
 BTC : 357MunC5K2wrrD6xkUWb8CneQM8jwxA1bp
-
-
 
 
 
