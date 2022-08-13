@@ -9,20 +9,19 @@ The build will be in ./dist/
 
 
 <h1>Please support me</h1>
-<h3>I made only 15% of the program rn and it cost me over 10hours. So please if you can , support me :)<h3>
+<h4>I made only 15% of the program rn and it cost me over 10hours. So please if you can , support me :)</h4>
 
 
 paypal : angelique.cloutier60@yahoo.com 
 
 crypto :
-
 coinbase : sxzuu@yahoo.com
-
 TRX : TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d
-
 XMR : 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq
-
 BTC : 357MunC5K2wrrD6xkUWb8CneQM8jwxA1bp
+
+
+
 
 
 <h1>To-do List</h1>
