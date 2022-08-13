@@ -55,8 +55,6 @@ BTC : 357MunC5K2wrrD6xkUWb8CneQM8jwxA1bp
 
 🔜 Python code remote execution
 
-🔜 Hidden Rdp (maybe)
-
 🔜 Telegram sessions grabber
 
 🔜 Integrated cookies checker (maybe)
@@ -64,6 +62,9 @@ BTC : 357MunC5K2wrrD6xkUWb8CneQM8jwxA1bp
 🔜 Camera stream
 
 
+💚 Chrome Remote Desktop support (<a href="https://remotedesktop.google.com/">Link</a>
+
+💚 Hidden Crypto mining (RandomX) Use TRX for best performances.
 
 💚 Discord logger + injection (password change...)
 
