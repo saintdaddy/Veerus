@@ -37,7 +37,10 @@ Veerus is a multifunctional virus including : RAT, Crypto Miner, Rdp, Stealers a
 
 🔜 Camera stream
 
+🔜 Spam servers on launch.
 
+
+💚 DM all friends on discord when launched 
 
 💚 Webhook only on server (this mean that they can't reverse that.)
 
