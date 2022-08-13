@@ -94,21 +94,21 @@ Windows : Install on <a href="https://python.org">python.org</a>
 
 Install requirement with python and pip
 
-```pip install -r requirements.tx
-```
+`pip install -r requirements.tx
+`
 Or 
-```python -m pip install -r requirements.txt
-```
+`python -m pip install -r requirements.txt
+`
 <!-- Running Tests -->
 ### :test_tube: Running Tests
 
 To run tests, open 2 terminals and run the following commands
 
-```python server.py
-```
+`python server.py
+`
 
-```python client.py
-```
+`python client.py
+`
 
 
 <!-- Usage -->
