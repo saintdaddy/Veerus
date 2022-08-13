@@ -70,152 +70,74 @@ Veerus is a multifunctional virus including : RAT, Crypto Miner, Rdp, Stealers a
 <!-- Env Variables -->
 ### :key: Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to edit `server.py` and `client.py`
 
-`API_KEY`
+Set `HOST` variable to your public IP in both files
 
-`ANOTHER_API_KEY`
+Open port `7777` on YOUR computer
+
+Discord : Set `Webhook` Variable in server.py (optional)
 
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
 
 <!-- Prerequisites -->
-### :bangbang: Prerequisites
+### :bangbang: Prerequisite 
 
-This project uses Yarn as package manager
+This project uses python
 
-```bash
- npm install --global yarn
-```
+```sudo apt install python```
 
+Windows : Install on <a href="https://python.org">python.org</a>
 <!-- Installation -->
 ### :gear: Installation
 
-Install my-project with npm
+Install requirement with python and pip
 
-```bash
-  yarn install my-project
-  cd my-project
+```pip install -r requirements.tx
 ```
-   
+Or 
+```python -m pip install -r requirements.txt
+```
 <!-- Running Tests -->
 ### :test_tube: Running Tests
 
-To run tests, run the following command
+To run tests, open 2 terminals and run the following commands
 
-```bash
-  yarn test test
+```python server.py
 ```
 
-<!-- Run Locally -->
-### :running: Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  yarn install
-```
-
-Start the server
-
-```bash
-  yarn start
-```
-
-
-<!-- Deployment -->
-### :triangular_flag_on_post: Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
+```python client.py
 ```
 
 
 <!-- Usage -->
 ## :eyes: Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
+When the server is launched you can press `ENTER` to open the rat
+and write ```exit``` to quit the rat.
 
-
-```javascript
-import Component from 'my-project'
-
-function App() {
-  return <Component />
-}
-```
-
-<!-- Roadmap -->
-## :compass: Roadmap
-
-* [x] Todo 1
-* [ ] Todo 2
-
-
-<!-- Contributing -->
-## :wave: Contributing
-
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-
-<!-- Code of Conduct -->
-### :scroll: Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
-
+🤔 - Commands :
+-Soon
 <!-- FAQ -->
 ## :grey_question: FAQ
 
-- Question 1
+- Will it be full support for Mac OS
 
-  + Answer 1
+  + Maybe but some commands, stealer and miner is working in Mac OS.
 
-- Question 2
+- Is it fully supported on Linux?
 
-  + Answer 2
-
-
-<!-- License -->
-## :warning: License
-
-Distributed under the no License. See LICENSE.txt for more information.
+  + Yes. We do almost all our tests in Kali Linux/Debian/Ubuntu.
 
 
 <!-- Contact -->
 ## :handshake: Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+How to reach me Discord : sz#4498 
 
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+Emails :
+ angelique.cloutier60@yahoo.com 
+ sxzuu@yahoo.com 
 
-
-<!-- Acknowledgments -->
-## :gem: Acknowledgements
-
-Use this section to mention useful resources and libraries that you have used in your projects.
-
- - [Shields.io](https://shields.io/)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
- - [Readme Template](https://github.com/othneildrew/Best-README-Template)
+Discord Server : https://discord.gg/jde3wwSVDa (open ticket)
