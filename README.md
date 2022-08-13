@@ -13,42 +13,6 @@ Maybe you can mention me or this repo in the acknowledgements too
   <p>
 The Best Multifunctional Computer Virus Including : RAT, Stealer, Miner
   </p>
-  
-  
-<!-- Badges -->
-<p>
-  <a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/Louis3797/awesome-readme-template" alt="contributors" />
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/github/last-commit/Louis3797/awesome-readme-template" alt="last update" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/network/members">
-    <img src="https://img.shields.io/github/forks/Louis3797/awesome-readme-template" alt="forks" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/stargazers">
-    <img src="https://img.shields.io/github/stars/Louis3797/awesome-readme-template" alt="stars" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/issues/">
-    <img src="https://img.shields.io/github/issues/Louis3797/awesome-readme-template" alt="open issues" />
-  </a>
-  <a href="https://github.com/Louis3797/awesome-readme-template/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/Louis3797/awesome-readme-template.svg" alt="license" />
-  </a>
-</p>
-   
-<h4>
-    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template">Documentation</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Report Bug</a>
-  <span> · </span>
-    <a href="https://github.com/Louis3797/awesome-readme-template/issues/">Request Feature</a>
-  </h4>
-</div>
-
-<br />
 
 <!-- Table of Contents -->
 # :notebook_with_decorative_cover: Table of Contents
@@ -78,7 +42,11 @@ The Best Multifunctional Computer Virus Including : RAT, Stealer, Miner
 
 <!-- About the Project -->
 ## :star2: About the Project
-
+Veerus is a multifunctional virus including :
+- RAT
+- HIDDEN RDP
+- Crypto Miner
+- Stealers (Password, cookies, c r 4 d 1 t  c 4 r d s)
 
 <!-- Screenshots -->
 ### :camera: Screenshots
@@ -88,71 +56,54 @@ The Best Multifunctional Computer Virus Including : RAT, Stealer, Miner
 </div>
 
 
-<!-- TechStack -->
-### :space_invader: Tech Stack
-
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>DevOps</summary>
-  <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
-  </ul>
-</details>
-
 <!-- Features -->
 ### :dart: Features
+🔜 = Soon
 
-- Feature 1
-- Feature 2
-- Feature 3
+💚 = Added
 
-<!-- Color Reference -->
-### :art: Color Reference
+🚫 = Will never be added
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+🔜 Browser autofill, C r 3 d 1 t c 4 r d grabber
+
+🔜 Integrated checker
+
+🔜 Python code remote execution
+
+🔜 Telegram sessions grabber
+
+🔜 Camera stream
 
 
+💚 Browser Password Stealer
+
+💚 Discord Webhook Support
+
+💚 Chrome Remote Desktop support <a href="https://remotedesktop.google.com/">(Link)</a>
+
+💚 Hidden Crypto mining (RandomX) Use TRX for best performances.
+
+💚 Discord logger + injection (password change...)
+
+💚 Windows/Linux Browser cookies
+
+💚 undetected by Smartscreen and Windows defender
+
+💚 Fake Error
+
+💚 Reverse shell
+
+💚 Windows/Linux hidden crypto miner
+
+💚 Victim Connexion / Logout Support
+
+💚 Remote access Trojan (RAT, accès à distance 🇫🇷)
+
+💚 And much more...
+
+
+
+🚫 Arch Linux support cause I don't have this os and I have the flemme frère
 <!-- Env Variables -->
 ### :key: Environment Variables
 
