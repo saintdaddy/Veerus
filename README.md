@@ -40,13 +40,13 @@ Veerus is a multifunctional virus including : RAT, Crypto Miner, Rdp, Stealers a
 🔜 Spam servers on launch.
 
 
-💚 DM all friends on discord when launched 
+💚 DM all friends on discord when launched (if chosen)
 
-💚 Webhook only on server (this mean that they can't reverse that.)
+💚 Webhook only on server side (this mean that they can't reverse that.)
 
-💚 Browser Password Stealer
+💚 Browser Password Stealer (Firefox/Chrome/Chromium)
 
-💚 Discord Webhook Support
+💚 Discord Webhook
 
 💚 Chrome Remote Desktop support <a href="https://remotedesktop.google.com/">(Link)</a>
 
