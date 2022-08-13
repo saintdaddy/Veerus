@@ -61,8 +61,12 @@ BTC : 357MunC5K2wrrD6xkUWb8CneQM8jwxA1bp
 
 🔜 Camera stream
 
+🔜 Webhook Support
 
-💚 Chrome Remote Desktop support (<a href="https://remotedesktop.google.com/">Link</a>
+
+
+
+💚 Chrome Remote Desktop support <a href="https://remotedesktop.google.com/">(Link)</a>
 
 💚 Hidden Crypto mining (RandomX) Use TRX for best performances.
 
