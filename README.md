@@ -19,7 +19,7 @@ The Best Multifunctional Computer Virus Including : RAT, Stealer, TRX/XMR Miner,
 Veerus is a multifunctional virus including : RAT, Crypto Miner, Stealers, Token Grabber, DM ALL and much more...
 
 
-<!-- Don't Forget -->
+##Don't Forget 
 :muscle: Don't forget to open ports : 80 and 7777
 
 :muscle: Don't forget to set your ip and trx address in both client.py and server.py
