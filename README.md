@@ -31,6 +31,8 @@ ETH :
 
 <!-- Features -->
 ### :dart: Features
+
+**WARINING !!! THE RAT IS NOT FINISHED !!!!**
 🔜 = Soon
 
 💚 = Added
