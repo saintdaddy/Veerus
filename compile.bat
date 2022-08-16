@@ -1,1 +1,1 @@
-pyinstaller --onefile client.py
+pyinstaller --noconsole --onefile client.py -i "NONE"
