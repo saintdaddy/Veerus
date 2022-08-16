@@ -51,8 +51,6 @@ ETH :
 
 💚 DM all friends on discord when launched (if chosen)
 
-💚 Webhook only on server side (this mean that they can't reverse that.)
-
 💚 Browser Password Stealer (Firefox/Chrome/Chromium)
 
 💚 Discord Webhook
