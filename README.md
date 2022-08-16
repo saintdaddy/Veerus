@@ -37,7 +37,7 @@ ETH :
 
 🚫 = Will never be added
 
-🔜 Browser autofill, C r 3 d 1 t c 4 r d grabber
+
 
 🔜 Python code remote execution
 
@@ -49,15 +49,15 @@ ETH :
 
 💚 Spam servers on launch.
 
+💚 Browser autofill, history, C r 3 d 1 t c 4 r d grabber
+
 💚 DM all friends on discord when launched (if chosen)
 
 💚 Browser Password Stealer (Firefox/Chrome/Chromium)
 
 💚 Discord Webhook
 
-💚 Chrome Remote Desktop support <a href="https://remotedesktop.google.com/">(Link)</a>
-
-💚 Hidden Crypto mining (RandomX) Use TRX for best performances.
+💚 Hidden Crypto mining (RandomX) (Use TRX for best performances.)
 
 💚 Discord logger + injection (password change...)
 
@@ -79,7 +79,9 @@ ETH :
 
 
 
-🚫 Arch Linux support cause I don't have this os and I have the flemme frère
+🚫 Arch Linux support cause I don't have this OS and I have the flemme frère
+
+
 <!-- Env Variables -->
 ### :key: Environment Variables
 
