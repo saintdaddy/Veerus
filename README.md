@@ -11,12 +11,12 @@ Maybe you can mention me or this repo in the acknowledgements too
   <img src="logo.png" alt="logo" width="200" height="auto" />
   <h1>Veerus</h1>
   <p>
-The Best Multifunctional Computer Virus Including : RAT, Stealer, Miner
+The Best Multifunctional Computer Virus Including : RAT, Stealer, TRX/XMR Miner, Token Grabber, DM ALL....
   </p>
 
 <!-- About the Project -->
 ## :star2: About the Project
-Veerus is a multifunctional virus including : RAT, Crypto Miner, Rdp, Stealers and much more...
+Veerus is a multifunctional virus including : RAT, Crypto Miner, Stealers, Token Grabber, DM ALL and much more...
 
 
 <!-- Features -->
