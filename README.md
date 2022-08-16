@@ -45,21 +45,21 @@ ETH :
 
 🔜 Camera stream
 
+🔜 Spam servers on launch.
+
+🔜 DM all friends on discord when launched (if chosen)
 
 
-💚 Spam servers on launch.
 
 💚 Browser autofill, history, C r 3 d 1 t c 4 r d grabber
 
-💚 DM all friends on discord when launched (if chosen)
-
 💚 Browser Password Stealer (Firefox/Chrome/Chromium)
 
-💚 Discord Webhook
+💚 Discord Webhook support
 
 💚 Hidden Crypto mining (RandomX) (Use TRX for best performances.)
 
-💚 Discord logger + injection (password change...)
+💚 Discord logger
 
 💚 Windows/Linux Browser cookies
 
