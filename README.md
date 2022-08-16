@@ -22,6 +22,12 @@ Veerus is a multifunctional virus including : RAT, Crypto Miner, Stealers, Token
 <!-- Support the project -->
 ## :star2: Paypal :
 angelique.cloutier60@yahoo.com
+  
+## :star2: Crypto :
+BTC :
+TRX :
+LTC : 
+ETH : 
 
 <!-- Features -->
 ### :dart: Features
