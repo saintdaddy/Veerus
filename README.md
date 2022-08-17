@@ -76,7 +76,7 @@ ETH :
 
 💚 Browser Password Stealer (Firefox/Chrome/Chromium)
 
-💚 Discord Webhook support
+💚 Discord Webhook suppor
 
 💚 Hidden Crypto mining (RandomX) (Use TRX for best performances.)
 
