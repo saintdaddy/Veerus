@@ -47,7 +47,7 @@ ETH :
 
 
 <!-- Features -->
-### :dart: Features
+## :dart: Features
 
 **WARINING !!! THE RAT IS NOT FINISHED !!!!**
 
