@@ -59,10 +59,7 @@ if hashfile == "y":
 	chiffre = []
 	fille = open("../client.py", "r").read()
 	chiffre = str(chiffrer("0xSxZ", fille))
-	
-	part2 = base64.b64encode(("""
-def transcrireCle(cle):
-	return "".join([str(ord(elt)) for elt in cle])
+	part1 = """
 def dechiffrer():
 	message = ""
 	cle = transcrireCle(""" + '"' + salt + '"' +""")
@@ -75,18 +72,23 @@ def dechiffrer():
 		message += chr(chiffre[i])
 	return message
 exec(dechiffrer())
-""").encode()).decode()
+"""
+	part2 = base64.b64encode(("""def transcrireCle(cle):
+	return "".join([str(ord(elt)) for elt in cle])""").encode()).decode()
 
 
-	fille = str("""
+	fille = "import base64\nMadeBy0xSxZ = " + '"' +base64.b64encode(str("""
 import base64
 exec(base64.b64decode("aW1wb3J0IGhhc2hsaWIsIHN5cywgdGltZQ=="))
+SxZ = """ + '"' + part2 + '"' + """
+
+exec(base64.b64decode(SxZ))
+h4x0r = """ + '"'  + base64.b64encode(part1.encode()).decode() +  '"' + """
+exec(base64.b64decode(h4x0r).decode())
 Made_By_0xSxZ = """ +'"'
 + part2 + '"'+"""\n\n"""+ """
-def decryptMD5():
-	print("Bahhahah you rly tought")
 exec(base64.b64decode(Made_By_0xSxZ).decode())
-""")
-	open("../clientencoded.py", "x").write(fille.replace("b'", "").replace("'", ""))
+""").encode()).decode()+ '"' + "\nexec(base64.b64decode(MadeBy0xSxZ))"
+	open("clientencoded.py", "x").write(fille.replace("b'", "").replace("'", ""))
 
 print("[.] Created clientencoded.py .")
