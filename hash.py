@@ -1,10 +1,7 @@
-import requests
 import uuid
 #from Crypto.Cipher import AES
 import base64
 import hashlib
-
-ip = requests.get('https://api.ipify.org').content.decode('utf8')
 
 hashfile = "y"
 
