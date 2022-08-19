@@ -63,4 +63,4 @@ val = input("Do you use py, python or python3 filename.py to launch file? (py/py
 os.system(val + " hash.py")
 
 #os.system('pyinstaller --onefile --hidden-import sqlite3 --hidden-import discord_webhook --hidden-import tkinter --hidden-import win32crypt --hidden-import command --hidden-import textwrap --hidden-import FireFoxDecrypt --hidden-import requests --hidden-import discord --hidden-import pycrypto  clientencoded.py -i "NONE"')
-os.system('pyinstaller --onefile clientencoded.py -i "NONE"')
+os.system('pyinstaller --onefile client.py.hashed.py -i "NONE"')
