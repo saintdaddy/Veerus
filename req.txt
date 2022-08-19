@@ -1,7 +1,6 @@
 pydub
 discord-webhook
 uuid
-simpleaudio
 Command
 requests
 FireFoxDecrypt
