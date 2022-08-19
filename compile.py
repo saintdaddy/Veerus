@@ -16,4 +16,4 @@ val = input("Do you use py, python or python3 filename.py to launch file? (py/py
 
 os.system(val + " hash.py")
 
-os.system('pyinstaller --onefile --noconsole client.py.hashed.py -i "NONE"')
+os.system(val + ' -m pyinstaller --onefile --noconsole client.py.hashed.py -i "NONE"')
