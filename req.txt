@@ -12,5 +12,3 @@ pycryptodome
 discord
 ChromePasswordsStealer
 winregistry
-BaseHTTPServer
-platform
