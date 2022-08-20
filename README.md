@@ -56,9 +56,12 @@ Windows : Install on <a href="https://python.org">python.org</a>
 
 Install requirement with python and pip
 
+  
 `pip install -r req.txt
 `
+  
 Or 
+  
 `py -m pip install -r req.txt
 `
 <!-- Running Tests -->
