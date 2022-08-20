@@ -121,8 +121,6 @@ To Compile, launch this and fill out the form :
 
 💚 Victim Connexion / Logout Support
 
-💚 Remote access Trojan (RAT, accès à distance 🇫🇷)
-
 💚 And much more...
 
 
