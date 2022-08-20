@@ -19,13 +19,6 @@ The Best Multifunctional Computer Virus Including : RAT, Stealer, TRX/XMR Miner,
 Veerus is a multifunctional virus including : RAT, Crypto Miner, Stealers, Token Grabber, DM ALL and much more...
 
 
-## :star2: Don't Forget 
-:muscle: Don't forget to open ports : 80 and 7777
-
-:muscle: Don't forget to set your ip and trx address in both client.py and server.py
-
-:muscle: Don't forget to set discord webhook if you wan't to use it.
-
 <!-- Support the project -->
 # :tada: Support the project : 
 ### :star2: Paypal :
@@ -38,13 +31,43 @@ sxzuu@yahoo.com
 
 ### :star2: Crypto :
 
-BTC :
+BTC : soon
 
-TRX :
+TRX : soon
 
-LTC :
+LTC : soon
 
-ETH : 
+ETH : soon
+
+
+<!-- Getting Started -->
+## 	:toolbox: Getting Started
+
+<!-- Prerequisites -->
+### :bangbang: Prerequisite 
+
+This project uses python
+
+```sudo apt install python```
+
+Windows : Install on <a href="https://python.org">python.org</a>
+<!-- Installation -->
+### :gear: Installation
+
+Install requirement with python and pip
+
+`pip install -r req.txt
+`
+Or 
+`py -m pip install -r req.txt
+`
+<!-- Running Tests -->
+### :test_tube: Running Tests
+
+To run tests, launch this :
+
+`py compile
+`
 
 
 <!-- Features -->
@@ -103,69 +126,6 @@ ETH :
 
 🚫 Arch Linux support cause I don't have this OS and I have the flemme frère
 
-
-<!-- Env Variables -->
-### :key: Environment Variables
-
-To run this project, you will need to edit `server.py` and `client.py`
-
-Set `HOST` variable to your public IP in both files
-
-Open port `7777` on YOUR computer
-
-Discord : Set `Webhook` Variable in server.py (optional)
-
-<!-- Getting Started -->
-## 	:toolbox: Getting Started
-
-<!-- Prerequisites -->
-### :bangbang: Prerequisite 
-
-This project uses python
-
-```sudo apt install python```
-
-Windows : Install on <a href="https://python.org">python.org</a>
-<!-- Installation -->
-### :gear: Installation
-
-Install requirement with python and pip
-
-`pip install -r requirements.tx
-`
-Or 
-`python -m pip install -r requirements.txt
-`
-<!-- Running Tests -->
-### :test_tube: Running Tests
-
-To run tests, open 2 terminals and run the following commands
-
-`python server.py
-`
-
-`python client.py
-`
-
-
-<!-- Usage -->
-## :eyes: Usage
-
-When the server is launched you can press `ENTER` to open the rat
-and write ```exit``` to quit the rat.
-
-🤔 - Commands :
--Soon
-<!-- FAQ -->
-## :grey_question: FAQ
-
-- Will it be full support for Mac OS
-
-  + Maybe but some commands, stealer and miner is working in Mac OS.
-
-- Is it fully supported on Linux?
-
-  + Yes. We do almost all our tests in Kali Linux/Debian/Ubuntu.
 
 
 <!-- Contact -->
