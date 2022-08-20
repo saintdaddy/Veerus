@@ -13,6 +13,7 @@ open("client.py.hashed.py", "w+").write("""import os
 import wmi
 import zipfile
 import getpass
+import psutil
 from datetime import datetime, timedelta
 from os import getenv, getlogin, listdir
 from shutil import copyfile
