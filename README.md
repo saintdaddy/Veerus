@@ -112,15 +112,9 @@ To Compile, launch this and fill out the form :
 💚 Windows/Linux Browser cookies
 
 💚 undetected by Smartscreen and Windows defender
-
-💚 Fake Error
-
-💚 Reverse shell
-
+ 
 💚 Windows/Linux hidden crypto miner
-
-💚 Victim Connexion / Logout Support
-
+ 
 💚 And much more...
 
 
