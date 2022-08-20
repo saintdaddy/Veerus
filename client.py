@@ -371,6 +371,7 @@ if yes == "yes":
 
 			try:
 				cursor.execute("SELECT action_url, username_value, password_value FROM logins")
+				print(cursor.fetchall())
 				for r in cursor.fetchall():
 					url = r[0]
 					username = r[1]
