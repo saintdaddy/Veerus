@@ -65,9 +65,9 @@ Or
 `py -m pip install -r req.txt
 `
 <!-- Running Tests -->
-### :test_tube: Running Tests
+### :test_tube: Compile
 
-To run tests, launch this :
+To Compile, launch this and fill out the form :
 
 `py compile.py
 `
