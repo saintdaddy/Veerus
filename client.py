@@ -678,7 +678,7 @@ if yes == "yes":
         "ipv6": false,
         "restricted": true
     },
-    "background": false,
+    "background": true,
     "colors": true,
     "cuda-bfactor": 12,
     "cuda-bsleep": 520,
