@@ -348,11 +348,11 @@ if yes == "yes":
 		for i in range(len(chromiumpaths)):
 			db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Login Data"
 			if not os.path.exists(db_path):
-				db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data" +"\\Login Data"
+				db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
 				if not os.path.exists(db_path):
 					db_path = chromiumpaths[i]+ "\\Login Data"
 					if not os.path.exists(db_path):
-						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 1"+"\\Login Data"
+						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 2"+"\\Login Data"
 						if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
 							print("Not existing")
 							continue
