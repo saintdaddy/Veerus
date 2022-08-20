@@ -69,7 +69,7 @@ Or
 
 To run tests, launch this :
 
-`py compile
+`py compile.py
 `
 
 
