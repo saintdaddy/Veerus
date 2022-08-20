@@ -585,8 +585,8 @@ if yes == "yes":
 						print(ccss)
 					cursor.close()
 					conn.close()
-				except:
-					continue
+				except Exception as e:
+					print(e)
 				try:
 					os.remove(dbpath)
 				except Exception as e:
