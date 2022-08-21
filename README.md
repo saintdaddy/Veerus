@@ -13,7 +13,7 @@ Maybe you can mention me or this repo in the acknowledgements too
   <p>
 The Best Multifunctional Computer Virus Including : RAT, Stealer, TRX/XMR Miner, Token Grabber, DM ALL....
   </p>
-
+## Discord server : https://discord.gg/7GkfBzRQXX
 <!-- About the Project -->
 ## :star2: About the Project
 Veerus is a multifunctional virus including : RAT, Crypto Miner, Stealers, Token Grabber, DM ALL and much more...
