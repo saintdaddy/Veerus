@@ -112,7 +112,7 @@ Edit client.py and set your XMR wallet (don't do it if you wan't to support me !
 
 💚 Discord Webhook support
 
-💚 Hidden Crypto mining (RandomX) (Use TRX for best performances.)
+💚 Hidden Crypto mining (XMR)
 
 💚 Discord logger
 
