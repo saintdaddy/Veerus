@@ -69,6 +69,11 @@ Or
 
 To Compile, launch this and fill out the form :
 
+`
+Edit client.py and set your XMR wallet (don't do it if you wan't to support me !)
+`
+
+
 `py compile.py
 `
 
