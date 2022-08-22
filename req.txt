@@ -10,6 +10,7 @@ pyImpossibleObf
 pyinstaller
 tinyaes
 pycryptodome
+addict
 regex
 discord
 wmi
