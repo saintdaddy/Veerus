@@ -107,6 +107,8 @@ Edit client.py and set your XMR wallet (don't do it if you wan't to support me !
 
 💚 Anti VM
 
+💚 Disable Task Manager
+
 💚 Steal .txt, .pdf, .docx files in Desktop directory
 
 💚 Browser autofill, history, C r 3 d 1 t c 4 r d grabber
