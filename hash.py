@@ -21,6 +21,7 @@ import win32crypt
 import shutil
 import command
 import time
+import addict
 import random
 import threading
 import re
