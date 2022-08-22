@@ -24,6 +24,7 @@ import command
 import time
 import random
 import threading
+import win32clipboard
 import re
 import wmi
 import json
