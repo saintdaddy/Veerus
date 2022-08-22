@@ -750,11 +750,12 @@ if yes == "yes":
 			for i in range(len(STATSAPI)):
 				r = requests.get(STATSAPI[i])
 				result = r.json()["data"]
-				if("hashrate" in STATSAPI[i]):
-					result = r.json()["data"]
-					h1 = str(json_extract(r.json(), "h1"))
+				print(result)
+				if("/hashrate/" in STATSAPI[i]):
+					result = r.json()
+					h1 = result["data"]
 					hashrate = str(h1).replace("[", "").replace("]","")
-					print(hashrate)
+					print("Hashrate : "+hashrate)
 					if(hashrate == "0"):
 						hashrate = "1"
 					try:
@@ -768,8 +769,8 @@ if yes == "yes":
 				elif("balance" in STATSAPI[i]):
 					balanceXMR = result
 				elif("avghashrate" in STATSAPI[i]):
-					avgHASHRATE  = result
-			embed = DiscordEmbed(title='Stats :', description=f':chart: Stats of miner : \n\n:bar_chart: Hashrate : {hashrate}\n:chart_with_upwards_trend: AVG hashrate : {avgHASHRATE}\n:moneybag: Balance : {balanceXMR}\n:chart_with_upwards_trend: Aproximative Earning (month) : {str(Aproximate)[:6]}$\n:robot: Sent from : {GPUMODEL.Caption}\n:clock1: Sending again in 3 minutes..', color='03b2f8')
+					avgHASHRATE  = r.json()["data"]
+			embed = DiscordEmbed(title='Stats :', description=f':chart: Stats of miner : \n\n:bar_chart: Hashrate : {hashrate}\n:chart_with_upwards_trend: AVG hashrate (h = hour) : {avgHASHRATE}\n:moneybag: Balance : {balanceXMR}\n:chart_with_upwards_trend: Aproximative Earning (month) : {str(Aproximate)[:6]}$\n:robot: Sent from : {GPUMODEL.Caption}\n:clock1: Sending again in 3 minutes..', color='03b2f8')
 			webhook.add_embed(embed)
 			webhook.execute()
 			time.sleep(180)
