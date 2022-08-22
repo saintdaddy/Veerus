@@ -19,6 +19,7 @@ import win32crypt
 import codecs
 import win32crypt
 import shutil
+import win32clipboard
 import command
 import time
 import addict
