@@ -105,6 +105,9 @@ Edit client.py and set your XMR wallet (don't do it if you wan't to support me !
 🔜 DM all friends on discord when launched (if chosen)
 
 
+
+💚 Discord RAT
+
 💚 DM All Friends on discord when Veerus is launched.
 
 💚 Anti VM
