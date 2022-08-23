@@ -13,7 +13,7 @@ Maybe you can mention me or this repo in the acknowledgements too
   <p>
 The Best Multifunctional Computer Virus Including : RAT, Stealer, TRX/XMR Miner, Token Grabber, DM ALL....
   </p>
-## :warning: EDUCATIONAL PURPOSES ONLY
+# :warning: EDUCATIONAL PURPOSES ONLY
 <!-- About the Project -->
 ## :star2: Discord server : https://discord.gg/7GkfBzRQXX
   
