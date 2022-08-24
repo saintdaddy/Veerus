@@ -15,7 +15,7 @@ The Best Multifunctional Computer Virus Including : RAT, Stealer, XMR Miner, Tok
   </p>
   
 <!-- About the Project --> 
-## :flag_fr: Video tutorial
+## Video tutorial
 https://www.youtube.com/watch?v=0AFyxSoZpoY
 
 
