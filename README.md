@@ -110,6 +110,8 @@ Edit client.py and set your XMR wallet (don't do it if you wan't to support me !
 
 
 
+💚 Telegram Session Stealer  
+  
 💚 Discord RAT
 
 💚 DM All Friends on discord when Veerus is launched.
