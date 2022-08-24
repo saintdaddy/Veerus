@@ -11,7 +11,7 @@ Maybe you can mention me or this repo in the acknowledgements too
   <img src="logo.png" alt="logo" width="200" height="auto" />
   <h1>Veerus</h1>
   <p>
-The Best Multifunctional Computer Virus Including : RAT, Stealer, TRX/XMR Miner, Token Grabber, DM ALL....
+The Best Multifunctional Computer Virus Including : RAT, Stealer, XMR Miner, Token Grabber, DM ALL....
   </p>
   
 <!-- About the Project -->
