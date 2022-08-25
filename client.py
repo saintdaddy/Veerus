@@ -50,7 +50,7 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-Bot_Token = "MTAxMjAwNjMzOTQwNjQ3OTM5MA.GOupsL.usiJ0LqTvSIRRY9AMjht3i9AfYS7Q3cWxAFgyQ"
+Bot_Token = "BotTokenForTheRat667"
 
 
 WEBHOOK = "webhook667"
