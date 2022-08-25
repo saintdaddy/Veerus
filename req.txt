@@ -20,3 +20,4 @@ winregistry
 anonfile
 pyarmor
 shutil
+anonfile
